@@ -1,5 +1,5 @@
 {
-	"name": "ds_blob_output_csv",
+	"name": "ds_blob_input_csv_bulk",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "ls_AzureBlobStorage1",
@@ -10,7 +10,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"container": "output"
+				"container": "input"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
@@ -18,6 +18,5 @@
 			"quoteChar": "\""
 		},
 		"schema": []
-	},
-	"type": "Microsoft.DataFactory/factories/datasets"
+	}
 }

@@ -1,6 +1,7 @@
 {
-	"name": "ds_blob_output_csv",
+	"name": "ds_csv_input_blob",
 	"properties": {
+		"description": "to copy the data from input dataset to output ",
 		"linkedServiceName": {
 			"referenceName": "ls_AzureBlobStorage1",
 			"type": "LinkedServiceReference"
@@ -10,14 +11,26 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"container": "output"
+				"container": "input"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
 			"firstRowAsHeader": true,
 			"quoteChar": "\""
 		},
-		"schema": []
-	},
-	"type": "Microsoft.DataFactory/factories/datasets"
+		"schema": [
+			{
+				"name": "CUSTOMER_ID",
+				"type": "String"
+			},
+			{
+				"name": "FULL_NAME",
+				"type": "String"
+			},
+			{
+				"name": "EMAIL_ADDRESS",
+				"type": "String"
+			}
+		]
+	}
 }
