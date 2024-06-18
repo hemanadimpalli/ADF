@@ -1,0 +1,42 @@
+{
+	"name": "pl_project1",
+	"properties": {
+		"description": "to copy all csv files",
+		"activities": [
+			{
+				"name": "Get Metadata1",
+				"type": "GetMetadata",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataset": {
+						"referenceName": "ds_blob_input_csv_bulk",
+						"type": "DatasetReference"
+					},
+					"fieldList": [
+						"childItems",
+						"exists",
+						"itemName",
+						"itemType",
+						"lastModified"
+					],
+					"storeSettings": {
+						"type": "AzureBlobStorageReadSettings",
+						"enablePartitionDiscovery": false
+					},
+					"formatSettings": {
+						"type": "DelimitedTextReadSettings"
+					}
+				}
+			}
+		],
+		"annotations": []
+	}
+}
