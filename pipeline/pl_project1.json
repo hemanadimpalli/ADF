@@ -29,6 +29,7 @@
 					],
 					"storeSettings": {
 						"type": "AzureBlobStorageReadSettings",
+						"recursive": true,
 						"modifiedDatetimeStart": "2024-06-17T10:30:59.000Z",
 						"modifiedDatetimeEnd": null,
 						"enablePartitionDiscovery": false
@@ -114,7 +115,7 @@
 									"formatSettings": {
 										"type": "DelimitedTextWriteSettings",
 										"quoteAllText": true,
-										"fileExtension": ".txt"
+										"fileExtension": ""
 									}
 								},
 								"enableStaging": false,
