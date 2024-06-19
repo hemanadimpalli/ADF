@@ -4,7 +4,8 @@
 		"description": "to copy all csv files",
 		"activities": [
 			{
-				"name": "Get Metadata1",
+				"name": "get_metadata",
+				"description": "get_metadata",
 				"type": "GetMetadata",
 				"dependsOn": [],
 				"policy": {
@@ -44,7 +45,7 @@
 				"type": "ForEach",
 				"dependsOn": [
 					{
-						"activity": "Get Metadata1",
+						"activity": "get_metadata",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -53,7 +54,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"items": {
-						"value": "@activity('Get Metadata1').output.childItems",
+						"value": "@activity('get_metadata').output.childItems",
 						"type": "Expression"
 					},
 					"activities": [
