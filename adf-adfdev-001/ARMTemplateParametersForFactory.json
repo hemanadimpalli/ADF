@@ -7,6 +7,15 @@
 		},
 		"ls_AzureBlobStorage1_connectionString": {
 			"value": ""
+		},
+		"ls_sftp_password": {
+			"value": ""
+		},
+		"ls_sftp_properties_typeProperties_host": {
+			"value": "eu-central-1.sftpcloud.io"
+		},
+		"ls_sftp_properties_typeProperties_userName": {
+			"value": "385f3a50079049c2b278567ecdb17df6"
 		}
 	}
 }

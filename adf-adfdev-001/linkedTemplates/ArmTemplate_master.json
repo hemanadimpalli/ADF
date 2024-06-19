@@ -11,6 +11,18 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'ls_AzureBlobStorage1'"
 		},
+		"ls_sftp_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'ls_sftp'"
+		},
+		"ls_sftp_properties_typeProperties_host": {
+			"type": "string",
+			"defaultValue": "eu-central-1.sftpcloud.io"
+		},
+		"ls_sftp_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "385f3a50079049c2b278567ecdb17df6"
+		},
 		"containerUri": {
 			"type": "string",
 			"metadata": "URI to storage account containing linked ARM templates"
@@ -40,10 +52,39 @@
 					},
 					"ls_AzureBlobStorage1_connectionString": {
 						"value": "[parameters('ls_AzureBlobStorage1_connectionString')]"
+					},
+					"ls_sftp_password": {
+						"value": "[parameters('ls_sftp_password')]"
+					},
+					"ls_sftp_properties_typeProperties_host": {
+						"value": "[parameters('ls_sftp_properties_typeProperties_host')]"
+					},
+					"ls_sftp_properties_typeProperties_userName": {
+						"value": "[parameters('ls_sftp_properties_typeProperties_userName')]"
 					}
 				}
 			},
 			"dependsOn": []
+		},
+		{
+			"name": "adf-adfdev-001_ArmTemplate_1",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_1.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adf-adfdev-001_ArmTemplate_0')]"
+			]
 		}
 	]
 }
