@@ -4,7 +4,7 @@
 		"description": "to copy all csv files",
 		"activities": [
 			{
-				"name": "get matadata",
+				"name": "Get Metadata1",
 				"type": "GetMetadata",
 				"dependsOn": [],
 				"policy": {
@@ -44,7 +44,7 @@
 				"type": "ForEach",
 				"dependsOn": [
 					{
-						"activity": "get matadata",
+						"activity": "Get Metadata1",
 						"dependencyConditions": [
 							"Succeeded"
 						]
