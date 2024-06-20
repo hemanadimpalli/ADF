@@ -14,7 +14,11 @@
 		"type": "Parquet",
 		"typeProperties": {
 			"location": {
-				"type": "SftpLocation"
+				"type": "SftpLocation",
+				"fileName": {
+					"value": "@dataset().filename",
+					"type": "Expression"
+				}
 			},
 			"compressionCodec": "snappy"
 		},
