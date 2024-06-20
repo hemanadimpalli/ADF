@@ -2,7 +2,7 @@
 	"name": "ds_sftp_json_dynamic",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "ls_AzureBlobStorage1",
+			"referenceName": "ls_sftp",
 			"type": "LinkedServiceReference"
 		},
 		"parameters": {
@@ -14,12 +14,11 @@
 		"type": "Json",
 		"typeProperties": {
 			"location": {
-				"type": "AzureBlobStorageLocation",
+				"type": "SftpLocation",
 				"fileName": {
 					"value": "@dataset().filename",
 					"type": "Expression"
-				},
-				"container": "landing"
+				}
 			}
 		},
 		"schema": {}
