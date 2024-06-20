@@ -368,9 +368,10 @@
 													"source": {
 														"type": "JsonSource",
 														"storeSettings": {
-															"type": "AzureBlobStorageReadSettings",
+															"type": "SftpReadSettings",
 															"recursive": true,
-															"enablePartitionDiscovery": false
+															"enablePartitionDiscovery": false,
+															"disableChunking": false
 														},
 														"formatSettings": {
 															"type": "JsonReadSettings"
