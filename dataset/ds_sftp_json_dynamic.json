@@ -18,7 +18,8 @@
 				"fileName": {
 					"value": "@dataset().filename",
 					"type": "Expression"
-				}
+				},
+				"container": "landing"
 			}
 		},
 		"schema": {}
