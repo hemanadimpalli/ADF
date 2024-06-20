@@ -14,11 +14,7 @@
 		"type": "Json",
 		"typeProperties": {
 			"location": {
-				"type": "SftpLocation",
-				"fileName": {
-					"value": "@dataset().filename",
-					"type": "Expression"
-				}
+				"type": "SftpLocation"
 			}
 		},
 		"schema": {}
