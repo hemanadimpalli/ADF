@@ -1,25 +1,16 @@
 {
-	"name": "ds_blob_landing_csv_dynamic",
+	"name": "ds_blob_archive_csv",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "ls_AzureBlobStorage1",
 			"type": "LinkedServiceReference"
-		},
-		"parameters": {
-			"filename": {
-				"type": "string"
-			}
 		},
 		"annotations": [],
 		"type": "DelimitedText",
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": {
-					"value": "@dataset().filename",
-					"type": "Expression"
-				},
-				"container": "landing"
+				"container": "archive"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
