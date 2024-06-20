@@ -90,7 +90,7 @@
 										"value": "csv",
 										"activities": [
 											{
-												"name": "sftp to landing",
+												"name": "sftp to landing_csv",
 												"type": "Copy",
 												"dependsOn": [],
 												"policy": {
@@ -161,11 +161,11 @@
 												]
 											},
 											{
-												"name": "landing to bronze",
+												"name": "landing to bronze_csv",
 												"type": "Copy",
 												"dependsOn": [
 													{
-														"activity": "sftp to landing",
+														"activity": "sftp to landing_csv",
 														"dependencyConditions": [
 															"Succeeded"
 														]
@@ -232,11 +232,11 @@
 												]
 											},
 											{
-												"name": "copying data from landing to archive",
+												"name": "copying data from landing to archive_csv",
 												"type": "Copy",
 												"dependsOn": [
 													{
-														"activity": "landing to bronze",
+														"activity": "landing to bronze_csv",
 														"dependencyConditions": [
 															"Succeeded"
 														]
@@ -303,11 +303,11 @@
 												]
 											},
 											{
-												"name": "Deleting landing",
+												"name": "Deleting landing_csv",
 												"type": "Delete",
 												"dependsOn": [
 													{
-														"activity": "copying data from landing to archive",
+														"activity": "copying data from landing to archive_csv",
 														"dependencyConditions": [
 															"Succeeded"
 														]
@@ -353,7 +353,7 @@
 										"value": "json",
 										"activities": [
 											{
-												"name": "Copy data1_copy1",
+												"name": "sftp to landing_json",
 												"type": "Copy",
 												"dependsOn": [],
 												"policy": {
@@ -363,15 +363,19 @@
 													"secureOutput": false,
 													"secureInput": false
 												},
-												"userProperties": [],
+												"userProperties": [
+													{
+														"name": "filename",
+														"value": ""
+													}
+												],
 												"typeProperties": {
 													"source": {
 														"type": "JsonSource",
 														"storeSettings": {
-															"type": "SftpReadSettings",
+															"type": "AzureBlobStorageReadSettings",
 															"recursive": true,
-															"enablePartitionDiscovery": false,
-															"disableChunking": false
+															"enablePartitionDiscovery": false
 														},
 														"formatSettings": {
 															"type": "JsonReadSettings"
@@ -387,6 +391,198 @@
 														}
 													},
 													"enableStaging": false
+												},
+												"inputs": [
+													{
+														"referenceName": "ds_sftp_json_dynamic",
+														"type": "DatasetReference",
+														"parameters": {
+															"filename": {
+																"value": "@item().name",
+																"type": "Expression"
+															}
+														}
+													}
+												],
+												"outputs": [
+													{
+														"referenceName": "ds_blob_landing_json_dynamic",
+														"type": "DatasetReference",
+														"parameters": {
+															"filename": {
+																"value": "@variables('var_filename')",
+																"type": "Expression"
+															}
+														}
+													}
+												]
+											},
+											{
+												"name": "landing to bronze_json",
+												"type": "Copy",
+												"dependsOn": [
+													{
+														"activity": "sftp to landing_json",
+														"dependencyConditions": [
+															"Succeeded"
+														]
+													}
+												],
+												"policy": {
+													"timeout": "0.12:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"typeProperties": {
+													"source": {
+														"type": "JsonSource",
+														"storeSettings": {
+															"type": "AzureBlobStorageReadSettings",
+															"recursive": true,
+															"enablePartitionDiscovery": false
+														},
+														"formatSettings": {
+															"type": "JsonReadSettings"
+														}
+													},
+													"sink": {
+														"type": "DelimitedTextSink",
+														"storeSettings": {
+															"type": "AzureBlobFSWriteSettings"
+														},
+														"formatSettings": {
+															"type": "DelimitedTextWriteSettings",
+															"quoteAllText": true,
+															"fileExtension": ".txt"
+														}
+													},
+													"enableStaging": false
+												},
+												"inputs": [
+													{
+														"referenceName": "ds_blob_landing_json_dynamic",
+														"type": "DatasetReference",
+														"parameters": {
+															"filename": {
+																"value": "@variables('var_filename')",
+																"type": "Expression"
+															}
+														}
+													}
+												],
+												"outputs": [
+													{
+														"referenceName": "ds_dl_bronze_json",
+														"type": "DatasetReference"
+													}
+												]
+											},
+											{
+												"name": "copying data from landing to archive_json",
+												"type": "Copy",
+												"dependsOn": [
+													{
+														"activity": "landing to bronze_json",
+														"dependencyConditions": [
+															"Succeeded"
+														]
+													}
+												],
+												"policy": {
+													"timeout": "0.12:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"typeProperties": {
+													"source": {
+														"type": "JsonSource",
+														"storeSettings": {
+															"type": "AzureBlobStorageReadSettings",
+															"recursive": true,
+															"enablePartitionDiscovery": false
+														},
+														"formatSettings": {
+															"type": "JsonReadSettings"
+														}
+													},
+													"sink": {
+														"type": "JsonSink",
+														"storeSettings": {
+															"type": "AzureBlobStorageWriteSettings"
+														},
+														"formatSettings": {
+															"type": "JsonWriteSettings"
+														}
+													},
+													"enableStaging": false
+												},
+												"inputs": [
+													{
+														"referenceName": "ds_blob_landing_json_dynamic",
+														"type": "DatasetReference",
+														"parameters": {
+															"filename": {
+																"value": "@variables('var_filename')",
+																"type": "Expression"
+															}
+														}
+													}
+												],
+												"outputs": [
+													{
+														"referenceName": "ds_blob_archive_json",
+														"type": "DatasetReference"
+													}
+												]
+											},
+											{
+												"name": "Deleting landing_json",
+												"type": "Delete",
+												"dependsOn": [
+													{
+														"activity": "copying data from landing to archive_json",
+														"dependencyConditions": [
+															"Succeeded"
+														]
+													}
+												],
+												"policy": {
+													"timeout": "0.12:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"typeProperties": {
+													"dataset": {
+														"referenceName": "ds_blob_landing_json_dynamic",
+														"type": "DatasetReference",
+														"parameters": {
+															"filename": {
+																"value": "@variables('var_filename')",
+																"type": "Expression"
+															}
+														}
+													},
+													"logStorageSettings": {
+														"linkedServiceName": {
+															"referenceName": "ls_AzureBlobStorage1",
+															"type": "LinkedServiceReference"
+														},
+														"path": "log"
+													},
+													"enableLogging": true,
+													"storeSettings": {
+														"type": "AzureBlobStorageReadSettings",
+														"recursive": true,
+														"enablePartitionDiscovery": false
+													}
 												}
 											}
 										]
@@ -395,7 +591,7 @@
 										"value": "parquet",
 										"activities": [
 											{
-												"name": "Copy data1_copy2",
+												"name": "sftp to landing_paraquet",
 												"type": "Copy",
 												"dependsOn": [],
 												"policy": {
@@ -428,7 +624,222 @@
 															"type": "ParquetWriteSettings"
 														}
 													},
-													"enableStaging": false
+													"enableStaging": false,
+													"translator": {
+														"type": "TabularTranslator",
+														"typeConversion": true,
+														"typeConversionSettings": {
+															"allowDataTruncation": true,
+															"treatBooleanAsNumber": false
+														}
+													}
+												},
+												"inputs": [
+													{
+														"referenceName": "ds_sftp_parquet_dynamic",
+														"type": "DatasetReference",
+														"parameters": {
+															"filename": {
+																"value": "@item().name",
+																"type": "Expression"
+															}
+														}
+													}
+												],
+												"outputs": [
+													{
+														"referenceName": "ds_blob_parquet_dynamic",
+														"type": "DatasetReference",
+														"parameters": {
+															"filename": {
+																"value": "@variables('var_filename')",
+																"type": "Expression"
+															}
+														}
+													}
+												]
+											},
+											{
+												"name": "landing to bronze_paraquet",
+												"type": "Copy",
+												"dependsOn": [
+													{
+														"activity": "sftp to landing_paraquet",
+														"dependencyConditions": [
+															"Succeeded"
+														]
+													}
+												],
+												"policy": {
+													"timeout": "0.12:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"typeProperties": {
+													"source": {
+														"type": "ParquetSource",
+														"storeSettings": {
+															"type": "AzureBlobStorageReadSettings",
+															"recursive": true,
+															"enablePartitionDiscovery": false
+														},
+														"formatSettings": {
+															"type": "ParquetReadSettings"
+														}
+													},
+													"sink": {
+														"type": "ParquetSink",
+														"storeSettings": {
+															"type": "AzureBlobFSWriteSettings"
+														},
+														"formatSettings": {
+															"type": "ParquetWriteSettings"
+														}
+													},
+													"enableStaging": false,
+													"translator": {
+														"type": "TabularTranslator",
+														"typeConversion": true,
+														"typeConversionSettings": {
+															"allowDataTruncation": true,
+															"treatBooleanAsNumber": false
+														}
+													}
+												},
+												"inputs": [
+													{
+														"referenceName": "ds_blob_parquet_dynamic",
+														"type": "DatasetReference",
+														"parameters": {
+															"filename": {
+																"value": "@variables('var_filename')",
+																"type": "Expression"
+															}
+														}
+													}
+												],
+												"outputs": [
+													{
+														"referenceName": "ds_dl_bronze_paraquet",
+														"type": "DatasetReference"
+													}
+												]
+											},
+											{
+												"name": "copying data from landing to archive_paraquet",
+												"type": "Copy",
+												"dependsOn": [
+													{
+														"activity": "landing to bronze_paraquet",
+														"dependencyConditions": [
+															"Succeeded"
+														]
+													}
+												],
+												"policy": {
+													"timeout": "0.12:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"typeProperties": {
+													"source": {
+														"type": "ParquetSource",
+														"storeSettings": {
+															"type": "AzureBlobStorageReadSettings",
+															"recursive": true,
+															"enablePartitionDiscovery": false
+														},
+														"formatSettings": {
+															"type": "ParquetReadSettings"
+														}
+													},
+													"sink": {
+														"type": "ParquetSink",
+														"storeSettings": {
+															"type": "AzureBlobStorageWriteSettings"
+														},
+														"formatSettings": {
+															"type": "ParquetWriteSettings"
+														}
+													},
+													"enableStaging": false,
+													"translator": {
+														"type": "TabularTranslator",
+														"typeConversion": true,
+														"typeConversionSettings": {
+															"allowDataTruncation": true,
+															"treatBooleanAsNumber": false
+														}
+													}
+												},
+												"inputs": [
+													{
+														"referenceName": "ds_blob_parquet_dynamic",
+														"type": "DatasetReference",
+														"parameters": {
+															"filename": {
+																"value": "@variables('var_filename')",
+																"type": "Expression"
+															}
+														}
+													}
+												],
+												"outputs": [
+													{
+														"referenceName": "ds_blob_archive_paraquet",
+														"type": "DatasetReference"
+													}
+												]
+											},
+											{
+												"name": "deleting landing_paraquet",
+												"type": "Delete",
+												"dependsOn": [
+													{
+														"activity": "copying data from landing to archive_paraquet",
+														"dependencyConditions": [
+															"Succeeded"
+														]
+													}
+												],
+												"policy": {
+													"timeout": "0.12:00:00",
+													"retry": 0,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"typeProperties": {
+													"dataset": {
+														"referenceName": "ds_blob_landing_paraquet_dynamic",
+														"type": "DatasetReference",
+														"parameters": {
+															"filename": {
+																"value": "@variables('var_filename')",
+																"type": "Expression"
+															}
+														}
+													},
+													"logStorageSettings": {
+														"linkedServiceName": {
+															"referenceName": "ls_AzureBlobStorage1",
+															"type": "LinkedServiceReference"
+														},
+														"path": "log"
+													},
+													"enableLogging": true,
+													"storeSettings": {
+														"type": "AzureBlobStorageReadSettings",
+														"recursive": true,
+														"enablePartitionDiscovery": false
+													}
 												}
 											}
 										]
