@@ -128,13 +128,7 @@
 												"inputs": [
 													{
 														"referenceName": "ds_sftp_json_dynamic",
-														"type": "DatasetReference",
-														"parameters": {
-															"filename": {
-																"value": "@variables('var_filename')",
-																"type": "Expression"
-															}
-														}
+														"type": "DatasetReference"
 													}
 												],
 												"outputs": [
