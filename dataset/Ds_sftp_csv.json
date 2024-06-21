@@ -1,6 +1,10 @@
 {
 	"name": "Ds_sftp_csv",
 	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_sftp",
+			"type": "LinkedServiceReference"
+		},
 		"annotations": [],
 		"type": "DelimitedText",
 		"typeProperties": {

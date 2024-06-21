@@ -684,10 +684,6 @@
 														"storeSettings": {
 															"type": "AzureBlobStorageReadSettings",
 															"recursive": true,
-															"wildcardFileName": {
-																"value": "@item().name",
-																"type": "Expression"
-															},
 															"deleteFilesAfterCompletion": false
 														},
 														"formatSettings": {
@@ -701,7 +697,25 @@
 														}
 													},
 													"enableStaging": false
-												}
+												},
+												"inputs": [
+													{
+														"referenceName": "ds_blob_landing_txt_dynamic",
+														"type": "DatasetReference",
+														"parameters": {
+															"filename": {
+																"value": "@variables('var_filename')",
+																"type": "Expression"
+															}
+														}
+													}
+												],
+												"outputs": [
+													{
+														"referenceName": "ds_blob_archieve_txt_dynamic",
+														"type": "DatasetReference"
+													}
+												]
 											},
 											{
 												"name": "Deleting txt file  from landing",
@@ -723,6 +737,16 @@
 												},
 												"userProperties": [],
 												"typeProperties": {
+													"dataset": {
+														"referenceName": "ds_blob_landing_txt_dynamic",
+														"type": "DatasetReference",
+														"parameters": {
+															"filename": {
+																"value": "@variables('var_filename')",
+																"type": "Expression"
+															}
+														}
+													},
 													"logStorageSettings": {
 														"linkedServiceName": {
 															"referenceName": "ls_AzureBlobStorage1",
@@ -734,10 +758,6 @@
 													"storeSettings": {
 														"type": "AzureBlobStorageReadSettings",
 														"recursive": true,
-														"wildcardFileName": {
-															"value": "@item().name",
-															"type": "Expression"
-														},
 														"enablePartitionDiscovery": false
 													}
 												}
