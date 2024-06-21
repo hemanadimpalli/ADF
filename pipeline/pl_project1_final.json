@@ -640,13 +640,7 @@
 												"outputs": [
 													{
 														"referenceName": "ds_blob_parquet_dynamic",
-														"type": "DatasetReference",
-														"parameters": {
-															"filename": {
-																"value": "@variables('var_filename')",
-																"type": "Expression"
-															}
-														}
+														"type": "DatasetReference"
 													}
 												]
 											},
