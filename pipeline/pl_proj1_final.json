@@ -108,6 +108,10 @@
 														"storeSettings": {
 															"type": "SftpReadSettings",
 															"recursive": true,
+															"wildcardFileName": {
+																"value": "@variables('v_filename')",
+																"type": "Expression"
+															},
 															"enablePartitionDiscovery": false,
 															"disableChunking": false
 														},
@@ -132,7 +136,7 @@
 														"type": "DatasetReference",
 														"parameters": {
 															"filename": {
-																"value": "@variables('v_filename').value",
+																"value": "@variables('v_filename')",
 																"type": "Expression"
 															}
 														}
