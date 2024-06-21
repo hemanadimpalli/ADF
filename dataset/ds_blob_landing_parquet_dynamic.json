@@ -11,7 +11,7 @@
 			}
 		},
 		"annotations": [],
-		"type": "Binary",
+		"type": "Parquet",
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
@@ -20,7 +20,9 @@
 					"type": "Expression"
 				},
 				"container": "landing"
-			}
-		}
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
 	}
 }

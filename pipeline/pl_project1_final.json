@@ -349,12 +349,23 @@
 														}
 													},
 													"sink": {
-														"type": "BinarySink",
+														"type": "ParquetSink",
 														"storeSettings": {
 															"type": "AzureBlobStorageWriteSettings"
+														},
+														"formatSettings": {
+															"type": "ParquetWriteSettings"
 														}
 													},
-													"enableStaging": false
+													"enableStaging": false,
+													"translator": {
+														"type": "TabularTranslator",
+														"typeConversion": true,
+														"typeConversionSettings": {
+															"allowDataTruncation": true,
+															"treatBooleanAsNumber": false
+														}
+													}
 												},
 												"inputs": [
 													{
@@ -402,13 +413,14 @@
 												"userProperties": [],
 												"typeProperties": {
 													"source": {
-														"type": "BinarySource",
+														"type": "ParquetSource",
 														"storeSettings": {
 															"type": "AzureBlobStorageReadSettings",
-															"recursive": true
+															"recursive": true,
+															"enablePartitionDiscovery": false
 														},
 														"formatSettings": {
-															"type": "BinaryReadSettings"
+															"type": "ParquetReadSettings"
 														}
 													},
 													"sink": {
@@ -420,12 +432,26 @@
 															"type": "ParquetWriteSettings"
 														}
 													},
-													"enableStaging": false
+													"enableStaging": false,
+													"translator": {
+														"type": "TabularTranslator",
+														"typeConversion": true,
+														"typeConversionSettings": {
+															"allowDataTruncation": true,
+															"treatBooleanAsNumber": false
+														}
+													}
 												},
 												"inputs": [
 													{
 														"referenceName": "ds_blob_landing_parquet_dynamic",
-														"type": "DatasetReference"
+														"type": "DatasetReference",
+														"parameters": {
+															"filename": {
+																"value": "@variables('var_filename')",
+																"type": "Expression"
+															}
+														}
 													}
 												],
 												"outputs": [
@@ -456,17 +482,18 @@
 												"userProperties": [],
 												"typeProperties": {
 													"source": {
-														"type": "BinarySource",
+														"type": "ParquetSource",
 														"storeSettings": {
 															"type": "AzureBlobStorageReadSettings",
 															"recursive": true,
 															"wildcardFileName": {
 																"value": "@item().name",
 																"type": "Expression"
-															}
+															},
+															"enablePartitionDiscovery": false
 														},
 														"formatSettings": {
-															"type": "BinaryReadSettings"
+															"type": "ParquetReadSettings"
 														}
 													},
 													"sink": {
@@ -478,12 +505,26 @@
 															"type": "ParquetWriteSettings"
 														}
 													},
-													"enableStaging": false
+													"enableStaging": false,
+													"translator": {
+														"type": "TabularTranslator",
+														"typeConversion": true,
+														"typeConversionSettings": {
+															"allowDataTruncation": true,
+															"treatBooleanAsNumber": false
+														}
+													}
 												},
 												"inputs": [
 													{
 														"referenceName": "ds_blob_landing_parquet_dynamic",
-														"type": "DatasetReference"
+														"type": "DatasetReference",
+														"parameters": {
+															"filename": {
+																"value": "@variables('var_filename')",
+																"type": "Expression"
+															}
+														}
 													}
 												],
 												"outputs": [
