@@ -60,7 +60,7 @@
 							},
 							"userProperties": [],
 							"typeProperties": {
-								"variableName": "var_filename",
+								"variableName": "v_filename",
 								"value": {
 									"value": "@item().name",
 									"type": "Expression"
@@ -128,12 +128,6 @@
 												"inputs": [
 													{
 														"referenceName": "ds_sftp_json_dynamic",
-														"type": "DatasetReference"
-													}
-												],
-												"outputs": [
-													{
-														"referenceName": "ds_blob_landing_json_dynamic",
 														"type": "DatasetReference",
 														"parameters": {
 															"filename": {
@@ -142,9 +136,18 @@
 															}
 														}
 													}
+												],
+												"outputs": [
+													{
+														"referenceName": "ds_blob_landing_json_dynamic",
+														"type": "DatasetReference"
+													}
 												]
 											}
 										]
+									},
+									{
+										"value": "Case2"
 									}
 								],
 								"defaultActivities": [
@@ -169,6 +172,9 @@
 				"type": "String"
 			},
 			"var_filename": {
+				"type": "String"
+			},
+			"v_filename": {
 				"type": "String"
 			}
 		},
