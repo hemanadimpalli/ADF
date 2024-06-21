@@ -171,9 +171,6 @@
 			}
 		],
 		"variables": {
-			"split": {
-				"type": "String"
-			},
 			"v_filename": {
 				"type": "String"
 			}
