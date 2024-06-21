@@ -357,8 +357,34 @@
 															"type": "ParquetWriteSettings"
 														}
 													},
-													"enableStaging": false
-												}
+													"enableStaging": false,
+													"translator": {
+														"type": "TabularTranslator",
+														"typeConversion": true,
+														"typeConversionSettings": {
+															"allowDataTruncation": true,
+															"treatBooleanAsNumber": false
+														}
+													}
+												},
+												"inputs": [
+													{
+														"referenceName": "ds_sftp_parquet_dynamic",
+														"type": "DatasetReference",
+														"parameters": {
+															"filename": {
+																"value": "@variables('var_filename')",
+																"type": "Expression"
+															}
+														}
+													}
+												],
+												"outputs": [
+													{
+														"referenceName": "ds_blob_parquet_dynamic",
+														"type": "DatasetReference"
+													}
+												]
 											},
 											{
 												"name": "landing to bronze_paraquet",
@@ -385,10 +411,6 @@
 														"storeSettings": {
 															"type": "AzureBlobStorageReadSettings",
 															"recursive": true,
-															"wildcardFileName": {
-																"value": "@item().name",
-																"type": "Expression"
-															},
 															"enablePartitionDiscovery": false
 														},
 														"formatSettings": {
@@ -404,8 +426,28 @@
 															"type": "ParquetWriteSettings"
 														}
 													},
-													"enableStaging": false
-												}
+													"enableStaging": false,
+													"translator": {
+														"type": "TabularTranslator",
+														"typeConversion": true,
+														"typeConversionSettings": {
+															"allowDataTruncation": true,
+															"treatBooleanAsNumber": false
+														}
+													}
+												},
+												"inputs": [
+													{
+														"referenceName": "ds_blob_parquet_dynamic",
+														"type": "DatasetReference"
+													}
+												],
+												"outputs": [
+													{
+														"referenceName": "ds_dl_bronze_paraquet",
+														"type": "DatasetReference"
+													}
+												]
 											},
 											{
 												"name": "copying data from landing to archive_paraquet",
@@ -440,15 +482,6 @@
 														},
 														"formatSettings": {
 															"type": "ParquetReadSettings"
-														}
-													},
-													"sink": {
-														"type": "ParquetSink",
-														"storeSettings": {
-															"type": "AzureBlobStorageWriteSettings"
-														},
-														"formatSettings": {
-															"type": "ParquetWriteSettings"
 														}
 													},
 													"enableStaging": false
