@@ -122,7 +122,7 @@
 														"formatSettings": {
 															"type": "DelimitedTextWriteSettings",
 															"quoteAllText": true,
-															"fileExtension": ".txt"
+															"fileExtension": ""
 														}
 													},
 													"enableStaging": false,
@@ -150,13 +150,7 @@
 												"outputs": [
 													{
 														"referenceName": "ds_blob_landing_csv_dynamic",
-														"type": "DatasetReference",
-														"parameters": {
-															"filename": {
-																"value": "@variables('var_filename')",
-																"type": "Expression"
-															}
-														}
+														"type": "DatasetReference"
 													}
 												]
 											},
@@ -217,13 +211,7 @@
 												"inputs": [
 													{
 														"referenceName": "ds_blob_landing_csv_dynamic",
-														"type": "DatasetReference",
-														"parameters": {
-															"filename": {
-																"value": "@variables('var_filename')",
-																"type": "Expression"
-															}
-														}
+														"type": "DatasetReference"
 													}
 												],
 												"outputs": [
