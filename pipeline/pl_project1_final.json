@@ -93,7 +93,14 @@
 											{
 												"name": "sftp to landing_json",
 												"type": "Copy",
-												"dependsOn": [],
+												"dependsOn": [
+													{
+														"activity": "Set variable1_copy1",
+														"dependencyConditions": [
+															"Succeeded"
+														]
+													}
+												],
 												"policy": {
 													"timeout": "0.12:00:00",
 													"retry": 0,
@@ -315,6 +322,23 @@
 														"type": "AzureBlobStorageReadSettings",
 														"recursive": true,
 														"enablePartitionDiscovery": false
+													}
+												}
+											},
+											{
+												"name": "Set variable1_copy1",
+												"type": "SetVariable",
+												"dependsOn": [],
+												"policy": {
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"typeProperties": {
+													"variableName": "var_filename",
+													"value": {
+														"value": "@item().name",
+														"type": "Expression"
 													}
 												}
 											}
