@@ -507,6 +507,16 @@
 												},
 												"userProperties": [],
 												"typeProperties": {
+													"dataset": {
+														"referenceName": "ds_blob_landing_parquet_dynamic",
+														"type": "DatasetReference",
+														"parameters": {
+															"filename": {
+																"value": "@variables('var_filename')",
+																"type": "Expression"
+															}
+														}
+													},
 													"logStorageSettings": {
 														"linkedServiceName": {
 															"referenceName": "ls_AzureBlobStorage1",
@@ -518,10 +528,6 @@
 													"storeSettings": {
 														"type": "AzureBlobStorageReadSettings",
 														"recursive": true,
-														"wildcardFileName": {
-															"value": "@item().name",
-															"type": "Expression"
-														},
 														"enablePartitionDiscovery": false
 													}
 												}
