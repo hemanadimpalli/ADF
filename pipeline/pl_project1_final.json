@@ -50,6 +50,7 @@
 						"value": "@activity('Get Metadata1').output.childItems",
 						"type": "Expression"
 					},
+					"isSequential": true,
 					"activities": [
 						{
 							"name": "Set variable1",
@@ -107,7 +108,6 @@
 														"storeSettings": {
 															"type": "SftpReadSettings",
 															"recursive": true,
-															"wildcardFileName": "@item().name",
 															"enablePartitionDiscovery": false,
 															"disableChunking": false
 														},
@@ -141,13 +141,7 @@
 												"outputs": [
 													{
 														"referenceName": "ds_blob_landing_json_dynamic",
-														"type": "DatasetReference",
-														"parameters": {
-															"filename": {
-																"value": "@item().name",
-																"type": "Expression"
-															}
-														}
+														"type": "DatasetReference"
 													}
 												]
 											},
@@ -176,7 +170,10 @@
 														"storeSettings": {
 															"type": "AzureBlobStorageReadSettings",
 															"recursive": true,
-															"wildcardFileName": "@item().name",
+															"wildcardFileName": {
+																"value": "@item().name",
+																"type": "Expression"
+															},
 															"enablePartitionDiscovery": false
 														},
 														"formatSettings": {
@@ -199,13 +196,7 @@
 												"inputs": [
 													{
 														"referenceName": "ds_blob_landing_json_dynamic",
-														"type": "DatasetReference",
-														"parameters": {
-															"filename": {
-																"value": "@item().name",
-																"type": "Expression"
-															}
-														}
+														"type": "DatasetReference"
 													}
 												],
 												"outputs": [
@@ -240,7 +231,10 @@
 														"storeSettings": {
 															"type": "AzureBlobStorageReadSettings",
 															"recursive": true,
-															"wildcardFileName": "@item().name",
+															"wildcardFileName": {
+																"value": "@item().name",
+																"type": "Expression"
+															},
 															"enablePartitionDiscovery": false
 														},
 														"formatSettings": {
@@ -261,13 +255,7 @@
 												"inputs": [
 													{
 														"referenceName": "ds_blob_landing_json_dynamic",
-														"type": "DatasetReference",
-														"parameters": {
-															"filename": {
-																"value": "@item().name",
-																"type": "Expression"
-															}
-														}
+														"type": "DatasetReference"
 													}
 												],
 												"outputs": [
@@ -299,13 +287,7 @@
 												"typeProperties": {
 													"dataset": {
 														"referenceName": "ds_blob_landing_json_dynamic",
-														"type": "DatasetReference",
-														"parameters": {
-															"filename": {
-																"value": "@item().name",
-																"type": "Expression"
-															}
-														}
+														"type": "DatasetReference"
 													},
 													"logStorageSettings": {
 														"linkedServiceName": {
@@ -318,7 +300,10 @@
 													"storeSettings": {
 														"type": "AzureBlobStorageReadSettings",
 														"recursive": true,
-														"wildcardFileName": "@item().name",
+														"wildcardFileName": {
+															"value": "@item().name",
+															"type": "Expression"
+														},
 														"enablePartitionDiscovery": false
 													}
 												}
@@ -346,7 +331,6 @@
 														"storeSettings": {
 															"type": "SftpReadSettings",
 															"recursive": true,
-															"wildcardFileName": "@item().name",
 															"enablePartitionDiscovery": false,
 															"disableChunking": false
 														},
@@ -388,13 +372,7 @@
 												"outputs": [
 													{
 														"referenceName": "ds_blob_parquet_dynamic",
-														"type": "DatasetReference",
-														"parameters": {
-															"filename": {
-																"value": "@item().name",
-																"type": "Expression"
-															}
-														}
+														"type": "DatasetReference"
 													}
 												]
 											},
@@ -423,7 +401,10 @@
 														"storeSettings": {
 															"type": "AzureBlobStorageReadSettings",
 															"recursive": true,
-															"wildcardFileName": "@item().name",
+															"wildcardFileName": {
+																"value": "@item().name",
+																"type": "Expression"
+															},
 															"enablePartitionDiscovery": false
 														},
 														"formatSettings": {
@@ -452,13 +433,7 @@
 												"inputs": [
 													{
 														"referenceName": "ds_blob_parquet_dynamic",
-														"type": "DatasetReference",
-														"parameters": {
-															"filename": {
-																"value": "@item().name",
-																"type": "Expression"
-															}
-														}
+														"type": "DatasetReference"
 													}
 												],
 												"outputs": [
@@ -493,7 +468,10 @@
 														"storeSettings": {
 															"type": "AzureBlobStorageReadSettings",
 															"recursive": true,
-															"wildcardFileName": "@item().name",
+															"wildcardFileName": {
+																"value": "@item().name",
+																"type": "Expression"
+															},
 															"enablePartitionDiscovery": false
 														},
 														"formatSettings": {
@@ -522,13 +500,7 @@
 												"inputs": [
 													{
 														"referenceName": "ds_blob_parquet_dynamic",
-														"type": "DatasetReference",
-														"parameters": {
-															"filename": {
-																"value": "@item().name",
-																"type": "Expression"
-															}
-														}
+														"type": "DatasetReference"
 													}
 												],
 												"outputs": [
@@ -579,7 +551,10 @@
 													"storeSettings": {
 														"type": "AzureBlobStorageReadSettings",
 														"recursive": true,
-														"wildcardFileName": "@item().name",
+														"wildcardFileName": {
+															"value": "@item().name",
+															"type": "Expression"
+														},
 														"enablePartitionDiscovery": false
 													}
 												}
@@ -607,7 +582,6 @@
 														"storeSettings": {
 															"type": "SftpReadSettings",
 															"recursive": true,
-															"wildcardFileName": "@item().name",
 															"deleteFilesAfterCompletion": false,
 															"disableChunking": false
 														},
@@ -732,7 +706,10 @@
 														"storeSettings": {
 															"type": "AzureBlobStorageReadSettings",
 															"recursive": true,
-															"wildcardFileName": "@item().name",
+															"wildcardFileName": {
+																"value": "@item().name",
+																"type": "Expression"
+															},
 															"deleteFilesAfterCompletion": false
 														},
 														"formatSettings": {
@@ -804,7 +781,10 @@
 													"storeSettings": {
 														"type": "AzureBlobStorageReadSettings",
 														"recursive": true,
-														"wildcardFileName": "@item().name",
+														"wildcardFileName": {
+															"value": "@item().name",
+															"type": "Expression"
+														},
 														"enablePartitionDiscovery": false
 													}
 												}
