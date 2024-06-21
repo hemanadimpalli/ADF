@@ -1,5 +1,5 @@
 {
-	"name": "ds_blob_parquet_dynamic",
+	"name": "ds_blob_landing_parquet_dynamic",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "ls_AzureBlobStorage1",
