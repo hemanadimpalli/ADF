@@ -163,6 +163,8 @@
 											{
 												"name": "landing to bronze_csv",
 												"type": "Copy",
+												"state": "Inactive",
+												"onInactiveMarkAs": "Succeeded",
 												"dependsOn": [
 													{
 														"activity": "sftp to landing_csv",
@@ -234,6 +236,8 @@
 											{
 												"name": "copying data from landing to archive_csv",
 												"type": "Copy",
+												"state": "Inactive",
+												"onInactiveMarkAs": "Succeeded",
 												"dependsOn": [
 													{
 														"activity": "landing to bronze_csv",
