@@ -87,7 +87,7 @@
 								},
 								"cases": [
 									{
-										"value": "csv",
+										"value": "txt",
 										"activities": [
 											{
 												"name": "sftp to landing_csv",
