@@ -87,7 +87,7 @@
 								},
 								"cases": [
 									{
-										"value": "txt",
+										"value": "csv",
 										"activities": [
 											{
 												"name": "sftp to landing_csv",
@@ -305,6 +305,8 @@
 											{
 												"name": "Deleting landing_csv",
 												"type": "Delete",
+												"state": "Inactive",
+												"onInactiveMarkAs": "Succeeded",
 												"dependsOn": [
 													{
 														"activity": "copying data from landing to archive_csv",
@@ -540,6 +542,8 @@
 											{
 												"name": "Deleting landing_json",
 												"type": "Delete",
+												"state": "Inactive",
+												"onInactiveMarkAs": "Succeeded",
 												"dependsOn": [
 													{
 														"activity": "copying data from landing to archive_json",
