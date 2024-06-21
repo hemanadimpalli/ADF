@@ -109,7 +109,7 @@
 															"type": "SftpReadSettings",
 															"recursive": true,
 															"wildcardFileName": {
-																"value": "@variables('v_filename')",
+																"value": "@item().name",
 																"type": "Expression"
 															},
 															"enablePartitionDiscovery": false,
