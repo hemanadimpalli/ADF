@@ -107,6 +107,7 @@
 														"storeSettings": {
 															"type": "SftpReadSettings",
 															"recursive": true,
+															"wildcardFileName": "@item().name",
 															"enablePartitionDiscovery": false,
 															"disableChunking": false
 														},
@@ -140,7 +141,13 @@
 												"outputs": [
 													{
 														"referenceName": "ds_blob_landing_json_dynamic",
-														"type": "DatasetReference"
+														"type": "DatasetReference",
+														"parameters": {
+															"filename": {
+																"value": "@item().name",
+																"type": "Expression"
+															}
+														}
 													}
 												]
 											},
@@ -193,7 +200,13 @@
 												"inputs": [
 													{
 														"referenceName": "ds_blob_landing_json_dynamic",
-														"type": "DatasetReference"
+														"type": "DatasetReference",
+														"parameters": {
+															"filename": {
+																"value": "@variables('var_filename')",
+																"type": "Expression"
+															}
+														}
 													}
 												],
 												"outputs": [
@@ -377,7 +390,13 @@
 												"outputs": [
 													{
 														"referenceName": "ds_blob_parquet_dynamic",
-														"type": "DatasetReference"
+														"type": "DatasetReference",
+														"parameters": {
+															"filename": {
+																"value": "@variables('var_filename')",
+																"type": "Expression"
+															}
+														}
 													}
 												]
 											},
