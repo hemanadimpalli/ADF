@@ -154,8 +154,6 @@
 											{
 												"name": "landing to bronze_json",
 												"type": "Copy",
-												"state": "Inactive",
-												"onInactiveMarkAs": "Succeeded",
 												"dependsOn": [
 													{
 														"activity": "sftp to landing_json",
@@ -178,6 +176,7 @@
 														"storeSettings": {
 															"type": "AzureBlobStorageReadSettings",
 															"recursive": true,
+															"wildcardFileName": "@item().name",
 															"enablePartitionDiscovery": false
 														},
 														"formatSettings": {
@@ -203,7 +202,7 @@
 														"type": "DatasetReference",
 														"parameters": {
 															"filename": {
-																"value": "@variables('var_filename')",
+																"value": "@item().name",
 																"type": "Expression"
 															}
 														}
