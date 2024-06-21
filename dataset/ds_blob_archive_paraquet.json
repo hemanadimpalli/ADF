@@ -1,16 +1,16 @@
 {
-	"name": "ds_dl_bronze_paraquet",
+	"name": "ds_blob_archive_paraquet",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "ls_dl",
+			"referenceName": "ls_AzureBlobStorage1",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
 		"type": "Parquet",
 		"typeProperties": {
 			"location": {
-				"type": "AzureBlobFSLocation",
-				"fileSystem": "bronze"
+				"type": "AzureBlobStorageLocation",
+				"container": "archive"
 			},
 			"compressionCodec": "snappy"
 		},
