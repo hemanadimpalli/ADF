@@ -145,13 +145,7 @@
 												"outputs": [
 													{
 														"referenceName": "ds_blob_landing_json_dynamic",
-														"type": "DatasetReference",
-														"parameters": {
-															"filename": {
-																"value": "@item().name",
-																"type": "Expression"
-															}
-														}
+														"type": "DatasetReference"
 													}
 												]
 											}
