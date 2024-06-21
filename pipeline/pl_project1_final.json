@@ -801,6 +801,8 @@
 											{
 												"name": "deleting landing_paraquet",
 												"type": "Delete",
+												"state": "Inactive",
+												"onInactiveMarkAs": "Succeeded",
 												"dependsOn": [
 													{
 														"activity": "copying data from landing to archive_paraquet",
