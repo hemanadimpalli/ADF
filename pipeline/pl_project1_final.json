@@ -125,7 +125,31 @@
 														}
 													},
 													"enableStaging": false
-												}
+												},
+												"inputs": [
+													{
+														"referenceName": "ds_json_sftp_dynamic",
+														"type": "DatasetReference",
+														"parameters": {
+															"filename": {
+																"value": "@variables('var_filename')",
+																"type": "Expression"
+															}
+														}
+													}
+												],
+												"outputs": [
+													{
+														"referenceName": "ds_blob_landing_json_dynamic",
+														"type": "DatasetReference",
+														"parameters": {
+															"filename": {
+																"value": "@variables('var_filename')",
+																"type": "Expression"
+															}
+														}
+													}
+												]
 											},
 											{
 												"name": "landing to bronze_json",
@@ -152,10 +176,6 @@
 														"storeSettings": {
 															"type": "AzureBlobStorageReadSettings",
 															"recursive": true,
-															"wildcardFileName": {
-																"value": "@item().name",
-																"type": "Expression"
-															},
 															"enablePartitionDiscovery": false
 														},
 														"formatSettings": {
@@ -163,18 +183,34 @@
 														}
 													},
 													"sink": {
-														"type": "DelimitedTextSink",
+														"type": "JsonSink",
 														"storeSettings": {
 															"type": "AzureBlobFSWriteSettings"
 														},
 														"formatSettings": {
-															"type": "DelimitedTextWriteSettings",
-															"quoteAllText": true,
-															"fileExtension": ".json"
+															"type": "JsonWriteSettings"
 														}
 													},
 													"enableStaging": false
-												}
+												},
+												"inputs": [
+													{
+														"referenceName": "ds_blob_landing_json_dynamic",
+														"type": "DatasetReference",
+														"parameters": {
+															"filename": {
+																"value": "@variables('var_filename')",
+																"type": "Expression"
+															}
+														}
+													}
+												],
+												"outputs": [
+													{
+														"referenceName": "ds_dl_bronze_json",
+														"type": "DatasetReference"
+													}
+												]
 											},
 											{
 												"name": "copying data from landing to archive_json",
@@ -201,10 +237,6 @@
 														"storeSettings": {
 															"type": "AzureBlobStorageReadSettings",
 															"recursive": true,
-															"wildcardFileName": {
-																"value": "@item().name",
-																"type": "Expression"
-															},
 															"enablePartitionDiscovery": false
 														},
 														"formatSettings": {
@@ -221,7 +253,25 @@
 														}
 													},
 													"enableStaging": false
-												}
+												},
+												"inputs": [
+													{
+														"referenceName": "ds_blob_landing_json_dynamic",
+														"type": "DatasetReference",
+														"parameters": {
+															"filename": {
+																"value": "@variables('var_filename')",
+																"type": "Expression"
+															}
+														}
+													}
+												],
+												"outputs": [
+													{
+														"referenceName": "ds_blob_archive_json",
+														"type": "DatasetReference"
+													}
+												]
 											},
 											{
 												"name": "Deleting landing_json",
@@ -243,6 +293,16 @@
 												},
 												"userProperties": [],
 												"typeProperties": {
+													"dataset": {
+														"referenceName": "ds_blob_landing_json_dynamic",
+														"type": "DatasetReference",
+														"parameters": {
+															"filename": {
+																"value": "@variables('var_filename')",
+																"type": "Expression"
+															}
+														}
+													},
 													"logStorageSettings": {
 														"linkedServiceName": {
 															"referenceName": "ls_AzureBlobStorage1",
@@ -254,10 +314,6 @@
 													"storeSettings": {
 														"type": "AzureBlobStorageReadSettings",
 														"recursive": true,
-														"wildcardFileName": {
-															"value": "@item().name",
-															"type": "Expression"
-														},
 														"enablePartitionDiscovery": false
 													}
 												}
