@@ -541,8 +541,6 @@
 											{
 												"name": "deleting landing_paraquet",
 												"type": "Delete",
-												"state": "Inactive",
-												"onInactiveMarkAs": "Succeeded",
 												"dependsOn": [
 													{
 														"activity": "copying data from landing to archive_paraquet",
@@ -565,7 +563,7 @@
 														"type": "DatasetReference",
 														"parameters": {
 															"filename": {
-																"value": "@variables('var_filename')",
+																"value": "@item().name",
 																"type": "Expression"
 															}
 														}
@@ -581,6 +579,7 @@
 													"storeSettings": {
 														"type": "AzureBlobStorageReadSettings",
 														"recursive": true,
+														"wildcardFileName": "@item().name",
 														"enablePartitionDiscovery": false
 													}
 												}
