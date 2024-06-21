@@ -177,9 +177,6 @@
 			"split": {
 				"type": "String"
 			},
-			"var_filename": {
-				"type": "String"
-			},
 			"v_filename": {
 				"type": "String"
 			}
