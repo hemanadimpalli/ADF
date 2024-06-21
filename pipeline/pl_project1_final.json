@@ -154,6 +154,8 @@
 											{
 												"name": "landing to bronze_json",
 												"type": "Copy",
+												"state": "Inactive",
+												"onInactiveMarkAs": "Succeeded",
 												"dependsOn": [
 													{
 														"activity": "sftp to landing_json",
@@ -217,6 +219,8 @@
 											{
 												"name": "copying data from landing to archive_json",
 												"type": "Copy",
+												"state": "Inactive",
+												"onInactiveMarkAs": "Succeeded",
 												"dependsOn": [
 													{
 														"activity": "landing to bronze_json",
@@ -278,6 +282,8 @@
 											{
 												"name": "Deleting landing_json",
 												"type": "Delete",
+												"state": "Inactive",
+												"onInactiveMarkAs": "Succeeded",
 												"dependsOn": [
 													{
 														"activity": "copying data from landing to archive_json",
