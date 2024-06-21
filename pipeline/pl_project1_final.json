@@ -671,6 +671,8 @@
 											{
 												"name": "landing to bronze_paraquet",
 												"type": "Copy",
+												"state": "Inactive",
+												"onInactiveMarkAs": "Succeeded",
 												"dependsOn": [
 													{
 														"activity": "sftp to landing_paraquet",
@@ -740,6 +742,8 @@
 											{
 												"name": "copying data from landing to archive_paraquet",
 												"type": "Copy",
+												"state": "Inactive",
+												"onInactiveMarkAs": "Succeeded",
 												"dependsOn": [
 													{
 														"activity": "landing to bronze_paraquet",
