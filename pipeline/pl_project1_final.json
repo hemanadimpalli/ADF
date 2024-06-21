@@ -176,10 +176,6 @@
 														"storeSettings": {
 															"type": "AzureBlobStorageReadSettings",
 															"recursive": true,
-															"wildcardFileName": {
-																"value": "@item().name",
-																"type": "Expression"
-															},
 															"enablePartitionDiscovery": false
 														},
 														"formatSettings": {
@@ -202,7 +198,13 @@
 												"inputs": [
 													{
 														"referenceName": "ds_blob_landing_json_dynamic",
-														"type": "DatasetReference"
+														"type": "DatasetReference",
+														"parameters": {
+															"filename": {
+																"value": "@variables('var_filename')",
+																"type": "Expression"
+															}
+														}
 													}
 												],
 												"outputs": [
@@ -237,10 +239,6 @@
 														"storeSettings": {
 															"type": "AzureBlobStorageReadSettings",
 															"recursive": true,
-															"wildcardFileName": {
-																"value": "@item().name",
-																"type": "Expression"
-															},
 															"enablePartitionDiscovery": false
 														},
 														"formatSettings": {
@@ -261,7 +259,13 @@
 												"inputs": [
 													{
 														"referenceName": "ds_blob_landing_json_dynamic",
-														"type": "DatasetReference"
+														"type": "DatasetReference",
+														"parameters": {
+															"filename": {
+																"value": "@variables('var_filename')",
+																"type": "Expression"
+															}
+														}
 													}
 												],
 												"outputs": [
