@@ -397,13 +397,7 @@
 												"outputs": [
 													{
 														"referenceName": "ds_blob_landing_json_dynamic",
-														"type": "DatasetReference",
-														"parameters": {
-															"filename": {
-																"value": "@variables('var_filename')",
-																"type": "Expression"
-															}
-														}
+														"type": "DatasetReference"
 													}
 												]
 											},
