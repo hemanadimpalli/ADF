@@ -53,33 +53,9 @@
 					"isSequential": true,
 					"activities": [
 						{
-							"name": "Set variable1",
-							"type": "SetVariable",
-							"dependsOn": [],
-							"policy": {
-								"secureOutput": false,
-								"secureInput": false
-							},
-							"userProperties": [],
-							"typeProperties": {
-								"variableName": "var_filename",
-								"value": {
-									"value": "@item().name",
-									"type": "Expression"
-								}
-							}
-						},
-						{
 							"name": "Switch1",
 							"type": "Switch",
-							"dependsOn": [
-								{
-									"activity": "Set variable1",
-									"dependencyConditions": [
-										"Succeeded"
-									]
-								}
-							],
+							"dependsOn": [],
 							"userProperties": [],
 							"typeProperties": {
 								"on": {
@@ -93,7 +69,14 @@
 											{
 												"name": "sftp to landing_json",
 												"type": "Copy",
-												"dependsOn": [],
+												"dependsOn": [
+													{
+														"activity": "Set variable_json",
+														"dependencyConditions": [
+															"Succeeded"
+														]
+													}
+												],
 												"policy": {
 													"timeout": "0.12:00:00",
 													"retry": 0,
@@ -317,6 +300,23 @@
 														"enablePartitionDiscovery": false
 													}
 												}
+											},
+											{
+												"name": "Set variable_json",
+												"type": "SetVariable",
+												"dependsOn": [],
+												"policy": {
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"typeProperties": {
+													"variableName": "var_filename",
+													"value": {
+														"value": "@item().name",
+														"type": "Expression"
+													}
+												}
 											}
 										]
 									},
@@ -326,7 +326,14 @@
 											{
 												"name": "sftp to landing_paraquet",
 												"type": "Copy",
-												"dependsOn": [],
+												"dependsOn": [
+													{
+														"activity": "Set variable_parquet",
+														"dependencyConditions": [
+															"Succeeded"
+														]
+													}
+												],
 												"policy": {
 													"timeout": "0.12:00:00",
 													"retry": 0,
@@ -578,6 +585,23 @@
 														"enablePartitionDiscovery": false
 													}
 												}
+											},
+											{
+												"name": "Set variable_parquet",
+												"type": "SetVariable",
+												"dependsOn": [],
+												"policy": {
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"typeProperties": {
+													"variableName": "var_filename",
+													"value": {
+														"value": "@item().name",
+														"type": "Expression"
+													}
+												}
 											}
 										]
 									},
@@ -587,7 +611,14 @@
 											{
 												"name": "sftp to landing txt",
 												"type": "Copy",
-												"dependsOn": [],
+												"dependsOn": [
+													{
+														"activity": "Set variable_txt",
+														"dependencyConditions": [
+															"Succeeded"
+														]
+													}
+												],
 												"policy": {
 													"timeout": "0.12:00:00",
 													"retry": 0,
@@ -800,6 +831,23 @@
 														"type": "AzureBlobStorageReadSettings",
 														"recursive": true,
 														"enablePartitionDiscovery": false
+													}
+												}
+											},
+											{
+												"name": "Set variable_txt",
+												"type": "SetVariable",
+												"dependsOn": [],
+												"policy": {
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"typeProperties": {
+													"variableName": "var_filename",
+													"value": {
+														"value": "@item().name",
+														"type": "Expression"
 													}
 												}
 											}
