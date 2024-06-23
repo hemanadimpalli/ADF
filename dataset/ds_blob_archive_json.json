@@ -10,7 +10,10 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"container": "archive"
+				"container": {
+					"value": "@Archive/@{formatDateTime(utcnow(),'yyyy')}/@Archive/@{formatDateTime(utcnow(),'MM')}/@Archive/@{formatDateTime(utcnow(),'DD')}",
+					"type": "Expression"
+				}
 			}
 		},
 		"schema": {}
