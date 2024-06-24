@@ -11,7 +11,7 @@
 			"location": {
 				"type": "AzureBlobStorageLocation",
 				"folderPath": {
-					"value": "@concat('Archive/', formatDateTime(utcnow(),'yyyy'), '/', formatDateTime(utcnow(),'MM'), '/', formatDateTime(utcnow(),'dd'))",
+					"value": "@formatDateTime(utcNow(),'yyyy/MM/dd')",
 					"type": "Expression"
 				},
 				"container": "archive"
