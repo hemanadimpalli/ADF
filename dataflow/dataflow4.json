@@ -1,0 +1,44 @@
+{
+	"name": "dataflow4",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "ds_json_bronze_products",
+						"type": "DatasetReference"
+					},
+					"name": "source1"
+				}
+			],
+			"sinks": [],
+			"transformations": [
+				{
+					"name": "cast1"
+				},
+				{
+					"name": "derivedColumn1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          PRODUCT_ID as string,",
+				"          PRODUCT_NAME as string,",
+				"          UNIT_PRICE as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false,",
+				"     documentForm: 'documentPerLine') ~> source1",
+				"source1 cast(output(",
+				"          PRODUCT_ID as integer",
+				"     ),",
+				"     errors: true) ~> cast1",
+				"cast1 derive(INJECTED_BY = 'Hema',",
+				"          INJECTED_DATE = currentDate(),",
+				"          INJECTED_TIME = currentTimestamp()) ~> derivedColumn1"
+			]
+		}
+	}
+}
