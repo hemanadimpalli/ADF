@@ -28,7 +28,7 @@
 					},
 					"fieldList": [
 						"childItems",
-						"lastModified"
+						"itemName"
 					],
 					"storeSettings": {
 						"type": "SftpReadSettings",
