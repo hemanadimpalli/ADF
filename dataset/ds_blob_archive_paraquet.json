@@ -10,7 +10,10 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"folderPath": "@concat('Archive/', formatDateTime(utcnow(),'yyyy'), '/', formatDateTime(utcnow(),'MM'), '/', formatDateTime(utcnow(),'dd'))",
+				"folderPath": {
+					"value": "@formatDateTime(utcNow(),'yyyy/MM/dd')",
+					"type": "Expression"
+				},
 				"container": "archive"
 			},
 			"compressionCodec": "snappy"
