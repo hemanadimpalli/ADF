@@ -27,9 +27,7 @@
 						}
 					},
 					"fieldList": [
-						"exists",
-						"lastModified",
-						"itemType"
+						"childItems"
 					],
 					"storeSettings": {
 						"type": "SftpReadSettings",
