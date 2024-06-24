@@ -1,0 +1,48 @@
+{
+	"name": "dataflow1",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "ds_paraquet_order_file",
+						"type": "DatasetReference"
+					},
+					"name": "source1"
+				}
+			],
+			"sinks": [],
+			"transformations": [
+				{
+					"name": "cast1"
+				},
+				{
+					"name": "derivedColumn1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          ORDER_ID as string,",
+				"          ORDER_DATETIME as string,",
+				"          CUSTOMER_ID as string,",
+				"          ORDER_STATUS as string,",
+				"          STORE_ID as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false,",
+				"     format: 'parquet') ~> source1",
+				"source1 cast(output(",
+				"          ORDER_ID as integer,",
+				"          CUSTOMER_ID as integer,",
+				"          STORE_ID as integer",
+				"     ),",
+				"     errors: true) ~> cast1",
+				"cast1 derive(Injected_By = 'Hema',",
+				"          Injection_Date = currentDate(),",
+				"          Injection_Timestamp = currentTimestamp()) ~> derivedColumn1"
+			]
+		}
+	}
+}
