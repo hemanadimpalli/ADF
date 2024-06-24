@@ -18,7 +18,13 @@
 				"typeProperties": {
 					"dataset": {
 						"referenceName": "Ds_sftp_csv",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"filename": {
+								"value": "/container_name/path/to/file.csv",
+								"type": "Expression"
+							}
+						}
 					},
 					"fieldList": [
 						"exists",
