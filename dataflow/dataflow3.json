@@ -12,10 +12,24 @@
 					"name": "source1"
 				}
 			],
-			"sinks": [],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "ds_silver_JSONtoparaquet_Customer",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
 			"transformations": [
 				{
 					"name": "cast1"
+				},
+				{
+					"name": "derivedColumn1"
+				},
+				{
+					"name": "select1"
 				}
 			],
 			"scriptLines": [
@@ -33,7 +47,31 @@
 				"          FULL_NAME as string,",
 				"          EMAIL_ADDRESS as string",
 				"     ),",
-				"     errors: true) ~> cast1"
+				"     errors: true) ~> cast1",
+				"cast1 derive(FIRST_NAME = split(FULL_NAME,' ')[1],",
+				"          SECOND_NAME = split(FULL_NAME,' ')[2],",
+				"          INJECTED_BY = 'Hema',",
+				"          INJECTED_DATE = currentDate(),",
+				"          INJECTED_TIME = currentTimestamp()) ~> derivedColumn1",
+				"derivedColumn1 select(mapColumn(",
+				"          CUSTOMER_ID,",
+				"          FIRST_NAME,",
+				"          SECOND_NAME,",
+				"          EMAIL_ADDRESS,",
+				"          INJECTED_BY,",
+				"          INJECTED_DATE,",
+				"          INJECTED_TIME",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select1",
+				"select1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     format: 'parquet',",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> sink1"
 			]
 		}
 	}
