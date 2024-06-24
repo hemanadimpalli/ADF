@@ -14,7 +14,8 @@
 		"type": "DelimitedText",
 		"typeProperties": {
 			"location": {
-				"type": "SftpLocation"
+				"type": "SftpLocation",
+				"fileName": ".csv"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
