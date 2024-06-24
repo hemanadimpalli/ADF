@@ -22,7 +22,8 @@
 					},
 					"fieldList": [
 						"exists",
-						"lastModified"
+						"lastModified",
+						"itemType"
 					],
 					"storeSettings": {
 						"type": "SftpReadSettings",
