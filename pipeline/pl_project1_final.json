@@ -406,6 +406,10 @@
 												},
 												"userProperties": [],
 												"typeProperties": {
+													"dataflow": {
+														"referenceName": "dataflow5",
+														"type": "DataFlowReference"
+													},
 													"compute": {
 														"coreCount": 8,
 														"computeType": "General"
