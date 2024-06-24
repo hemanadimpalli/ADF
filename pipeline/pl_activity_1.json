@@ -27,8 +27,7 @@
 						}
 					},
 					"fieldList": [
-						"childItems",
-						"itemName"
+						"childItems"
 					],
 					"storeSettings": {
 						"type": "SftpReadSettings",
