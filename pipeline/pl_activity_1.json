@@ -21,7 +21,7 @@
 						"type": "DatasetReference",
 						"parameters": {
 							"filename": {
-								"value": "/container_name/path/to/file.csv",
+								"value": "data.csv",
 								"type": "Expression"
 							}
 						}
