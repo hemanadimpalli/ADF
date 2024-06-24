@@ -21,7 +21,8 @@
 						"type": "DatasetReference"
 					},
 					"fieldList": [
-						"exists"
+						"exists",
+						"lastModified"
 					],
 					"storeSettings": {
 						"type": "SftpReadSettings",
