@@ -26,11 +26,11 @@
 						"type": "SftpReadSettings",
 						"recursive": true,
 						"modifiedDatetimeStart": {
-							"value": "@concat(formatDateTime(adddays(utcnow(), -1), 'yyyy-MM-ddT00:00:00Z'))",
+							"value": "@getPastTime(1,'Day')",
 							"type": "Expression"
 						},
 						"modifiedDatetimeEnd": {
-							"value": "@concat(formatDateTime(adddays(utcnow(), -1), 'yyyy-MM-ddT23:59:59Z'))",
+							"value": "@getPastTime(1,'Day')",
 							"type": "Expression"
 						},
 						"enablePartitionDiscovery": false,
