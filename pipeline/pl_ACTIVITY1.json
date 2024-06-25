@@ -24,12 +24,13 @@
 					],
 					"storeSettings": {
 						"type": "SftpReadSettings",
+						"recursive": true,
 						"modifiedDatetimeStart": {
-							"value": "@getPastTime(1,'Day')",
+							"value": "@concat(formatDateTime(adddays(utcnow(), -1), 'yyyy-MM-ddT00:00:00Z'))",
 							"type": "Expression"
 						},
 						"modifiedDatetimeEnd": {
-							"value": "@getPastTime(1,'Minute')",
+							"value": "@concat(formatDateTime(adddays(utcnow(), -1), 'yyyy-MM-ddT23:59:59Z'))",
 							"type": "Expression"
 						},
 						"enablePartitionDiscovery": false,
