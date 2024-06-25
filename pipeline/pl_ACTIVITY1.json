@@ -104,7 +104,8 @@
 										"disableChunking": false
 									},
 									"formatSettings": {
-										"type": "DelimitedTextReadSettings"
+										"type": "DelimitedTextReadSettings",
+										"skipLineCount": 2
 									}
 								},
 								"sink": {
@@ -183,7 +184,7 @@
 										{
 											"name": "Ingested_date",
 											"value": {
-												"value": "@utcnow()",
+												"value": "@formatDateTime(utcNow(),'yyyy/MM/dd')",
 												"type": "Expression"
 											}
 										},
@@ -198,7 +199,8 @@
 										"enablePartitionDiscovery": false
 									},
 									"formatSettings": {
-										"type": "DelimitedTextReadSettings"
+										"type": "DelimitedTextReadSettings",
+										"skipLineCount": 2
 									}
 								},
 								"sink": {
