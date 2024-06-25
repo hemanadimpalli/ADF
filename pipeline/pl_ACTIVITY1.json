@@ -19,7 +19,9 @@
 						"referenceName": "Ds_sftp_csv_1",
 						"type": "DatasetReference"
 					},
-					"fieldList": [],
+					"fieldList": [
+						"childItems"
+					],
 					"storeSettings": {
 						"type": "SftpReadSettings",
 						"modifiedDatetimeStart": {
