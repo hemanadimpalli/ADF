@@ -203,44 +203,6 @@
 								"enableStaging": false,
 								"translator": {
 									"type": "TabularTranslator",
-									"mappings": [
-										{
-											"source": {
-												"name": "CUSTOMER_ID",
-												"type": "String",
-												"physicalType": "String"
-											},
-											"sink": {
-												"name": "CUSTOMER_ID",
-												"type": "String",
-												"physicalType": "String"
-											}
-										},
-										{
-											"source": {
-												"name": "FULL_NAME",
-												"type": "String",
-												"physicalType": "String"
-											},
-											"sink": {
-												"name": "FULL_NAME",
-												"type": "String",
-												"physicalType": "String"
-											}
-										},
-										{
-											"source": {
-												"name": "EMAIL_ADDRESS",
-												"type": "String",
-												"physicalType": "String"
-											},
-											"sink": {
-												"name": "EMAIL_ADDRESS",
-												"type": "String",
-												"physicalType": "String"
-											}
-										}
-									],
 									"typeConversion": true,
 									"typeConversionSettings": {
 										"allowDataTruncation": true,
