@@ -1,0 +1,19 @@
+{
+	"name": "ds_NJson_Archive",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_AzureBlobStorage1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"folderPath": "NJson",
+				"container": "archive"
+			}
+		},
+		"schema": {}
+	}
+}
