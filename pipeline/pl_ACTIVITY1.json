@@ -177,7 +177,7 @@
 									"additionalColumns": [
 										{
 											"name": "Ingested_By",
-											"value": "'HEMA'"
+											"value": "HEMA"
 										},
 										{
 											"name": "Ingested_date",
@@ -185,6 +185,10 @@
 												"value": "@utcnow()",
 												"type": "Expression"
 											}
+										},
+										{
+											"name": "Fila_location",
+											"value": "$$FILEPATH"
 										}
 									],
 									"storeSettings": {
