@@ -28,6 +28,10 @@
 							"value": "@getPastTime(1,'Day')",
 							"type": "Expression"
 						},
+						"modifiedDatetimeEnd": {
+							"value": "@getPastTime(2,'Hour')",
+							"type": "Expression"
+						},
 						"enablePartitionDiscovery": false,
 						"disableChunking": false
 					},
