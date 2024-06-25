@@ -1,6 +1,10 @@
 {
 	"name": "Ds_sftp_csv_dynamic",
 	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_sftp",
+			"type": "LinkedServiceReference"
+		},
 		"parameters": {
 			"filename": {
 				"type": "string"
