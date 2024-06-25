@@ -189,8 +189,11 @@
 										"type": "AzureBlobStorageWriteSettings",
 										"metadata": [
 											{
-												"name": "Ingested_By",
-												"value": "HEMA"
+												"name": "Ingested_date",
+												"value": {
+													"value": "@utcnow()",
+													"type": "Expression"
+												}
 											}
 										]
 									},
