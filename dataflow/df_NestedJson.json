@@ -1,5 +1,5 @@
 {
-	"name": "dataflow6",
+	"name": "df_NestedJson",
 	"properties": {
 		"type": "MappingDataFlow",
 		"typeProperties": {
@@ -13,7 +13,11 @@
 				}
 			],
 			"sinks": [],
-			"transformations": [],
+			"transformations": [
+				{
+					"name": "cast1"
+				}
+			],
 			"scriptLines": [
 				"source(output(",
 				"          driverId as integer,",
@@ -28,7 +32,18 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false,",
-				"     documentForm: 'documentPerLine') ~> source1"
+				"     documentForm: 'documentPerLine') ~> source1",
+				"source1 cast(output(",
+				"          driverId as integer,",
+				"          driverRef as string,",
+				"          number as string,",
+				"          code as string,",
+				"          name as (forename as string, surname as string),",
+				"          dob as date,",
+				"          nationality as string,",
+				"          url as string",
+				"     ),",
+				"     errors: true) ~> cast1"
 			]
 		}
 	}
