@@ -19,11 +19,13 @@
 						"referenceName": "Ds_sftp_csv_1",
 						"type": "DatasetReference"
 					},
-					"fieldList": [
-						"childItems"
-					],
+					"fieldList": [],
 					"storeSettings": {
 						"type": "SftpReadSettings",
+						"modifiedDatetimeStart": {
+							"value": "@getPastTime(1,'Day')",
+							"type": "Expression"
+						},
 						"enablePartitionDiscovery": false,
 						"disableChunking": false
 					},
