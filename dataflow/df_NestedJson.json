@@ -1,0 +1,82 @@
+{
+	"name": "df_NestedJson",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "ds_NJson_Blob",
+						"type": "DatasetReference"
+					},
+					"name": "source1"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "ds_NJson_Archive",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [
+				{
+					"name": "cast1"
+				},
+				{
+					"name": "derivedColumn1"
+				},
+				{
+					"name": "select1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          driverId as integer,",
+				"          driverRef as string,",
+				"          number as string,",
+				"          code as string,",
+				"          name as (forename as string, surname as string),",
+				"          dob as string,",
+				"          nationality as string,",
+				"          url as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false,",
+				"     documentForm: 'documentPerLine') ~> source1",
+				"source1 cast(output(",
+				"          driverId as integer,",
+				"          driverRef as string,",
+				"          number as string,",
+				"          code as string,",
+				"          name as (forename as string, surname as string),",
+				"          dob as date,",
+				"          nationality as string,",
+				"          url as string",
+				"     ),",
+				"     errors: true) ~> cast1",
+				"cast1 derive({Full Name} = name.forename+' '+name.surname) ~> derivedColumn1",
+				"derivedColumn1 select(mapColumn(",
+				"          DriverId = driverId,",
+				"          DriverRef = driverRef,",
+				"          Number = number,",
+				"          Code = code,",
+				"          Name = name,",
+				"          {Full Name},",
+				"          DOB = dob,",
+				"          Nationality = nationality,",
+				"          URL = url",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select1",
+				"select1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> sink1"
+			]
+		}
+	}
+}

@@ -1,28 +1,19 @@
 {
-	"name": "Ds_sftp_csv_dynamic",
+	"name": "Ds_sftp_csv_1",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "ls_sftp",
 			"type": "LinkedServiceReference"
 		},
-		"parameters": {
-			"filename": {
-				"type": "string"
-			}
-		},
 		"annotations": [],
 		"type": "DelimitedText",
 		"typeProperties": {
 			"location": {
-				"type": "SftpLocation",
-				"fileName": {
-					"value": "@dataset().filename",
-					"type": "Expression"
-				}
+				"type": "SftpLocation"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
-			"firstRowAsHeader": false,
+			"firstRowAsHeader": true,
 			"quoteChar": "\""
 		},
 		"schema": []
