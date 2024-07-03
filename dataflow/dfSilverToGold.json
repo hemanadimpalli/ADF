@@ -24,6 +24,20 @@
 						"type": "DatasetReference"
 					},
 					"name": "OrderDimension"
+				},
+				{
+					"dataset": {
+						"referenceName": "ds_silver_jsonToParquet_Store",
+						"type": "DatasetReference"
+					},
+					"name": "StoreDimension"
+				},
+				{
+					"dataset": {
+						"referenceName": "ds_silver_JSONtoparaquet_Customer",
+						"type": "DatasetReference"
+					},
+					"name": "CustomerDimension"
 				}
 			],
 			"sinks": [],
@@ -39,6 +53,18 @@
 				},
 				{
 					"name": "select2"
+				},
+				{
+					"name": "join3"
+				},
+				{
+					"name": "select3"
+				},
+				{
+					"name": "join4"
+				},
+				{
+					"name": "select4"
 				}
 			],
 			"scriptLines": [
@@ -82,6 +108,33 @@
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false,",
 				"     format: 'parquet') ~> OrderDimension",
+				"source(output(",
+				"          STORE_ID as integer,",
+				"          STORE_NAME as string,",
+				"          WEB_ADDRESS as string,",
+				"          LATITUDE as string,",
+				"          LONGITUDE as string,",
+				"          INJECTED_BY as string,",
+				"          INJECTED_DATE as date,",
+				"          INJECTED_TIME as timestamp",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false,",
+				"     format: 'parquet') ~> StoreDimension",
+				"source(output(",
+				"          CUSTOMER_ID as integer,",
+				"          FIRST_NAME as string,",
+				"          SECOND_NAME as string,",
+				"          EMAIL_ADDRESS as string,",
+				"          INJECTED_BY as string,",
+				"          INJECTED_DATE as date,",
+				"          INJECTED_TIME as timestamp",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false,",
+				"     format: 'parquet') ~> CustomerDimension",
 				"OrderItemsFact, ProductDimension join(OrderItemsFact@PRODUCT_ID == ProductDimension@PRODUCT_ID,",
 				"     joinType:'left',",
 				"     matchType:'exact',",
@@ -109,19 +162,74 @@
 				"          ORDER_ID = select1@ORDER_ID,",
 				"          PRODUCT_ID,",
 				"          LINE_ITEM_ID,",
-				"          STORE_ID,",
-				"          CUSTOMER_ID,",
-				"          ORDER_STATUS,",
 				"          PRODUCT_NAME,",
 				"          UNIT_PRICE,",
 				"          QUANTITY,",
 				"          ORDER_DATETIME,",
+				"          CUSTOMER_ID,",
+				"          ORDER_STATUS,",
+				"          STORE_ID,",
 				"          INJECTED_BY,",
 				"          INJECTED_DATE,",
 				"          INJECTED_TIMESTAMP",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> select2"
+				"     skipDuplicateMapOutputs: true) ~> select2",
+				"select2, StoreDimension join(select2@STORE_ID == StoreDimension@STORE_ID,",
+				"     joinType:'left',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> join3",
+				"join3 select(mapColumn(",
+				"          CUSTOMER_ID,",
+				"          PRODUCT_ID,",
+				"          ORDER_ID,",
+				"          LINE_ITEM_ID,",
+				"          STORE_ID = select2@STORE_ID,",
+				"          ORDER_STATUS,",
+				"          PRODUCT_NAME,",
+				"          STORE_NAME,",
+				"          WEB_ADDRESS,",
+				"          UNIT_PRICE,",
+				"          QUANTITY,",
+				"          LATITUDE,",
+				"          LONGITUDE,",
+				"          ORDER_DATETIME,",
+				"          INJECTED_BY = select2@INJECTED_BY,",
+				"          INJECTED_DATE = select2@INJECTED_DATE,",
+				"          INJECTED_TIMESTAMP",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select3",
+				"select3, CustomerDimension join(select3@CUSTOMER_ID == CustomerDimension@CUSTOMER_ID,",
+				"     joinType:'left',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> join4",
+				"join4 select(mapColumn(",
+				"          CUSTOMER_ID = select3@CUSTOMER_ID,",
+				"          PRODUCT_ID,",
+				"          ORDER_ID,",
+				"          STORE_ID,",
+				"          LINE_ITEM_ID,",
+				"          PRODUCT_NAME,",
+				"          STORE_NAME,",
+				"          ORDER_STATUS,",
+				"          WEB_ADDRESS,",
+				"          UNIT_PRICE,",
+				"          QUANTITY,",
+				"          LATITUDE,",
+				"          LONGITUDE,",
+				"          ORDER_DATETIME,",
+				"          FIRST_NAME,",
+				"          SECOND_NAME,",
+				"          EMAIL_ADDRESS,",
+				"          INJECTED_BY = select3@INJECTED_BY,",
+				"          INJECTED_DATE = select3@INJECTED_DATE,",
+				"          INJECTED_TIMESTAMP",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select4"
 			]
 		}
 	}
