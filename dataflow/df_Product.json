@@ -1,5 +1,5 @@
 {
-	"name": "dataflow4",
+	"name": "df_Product",
 	"properties": {
 		"type": "MappingDataFlow",
 		"typeProperties": {
@@ -53,6 +53,7 @@
 				"derivedColumn1 select(mapColumn(",
 				"          PRODUCT_ID,",
 				"          PRODUCT_NAME,",
+				"          COLOR = Color,",
 				"          UNIT_PRICE,",
 				"          INJGESTED_BY = INJECTED_BY,",
 				"          INJGESTED_DATE = INJECTED_DATE,",
