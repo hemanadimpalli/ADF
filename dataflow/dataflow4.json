@@ -49,7 +49,7 @@
 				"cast1 derive(INJECTED_BY = 'Hema',",
 				"          INJECTED_DATE = currentDate(),",
 				"          INJECTED_TIME = currentTimestamp(),",
-				"          Color = replace(split(PRODUCT_NAME, '(')[2], ')', ' ')) ~> derivedColumn1",
+				"          Color = replace(split(PRODUCT_NAME, '(')[2], ')', '')) ~> derivedColumn1",
 				"derivedColumn1 select(mapColumn(",
 				"          PRODUCT_ID,",
 				"          PRODUCT_NAME,",
