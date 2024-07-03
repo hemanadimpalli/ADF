@@ -234,7 +234,9 @@
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select4",
 				"select4 cast(output(",
-				"          UNIT_PRICE as integer",
+				"          UNIT_PRICE as integer,",
+				"          LATITUDE as decimal(10,0),",
+				"          LONGITUDE as decimal(10,0)",
 				"     ),",
 				"     errors: true) ~> cast1"
 			]
