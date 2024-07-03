@@ -345,7 +345,7 @@
 												"userProperties": [],
 												"typeProperties": {
 													"dataflow": {
-														"referenceName": "dataflow3",
+														"referenceName": "df_Customer",
 														"type": "DataFlowReference"
 													},
 													"compute": {
@@ -376,7 +376,7 @@
 												"userProperties": [],
 												"typeProperties": {
 													"dataflow": {
-														"referenceName": "dataflow4",
+														"referenceName": "df_Product",
 														"type": "DataFlowReference"
 													},
 													"compute": {
@@ -407,7 +407,7 @@
 												"userProperties": [],
 												"typeProperties": {
 													"dataflow": {
-														"referenceName": "dataflow5",
+														"referenceName": "df_Store",
 														"type": "DataFlowReference"
 													},
 													"compute": {
@@ -723,7 +723,7 @@
 												"userProperties": [],
 												"typeProperties": {
 													"dataflow": {
-														"referenceName": "dataflow1",
+														"referenceName": "df_Order",
 														"type": "DataFlowReference"
 													},
 													"compute": {
@@ -1002,7 +1002,7 @@
 												"userProperties": [],
 												"typeProperties": {
 													"dataflow": {
-														"referenceName": "dataflow2",
+														"referenceName": "df_OrderItemDetails",
 														"type": "DataFlowReference"
 													},
 													"compute": {
