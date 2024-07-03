@@ -1,0 +1,128 @@
+{
+	"name": "dfSilverToGold",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "ds_silver_txttoParquet",
+						"type": "DatasetReference"
+					},
+					"name": "OrderItemsFact"
+				},
+				{
+					"dataset": {
+						"referenceName": "ds_silver_products_jsonToParquet",
+						"type": "DatasetReference"
+					},
+					"name": "ProductDimension"
+				},
+				{
+					"dataset": {
+						"referenceName": "ds_parquet_silver_order",
+						"type": "DatasetReference"
+					},
+					"name": "OrderDimension"
+				}
+			],
+			"sinks": [],
+			"transformations": [
+				{
+					"name": "join1"
+				},
+				{
+					"name": "select1"
+				},
+				{
+					"name": "join2"
+				},
+				{
+					"name": "select2"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          ORDER_ID as integer,",
+				"          LINE_ITEM_ID as integer,",
+				"          PRODUCT_ID as integer,",
+				"          UNIT_PRICE as string,",
+				"          QUANTITY as integer,",
+				"          INJECTED_BY as string,",
+				"          INJECTED_DATE as date,",
+				"          INJECTED_TIME as timestamp",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false,",
+				"     format: 'parquet') ~> OrderItemsFact",
+				"source(output(",
+				"          PRODUCT_ID as integer,",
+				"          PRODUCT_NAME as string,",
+				"          UNIT_PRICE as string,",
+				"          INJECTED_BY as string,",
+				"          INJECTED_DATE as date,",
+				"          INJECTED_TIME as timestamp",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false,",
+				"     format: 'parquet') ~> ProductDimension",
+				"source(output(",
+				"          ORDER_ID as integer,",
+				"          ORDER_DATETIME as string,",
+				"          CUSTOMER_ID as integer,",
+				"          ORDER_STATUS as string,",
+				"          STORE_ID as integer,",
+				"          INJECTED_BY as string,",
+				"          INJECTED_DATE as date,",
+				"          INJECTED_TIMESTAMP as timestamp",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false,",
+				"     format: 'parquet') ~> OrderDimension",
+				"OrderItemsFact, ProductDimension join(OrderItemsFact@PRODUCT_ID == ProductDimension@PRODUCT_ID,",
+				"     joinType:'left',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> join1",
+				"join1 select(mapColumn(",
+				"          ORDER_ID,",
+				"          PRODUCT_ID = OrderItemsFact@PRODUCT_ID,",
+				"          LINE_ITEM_ID,",
+				"          PRODUCT_NAME,",
+				"          UNIT_PRICE = OrderItemsFact@UNIT_PRICE,",
+				"          QUANTITY,",
+				"          INGESTED_BY = OrderItemsFact@INJECTED_BY,",
+				"          INGESTED_DATE = OrderItemsFact@INJECTED_DATE,",
+				"          INGESTED_TIME = OrderItemsFact@INJECTED_TIME",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select1",
+				"select1, OrderDimension join(select1@ORDER_ID == OrderDimension@ORDER_ID,",
+				"     joinType:'left',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> join2",
+				"join2 select(mapColumn(",
+				"          ORDER_ID = select1@ORDER_ID,",
+				"          PRODUCT_ID,",
+				"          LINE_ITEM_ID,",
+				"          CUSTOMER_ID,",
+				"          STORE_ID,",
+				"          PRODUCT_NAME,",
+				"          UNIT_PRICE,",
+				"          QUANTITY,",
+				"          ORDER_STATUS,",
+				"          ORDER_DATETIME,",
+				"          INGESTED_BY,",
+				"          INGESTED_DATE,",
+				"          INGESTED_TIME",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select2"
+			]
+		}
+	}
+}
