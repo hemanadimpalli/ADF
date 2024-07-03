@@ -65,6 +65,9 @@
 				},
 				{
 					"name": "select4"
+				},
+				{
+					"name": "cast1"
 				}
 			],
 			"scriptLines": [
@@ -229,7 +232,11 @@
 				"          INJECTED_TIMESTAMP",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> select4"
+				"     skipDuplicateMapOutputs: true) ~> select4",
+				"select4 cast(output(",
+				"          UNIT_PRICE as integer",
+				"     ),",
+				"     errors: true) ~> cast1"
 			]
 		}
 	}
