@@ -751,15 +751,14 @@
 												"userProperties": [],
 												"typeProperties": {
 													"source": {
-														"type": "BinarySource",
+														"type": "DelimitedTextSource",
 														"storeSettings": {
 															"type": "SftpReadSettings",
 															"recursive": true,
-															"deleteFilesAfterCompletion": false,
 															"disableChunking": false
 														},
 														"formatSettings": {
-															"type": "BinaryReadSettings"
+															"type": "DelimitedTextReadSettings"
 														}
 													},
 													"sink": {
@@ -772,14 +771,8 @@
 												},
 												"inputs": [
 													{
-														"referenceName": "ds_sftp_txt_dynamic",
-														"type": "DatasetReference",
-														"parameters": {
-															"filename": {
-																"value": "@variables('var_filename')",
-																"type": "Expression"
-															}
-														}
+														"referenceName": "Ds_sftp_csv",
+														"type": "DatasetReference"
 													}
 												],
 												"outputs": [
