@@ -15,14 +15,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileName": {
-					"value": "@dataset().filename",
-					"type": "Expression"
-				},
-				"fileSystem": {
-					"value": "@dataset().filename",
-					"type": "Expression"
-				}
+				"fileSystem": "bronze"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
