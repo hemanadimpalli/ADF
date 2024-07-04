@@ -1053,7 +1053,15 @@
 				"typeProperties": {
 					"dataflow": {
 						"referenceName": "df_SilverToGold",
-						"type": "DataFlowReference"
+						"type": "DataFlowReference",
+						"datasetParameters": {
+							"sink1": {
+								"filename": {
+									"value": "@activity('Switch1').output.pipelineReturnValue",
+									"type": "Expression"
+								}
+							}
+						}
 					},
 					"compute": {
 						"coreCount": 8,
@@ -1087,6 +1095,7 @@
 						"storeSettings": {
 							"type": "AzureBlobFSReadSettings",
 							"recursive": true,
+							"wildcardFileName": "*.parquet",
 							"enablePartitionDiscovery": false
 						},
 						"formatSettings": {
