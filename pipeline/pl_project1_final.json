@@ -17,13 +17,7 @@
 				"typeProperties": {
 					"dataset": {
 						"referenceName": "Ds_sftp_csv",
-						"type": "DatasetReference",
-						"parameters": {
-							"filename": {
-								"value": "@variables('var_filename')",
-								"type": "Expression"
-							}
-						}
+						"type": "DatasetReference"
 					},
 					"fieldList": [
 						"childItems"
