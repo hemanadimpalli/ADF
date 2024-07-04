@@ -979,14 +979,8 @@
 												"userProperties": [],
 												"typeProperties": {
 													"dataset": {
-														"referenceName": "ds_blob_landing_txt_dynamic",
-														"type": "DatasetReference",
-														"parameters": {
-															"filename": {
-																"value": "@variables('var_filename')",
-																"type": "Expression"
-															}
-														}
+														"referenceName": "ds_blob_landing_csv_dynamic",
+														"type": "DatasetReference"
 													},
 													"logStorageSettings": {
 														"linkedServiceName": {
