@@ -430,10 +430,9 @@
 													"source": {
 														"type": "ParquetSource",
 														"storeSettings": {
-															"type": "SftpReadSettings",
+															"type": "AzureBlobStorageReadSettings",
 															"recursive": true,
-															"enablePartitionDiscovery": false,
-															"disableChunking": false
+															"enablePartitionDiscovery": false
 														},
 														"formatSettings": {
 															"type": "ParquetReadSettings"
@@ -460,14 +459,8 @@
 												},
 												"inputs": [
 													{
-														"referenceName": "ds_sftp_parquet_dynamic",
-														"type": "DatasetReference",
-														"parameters": {
-															"filename": {
-																"value": "@variables('var_filename')",
-																"type": "Expression"
-															}
-														}
+														"referenceName": "ds_parquet_input_blob",
+														"type": "DatasetReference"
 													}
 												],
 												"outputs": [
@@ -746,9 +739,8 @@
 													"source": {
 														"type": "DelimitedTextSource",
 														"storeSettings": {
-															"type": "SftpReadSettings",
-															"recursive": true,
-															"disableChunking": false
+															"type": "AzureBlobStorageReadSettings",
+															"recursive": true
 														},
 														"formatSettings": {
 															"type": "DelimitedTextReadSettings"
@@ -777,14 +769,8 @@
 												},
 												"inputs": [
 													{
-														"referenceName": "Ds_sftp_csv",
-														"type": "DatasetReference",
-														"parameters": {
-															"filename": {
-																"value": "@variables('var_filename')",
-																"type": "Expression"
-															}
-														}
+														"referenceName": "ds_input_blob_csv",
+														"type": "DatasetReference"
 													}
 												],
 												"outputs": [
