@@ -87,10 +87,9 @@
 													"source": {
 														"type": "JsonSource",
 														"storeSettings": {
-															"type": "SftpReadSettings",
+															"type": "AzureBlobStorageReadSettings",
 															"recursive": true,
-															"enablePartitionDiscovery": false,
-															"disableChunking": false
+															"enablePartitionDiscovery": false
 														},
 														"formatSettings": {
 															"type": "JsonReadSettings"
@@ -109,14 +108,8 @@
 												},
 												"inputs": [
 													{
-														"referenceName": "ds_json_sftp_dynamic",
-														"type": "DatasetReference",
-														"parameters": {
-															"filename": {
-																"value": "@variables('var_filename')",
-																"type": "Expression"
-															}
-														}
+														"referenceName": "ds_json_blob_input",
+														"type": "DatasetReference"
 													}
 												],
 												"outputs": [
