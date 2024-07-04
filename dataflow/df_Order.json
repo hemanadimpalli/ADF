@@ -46,7 +46,7 @@
 				"     format: 'parquet') ~> source1",
 				"source1 cast(output(",
 				"          ORDER_ID as integer,",
-				"          ORDER_DATETIME as timestamp 'dd-MMM-yyyy HH:mm:ss',",
+				"          ORDER_DATETIME as timestamp,",
 				"          CUSTOMER_ID as integer",
 				"     ),",
 				"     errors: true) ~> cast1",
