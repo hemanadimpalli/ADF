@@ -793,8 +793,14 @@
 												],
 												"outputs": [
 													{
-														"referenceName": "ds_blob_csv",
-														"type": "DatasetReference"
+														"referenceName": "ds_blob_landing_csv_dynamic",
+														"type": "DatasetReference",
+														"parameters": {
+															"filename": {
+																"value": "@variables('var_filename')",
+																"type": "Expression"
+															}
+														}
 													}
 												]
 											},
