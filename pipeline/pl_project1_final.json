@@ -1047,15 +1047,7 @@
 				"typeProperties": {
 					"dataflow": {
 						"referenceName": "df_SilverToGold",
-						"type": "DataFlowReference",
-						"datasetParameters": {
-							"sink1": {
-								"filename": {
-									"value": "@variables('var_filename')",
-									"type": "Expression"
-								}
-							}
-						}
+						"type": "DataFlowReference"
 					},
 					"compute": {
 						"coreCount": 8,
@@ -1114,13 +1106,7 @@
 				"inputs": [
 					{
 						"referenceName": "ds_parquetSilverToGold",
-						"type": "DatasetReference",
-						"parameters": {
-							"filename": {
-								"value": "@activity('Data flow6').output",
-								"type": "Expression"
-							}
-						}
+						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
