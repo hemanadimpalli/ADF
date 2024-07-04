@@ -825,27 +825,40 @@
 												"userProperties": [],
 												"typeProperties": {
 													"source": {
-														"type": "BinarySource",
+														"type": "DelimitedTextSource",
 														"storeSettings": {
 															"type": "AzureBlobStorageReadSettings",
 															"recursive": true,
-															"deleteFilesAfterCompletion": false
+															"enablePartitionDiscovery": false
 														},
 														"formatSettings": {
-															"type": "BinaryReadSettings"
+															"type": "DelimitedTextReadSettings"
 														}
 													},
 													"sink": {
-														"type": "BinarySink",
+														"type": "DelimitedTextSink",
 														"storeSettings": {
 															"type": "AzureBlobFSWriteSettings"
+														},
+														"formatSettings": {
+															"type": "DelimitedTextWriteSettings",
+															"quoteAllText": true,
+															"fileExtension": ".txt"
 														}
 													},
-													"enableStaging": false
+													"enableStaging": false,
+													"translator": {
+														"type": "TabularTranslator",
+														"typeConversion": true,
+														"typeConversionSettings": {
+															"allowDataTruncation": true,
+															"treatBooleanAsNumber": false
+														}
+													}
 												},
 												"inputs": [
 													{
-														"referenceName": "ds_blob_landing_txt_dynamic",
+														"referenceName": "ds_blob_landing_csv_dynamic",
 														"type": "DatasetReference",
 														"parameters": {
 															"filename": {
@@ -857,7 +870,7 @@
 												],
 												"outputs": [
 													{
-														"referenceName": "ds_dl_bronze_txt_dynamic",
+														"referenceName": "ds_dl_bronze_csv_dynamic",
 														"type": "DatasetReference"
 													}
 												]
@@ -883,27 +896,40 @@
 												"userProperties": [],
 												"typeProperties": {
 													"source": {
-														"type": "BinarySource",
+														"type": "DelimitedTextSource",
 														"storeSettings": {
-															"type": "AzureBlobStorageReadSettings",
+															"type": "AzureBlobFSReadSettings",
 															"recursive": true,
-															"deleteFilesAfterCompletion": false
+															"enablePartitionDiscovery": false
 														},
 														"formatSettings": {
-															"type": "BinaryReadSettings"
+															"type": "DelimitedTextReadSettings"
 														}
 													},
 													"sink": {
-														"type": "BinarySink",
+														"type": "DelimitedTextSink",
 														"storeSettings": {
 															"type": "AzureBlobStorageWriteSettings"
+														},
+														"formatSettings": {
+															"type": "DelimitedTextWriteSettings",
+															"quoteAllText": true,
+															"fileExtension": ".txt"
 														}
 													},
-													"enableStaging": false
+													"enableStaging": false,
+													"translator": {
+														"type": "TabularTranslator",
+														"typeConversion": true,
+														"typeConversionSettings": {
+															"allowDataTruncation": true,
+															"treatBooleanAsNumber": false
+														}
+													}
 												},
 												"inputs": [
 													{
-														"referenceName": "ds_blob_landing_txt_dynamic",
+														"referenceName": "ds_dl_bronze_csv_dynamic",
 														"type": "DatasetReference",
 														"parameters": {
 															"filename": {
@@ -915,7 +941,7 @@
 												],
 												"outputs": [
 													{
-														"referenceName": "ds_blob_archieve_txt_dynamic",
+														"referenceName": "ds_blob_Archive_csv_dynamic",
 														"type": "DatasetReference"
 													}
 												]
