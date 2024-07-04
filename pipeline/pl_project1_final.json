@@ -948,7 +948,13 @@
 												"outputs": [
 													{
 														"referenceName": "ds_blob_Archive_csv_dynamic",
-														"type": "DatasetReference"
+														"type": "DatasetReference",
+														"parameters": {
+															"filename": {
+																"value": "@variables('var_filename')",
+																"type": "Expression"
+															}
+														}
 													}
 												]
 											},
