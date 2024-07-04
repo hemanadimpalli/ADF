@@ -16,17 +16,15 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataset": {
-						"referenceName": "ds_sftp_txt_dynamic",
+						"referenceName": "ds_blob_binary_input",
 						"type": "DatasetReference"
 					},
 					"fieldList": [
 						"childItems"
 					],
 					"storeSettings": {
-						"type": "SftpReadSettings",
-						"recursive": true,
-						"enablePartitionDiscovery": false,
-						"disableChunking": false
+						"type": "AzureBlobStorageReadSettings",
+						"enablePartitionDiscovery": false
 					},
 					"formatSettings": {
 						"type": "BinaryReadSettings"
