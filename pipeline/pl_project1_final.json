@@ -1057,7 +1057,7 @@
 						"datasetParameters": {
 							"sink1": {
 								"filename": {
-									"value": "@activity('Switch1').output.pipelineReturnValue",
+									"value": "@variables('var_filename')",
 									"type": "Expression"
 								}
 							}
