@@ -76,6 +76,9 @@
 				},
 				{
 					"name": "cast1"
+				},
+				{
+					"name": "derivedColumn1"
 				}
 			],
 			"scriptLines": [
@@ -244,11 +247,11 @@
 				"select4 cast(output(",
 				"          UNIT_PRICE as integer,",
 				"          LATITUDE as decimal(10,0),",
-				"          LONGITUDE as decimal(10,0),",
-				"          ORDER_DATETIME as timestamp",
+				"          LONGITUDE as decimal(10,0)",
 				"     ),",
 				"     errors: true) ~> cast1",
-				"cast1 sink(allowSchemaDrift: true,",
+				"cast1 derive(ORDER_DATETIME = toTimestamp(ORDER_DATETIME,\"dd-MMM-yy HH.mm.ss.SS\")) ~> derivedColumn1",
+				"derivedColumn1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
 				"          CUSTOMER_ID as integer,",
