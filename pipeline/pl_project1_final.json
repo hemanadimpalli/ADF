@@ -16,7 +16,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataset": {
-						"referenceName": "Ds_sftp_csv",
+						"referenceName": "ds_sftp_txt_dynamic",
 						"type": "DatasetReference"
 					},
 					"fieldList": [
@@ -29,7 +29,7 @@
 						"disableChunking": false
 					},
 					"formatSettings": {
-						"type": "DelimitedTextReadSettings"
+						"type": "BinaryReadSettings"
 					}
 				}
 			},
