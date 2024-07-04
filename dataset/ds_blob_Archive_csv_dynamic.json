@@ -15,10 +15,8 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"container": {
-					"value": "@dataset().filename",
-					"type": "Expression"
-				}
+				"folderPath": "@formatDateTime(utcNow(),'yyyy/MM/dd')",
+				"container": "archive"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
