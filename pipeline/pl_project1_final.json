@@ -871,7 +871,13 @@
 												"outputs": [
 													{
 														"referenceName": "ds_dl_bronze_csv_dynamic",
-														"type": "DatasetReference"
+														"type": "DatasetReference",
+														"parameters": {
+															"filename": {
+																"value": "@variables('var_filename')",
+																"type": "Expression"
+															}
+														}
 													}
 												]
 											},
