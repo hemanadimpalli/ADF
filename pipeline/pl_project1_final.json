@@ -1111,7 +1111,13 @@
 				"inputs": [
 					{
 						"referenceName": "ds_parquetSilverToGold",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"filename": {
+								"value": "@activity('Data flow6').output",
+								"type": "Expression"
+							}
+						}
 					}
 				],
 				"outputs": [
