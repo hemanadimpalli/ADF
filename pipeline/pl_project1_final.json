@@ -109,7 +109,13 @@
 												"inputs": [
 													{
 														"referenceName": "ds_json_blob_input",
-														"type": "DatasetReference"
+														"type": "DatasetReference",
+														"parameters": {
+															"filename": {
+																"value": "@variables('var_filename')",
+																"type": "Expression"
+															}
+														}
 													}
 												],
 												"outputs": [
@@ -460,7 +466,13 @@
 												"inputs": [
 													{
 														"referenceName": "ds_parquet_input_blob",
-														"type": "DatasetReference"
+														"type": "DatasetReference",
+														"parameters": {
+															"filename": {
+																"value": "@variables('var_filename')",
+																"type": "Expression"
+															}
+														}
 													}
 												],
 												"outputs": [
@@ -770,7 +782,13 @@
 												"inputs": [
 													{
 														"referenceName": "ds_input_blob_csv",
-														"type": "DatasetReference"
+														"type": "DatasetReference",
+														"parameters": {
+															"filename": {
+																"value": "@variables('var_filename')",
+																"type": "Expression"
+															}
+														}
 													}
 												],
 												"outputs": [
