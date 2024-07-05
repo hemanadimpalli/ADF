@@ -82,7 +82,17 @@
 				"     preCommands: [],",
 				"     postCommands: [],",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> sink1"
+				"     skipDuplicateMapOutputs: true,",
+				"     mapColumn(",
+				"          ORDER_ID,",
+				"          ORDER_DATETIME,",
+				"          CUSTOMER_ID,",
+				"          ORDER_STATUS,",
+				"          STORE_ID,",
+				"          INJGESTED_BY,",
+				"          INJGESTED_DATE,",
+				"          INJGESTED_TIMESTAMP",
+				"     )) ~> sink1"
 			]
 		}
 	}
