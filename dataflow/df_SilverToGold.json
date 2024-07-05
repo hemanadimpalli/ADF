@@ -285,8 +285,8 @@
 				"          SECOND_NAME,",
 				"          EMAIL_ADDRESS,",
 				"          INGESTED_BY,",
-				"          INJECTED_DATE = INGESTED_DATE,",
-				"          INJECTED_TIMESTAMP = INGESTED_TIMESTAMP",
+				"          INGESTED_DATE,",
+				"          INGESTED_TIMESTAMP",
 				"     )) ~> sink1"
 			]
 		}
