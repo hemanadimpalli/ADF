@@ -71,7 +71,16 @@
 				"     preCommands: [],",
 				"     postCommands: [],",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> sink1"
+				"     skipDuplicateMapOutputs: true,",
+				"     mapColumn(",
+				"          CUSTOMER_ID,",
+				"          FIRST_NAME,",
+				"          Sur_Name,",
+				"          EMAIL_ADDRESS,",
+				"          INJGESTED_BY,",
+				"          INJGESTED_DATE,",
+				"          INJGESTED_TIME",
+				"     )) ~> sink1"
 			]
 		}
 	}
