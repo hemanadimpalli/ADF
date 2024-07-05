@@ -235,6 +235,7 @@
 				"          STORE_ID,",
 				"          LINE_ITEM_ID,",
 				"          PRODUCT_NAME,",
+				"          COLOR,",
 				"          STORE_NAME,",
 				"          ORDER_STATUS,",
 				"          WEB_ADDRESS,",
