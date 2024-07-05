@@ -1,5 +1,5 @@
 {
-	"name": "ds_parquetSilverToGold",
+	"name": "ds_dl_gold_parquet",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "ls_dl",
@@ -10,10 +10,8 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"folderPath": {
-					"value": "@formatDateTime(utcNow(),'yyyy/MM/dd')",
-					"type": "Expression"
-				},
+				"fileName": "part-00000-bd6c972e-e632-4119-9881-c200231c4dc6-c000.snappy.parquet",
+				"folderPath": "2024/07/05",
 				"fileSystem": "gold"
 			},
 			"compressionCodec": "snappy"

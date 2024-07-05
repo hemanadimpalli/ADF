@@ -75,7 +75,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "ds_parquetSilverToGold",
+						"referenceName": "ds_dl_gold_parquet",
 						"type": "DatasetReference"
 					}
 				],
