@@ -1,8 +1,8 @@
 {
-	"name": "Ds_sftp_csv",
+	"name": "ds_input_blob_csv",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "ls_sftp",
+			"referenceName": "ls_AzureBlobStorage1",
 			"type": "LinkedServiceReference"
 		},
 		"parameters": {
@@ -14,11 +14,12 @@
 		"type": "DelimitedText",
 		"typeProperties": {
 			"location": {
-				"type": "SftpLocation",
+				"type": "AzureBlobStorageLocation",
 				"fileName": {
 					"value": "@dataset().filename",
 					"type": "Expression"
-				}
+				},
+				"container": "input"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",

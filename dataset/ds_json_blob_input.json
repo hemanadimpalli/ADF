@@ -1,5 +1,5 @@
 {
-	"name": "ds_blob_landing_json_dynamic",
+	"name": "ds_json_blob_input",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "ls_AzureBlobStorage1",
@@ -19,10 +19,22 @@
 					"value": "@dataset().filename",
 					"type": "Expression"
 				},
-				"folderPath": "Test",
-				"container": "landing"
+				"container": "input"
 			}
 		},
-		"schema": {}
+		"schema": {
+			"type": "object",
+			"properties": {
+				"CUSTOMER_ID": {
+					"type": "string"
+				},
+				"FULL_NAME": {
+					"type": "string"
+				},
+				"EMAIL_ADDRESS": {
+					"type": "string"
+				}
+			}
+		}
 	}
 }

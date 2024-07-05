@@ -1,12 +1,12 @@
 {
-	"name": "dataflow5",
+	"name": "df_Product",
 	"properties": {
 		"type": "MappingDataFlow",
 		"typeProperties": {
 			"sources": [
 				{
 					"dataset": {
-						"referenceName": "ds_bronze_stores_json",
+						"referenceName": "ds_json_bronze_products",
 						"type": "DatasetReference"
 					},
 					"name": "source1"
@@ -15,7 +15,7 @@
 			"sinks": [
 				{
 					"dataset": {
-						"referenceName": "ds_silver_jsonToParquet_Store",
+						"referenceName": "ds_silver_products_jsonToParquet",
 						"type": "DatasetReference"
 					},
 					"name": "sink1"
@@ -34,36 +34,30 @@
 			],
 			"scriptLines": [
 				"source(output(",
-				"          STORE_ID as string,",
-				"          STORE_NAME as string,",
-				"          WEB_ADDRESS as string,",
-				"          LATITUDE as string,",
-				"          LONGITUDE as string",
+				"          PRODUCT_ID as string,",
+				"          PRODUCT_NAME as string,",
+				"          UNIT_PRICE as string",
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false,",
 				"     documentForm: 'documentPerLine') ~> source1",
 				"source1 cast(output(",
-				"          STORE_ID as integer,",
-				"          STORE_NAME as string,",
-				"          WEB_ADDRESS as string,",
-				"          LATITUDE as string,",
-				"          LONGITUDE as string",
+				"          PRODUCT_ID as integer",
 				"     ),",
 				"     errors: true) ~> cast1",
 				"cast1 derive(INJECTED_BY = 'Hema',",
 				"          INJECTED_DATE = currentDate(),",
-				"          INJECTED_TIME = currentTimestamp()) ~> derivedColumn1",
+				"          INJECTED_TIME = currentTimestamp(),",
+				"          Color = replace(split(PRODUCT_NAME, '(')[2], ')', '')) ~> derivedColumn1",
 				"derivedColumn1 select(mapColumn(",
-				"          STORE_ID,",
-				"          STORE_NAME,",
-				"          WEB_ADDRESS,",
-				"          LATITUDE,",
-				"          LONGITUDE,",
-				"          INJECTED_BY,",
-				"          INJECTED_DATE,",
-				"          INJECTED_TIME",
+				"          PRODUCT_ID,",
+				"          PRODUCT_NAME,",
+				"          COLOR = Color,",
+				"          UNIT_PRICE,",
+				"          INJGESTED_BY = INJECTED_BY,",
+				"          INJGESTED_DATE = INJECTED_DATE,",
+				"          INJGESTED_TIME = INJECTED_TIME",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select1",

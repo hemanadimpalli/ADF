@@ -15,6 +15,35 @@
 			},
 			"compressionCodec": "snappy"
 		},
-		"schema": []
+		"schema": [
+			{
+				"name": "CUSTOMER_ID",
+				"type": "INT32"
+			},
+			{
+				"name": "FIRST_NAME",
+				"type": "UTF8"
+			},
+			{
+				"name": "Sur_Name",
+				"type": "UTF8"
+			},
+			{
+				"name": "EMAIL_ADDRESS",
+				"type": "UTF8"
+			},
+			{
+				"name": "INJGESTED_BY",
+				"type": "UTF8"
+			},
+			{
+				"name": "INJGESTED_DATE",
+				"type": "DATE"
+			},
+			{
+				"name": "INJGESTED_TIME",
+				"type": "INT96"
+			}
+		]
 	}
 }

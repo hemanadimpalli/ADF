@@ -15,6 +15,39 @@
 			},
 			"compressionCodec": "snappy"
 		},
-		"schema": []
+		"schema": [
+			{
+				"name": "ORDER_ID",
+				"type": "INT32"
+			},
+			{
+				"name": "LINE_ITEM_ID",
+				"type": "INT32"
+			},
+			{
+				"name": "PRODUCT_ID",
+				"type": "INT32"
+			},
+			{
+				"name": "UNIT_PRICE",
+				"type": "UTF8"
+			},
+			{
+				"name": "QUANTITY",
+				"type": "INT32"
+			},
+			{
+				"name": "INJECTED_BY",
+				"type": "UTF8"
+			},
+			{
+				"name": "INJECTED_DATE",
+				"type": "DATE"
+			},
+			{
+				"name": "INJECTED_TIME",
+				"type": "INT96"
+			}
+		]
 	}
 }

@@ -1,0 +1,99 @@
+{
+	"name": "df_Order",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "ds_paraquet_order_file",
+						"type": "DatasetReference"
+					},
+					"name": "source1"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "ds_parquet_silver_order",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [
+				{
+					"name": "cast1"
+				},
+				{
+					"name": "derivedColumn1"
+				},
+				{
+					"name": "select1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          ORDER_ID as string,",
+				"          ORDER_DATETIME as string,",
+				"          CUSTOMER_ID as string,",
+				"          ORDER_STATUS as string,",
+				"          STORE_ID as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false,",
+				"     format: 'parquet') ~> source1",
+				"source1 cast(output(",
+				"          ORDER_ID as integer,",
+				"          CUSTOMER_ID as integer",
+				"     ),",
+				"     errors: true) ~> cast1",
+				"cast1 derive(Injected_By = 'Hema',",
+				"          ORDER_DATETIME = toTimestamp(ORDER_DATETIME,\"dd-MMM-yy HH.mm.ss.SS\"),",
+				"          Injection_Date = currentDate(),",
+				"          Injection_Timestamp = currentTimestamp()) ~> derivedColumn1",
+				"derivedColumn1 select(mapColumn(",
+				"          ORDER_ID,",
+				"          ORDER_DATETIME,",
+				"          CUSTOMER_ID,",
+				"          ORDER_STATUS,",
+				"          STORE_ID,",
+				"          INJGESTED_BY = Injected_By,",
+				"          INJGESTED_DATE = Injection_Date,",
+				"          INJGESTED_TIMESTAMP = Injection_Timestamp",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select1",
+				"select1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          ORDER_ID as integer,",
+				"          ORDER_DATETIME as timestamp,",
+				"          CUSTOMER_ID as integer,",
+				"          ORDER_STATUS as string,",
+				"          STORE_ID as string,",
+				"          INJGESTED_BY as string,",
+				"          INJGESTED_DATE as date,",
+				"          INJGESTED_TIMESTAMP as timestamp",
+				"     ),",
+				"     format: 'parquet',",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     mapColumn(",
+				"          ORDER_ID,",
+				"          ORDER_DATETIME,",
+				"          CUSTOMER_ID,",
+				"          ORDER_STATUS,",
+				"          STORE_ID,",
+				"          INJGESTED_BY,",
+				"          INJGESTED_DATE,",
+				"          INJGESTED_TIMESTAMP",
+				"     )) ~> sink1"
+			]
+		}
+	}
+}

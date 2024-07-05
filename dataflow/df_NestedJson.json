@@ -64,7 +64,6 @@
 				"          DriverRef = driverRef,",
 				"          Number = number,",
 				"          Code = code,",
-				"          Name = name,",
 				"          {Full Name},",
 				"          DOB = dob,",
 				"          Nationality = nationality,",

@@ -1,0 +1,18 @@
+{
+	"name": "ds_blob_binary_input",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_AzureBlobStorage1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"folderPath": "Customer Orders 3 (1)/__MACOSX/Customer Orders 3",
+				"container": "input"
+			}
+		}
+	}
+}

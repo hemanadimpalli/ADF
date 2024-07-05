@@ -16,26 +16,18 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataset": {
-						"referenceName": "Ds_sftp_csv",
-						"type": "DatasetReference",
-						"parameters": {
-							"filename": {
-								"value": "@variables('var_filename')",
-								"type": "Expression"
-							}
-						}
+						"referenceName": "ds_blob_binary_input",
+						"type": "DatasetReference"
 					},
 					"fieldList": [
 						"childItems"
 					],
 					"storeSettings": {
-						"type": "SftpReadSettings",
-						"recursive": true,
-						"enablePartitionDiscovery": false,
-						"disableChunking": false
+						"type": "AzureBlobStorageReadSettings",
+						"enablePartitionDiscovery": false
 					},
 					"formatSettings": {
-						"type": "DelimitedTextReadSettings"
+						"type": "BinaryReadSettings"
 					}
 				}
 			},
@@ -95,10 +87,9 @@
 													"source": {
 														"type": "JsonSource",
 														"storeSettings": {
-															"type": "SftpReadSettings",
+															"type": "AzureBlobStorageReadSettings",
 															"recursive": true,
-															"enablePartitionDiscovery": false,
-															"disableChunking": false
+															"enablePartitionDiscovery": false
 														},
 														"formatSettings": {
 															"type": "JsonReadSettings"
@@ -117,7 +108,7 @@
 												},
 												"inputs": [
 													{
-														"referenceName": "ds_json_sftp_dynamic",
+														"referenceName": "ds_json_blob_input",
 														"type": "DatasetReference",
 														"parameters": {
 															"filename": {
@@ -345,7 +336,7 @@
 												"userProperties": [],
 												"typeProperties": {
 													"dataflow": {
-														"referenceName": "dataflow3",
+														"referenceName": "df_Customer",
 														"type": "DataFlowReference"
 													},
 													"compute": {
@@ -376,7 +367,7 @@
 												"userProperties": [],
 												"typeProperties": {
 													"dataflow": {
-														"referenceName": "dataflow4",
+														"referenceName": "df_Product",
 														"type": "DataFlowReference"
 													},
 													"compute": {
@@ -407,7 +398,7 @@
 												"userProperties": [],
 												"typeProperties": {
 													"dataflow": {
-														"referenceName": "dataflow5",
+														"referenceName": "df_Store",
 														"type": "DataFlowReference"
 													},
 													"compute": {
@@ -445,10 +436,9 @@
 													"source": {
 														"type": "ParquetSource",
 														"storeSettings": {
-															"type": "SftpReadSettings",
+															"type": "AzureBlobStorageReadSettings",
 															"recursive": true,
-															"enablePartitionDiscovery": false,
-															"disableChunking": false
+															"enablePartitionDiscovery": false
 														},
 														"formatSettings": {
 															"type": "ParquetReadSettings"
@@ -475,7 +465,7 @@
 												},
 												"inputs": [
 													{
-														"referenceName": "ds_sftp_parquet_dynamic",
+														"referenceName": "ds_parquet_input_blob",
 														"type": "DatasetReference",
 														"parameters": {
 															"filename": {
@@ -723,7 +713,7 @@
 												"userProperties": [],
 												"typeProperties": {
 													"dataflow": {
-														"referenceName": "dataflow1",
+														"referenceName": "df_Order",
 														"type": "DataFlowReference"
 													},
 													"compute": {
@@ -759,28 +749,39 @@
 												"userProperties": [],
 												"typeProperties": {
 													"source": {
-														"type": "BinarySource",
+														"type": "DelimitedTextSource",
 														"storeSettings": {
-															"type": "SftpReadSettings",
-															"recursive": true,
-															"deleteFilesAfterCompletion": false,
-															"disableChunking": false
+															"type": "AzureBlobStorageReadSettings",
+															"recursive": true
 														},
 														"formatSettings": {
-															"type": "BinaryReadSettings"
+															"type": "DelimitedTextReadSettings"
 														}
 													},
 													"sink": {
-														"type": "BinarySink",
+														"type": "DelimitedTextSink",
 														"storeSettings": {
 															"type": "AzureBlobStorageWriteSettings"
+														},
+														"formatSettings": {
+															"type": "DelimitedTextWriteSettings",
+															"quoteAllText": true,
+															"fileExtension": ".txt"
 														}
 													},
-													"enableStaging": false
+													"enableStaging": false,
+													"translator": {
+														"type": "TabularTranslator",
+														"typeConversion": true,
+														"typeConversionSettings": {
+															"allowDataTruncation": true,
+															"treatBooleanAsNumber": false
+														}
+													}
 												},
 												"inputs": [
 													{
-														"referenceName": "ds_sftp_txt_dynamic",
+														"referenceName": "ds_input_blob_csv",
 														"type": "DatasetReference",
 														"parameters": {
 															"filename": {
@@ -792,7 +793,7 @@
 												],
 												"outputs": [
 													{
-														"referenceName": "ds_blob_landing_txt_dynamic",
+														"referenceName": "ds_blob_landing_csv_dynamic",
 														"type": "DatasetReference",
 														"parameters": {
 															"filename": {
@@ -824,27 +825,40 @@
 												"userProperties": [],
 												"typeProperties": {
 													"source": {
-														"type": "BinarySource",
+														"type": "DelimitedTextSource",
 														"storeSettings": {
 															"type": "AzureBlobStorageReadSettings",
 															"recursive": true,
-															"deleteFilesAfterCompletion": false
+															"enablePartitionDiscovery": false
 														},
 														"formatSettings": {
-															"type": "BinaryReadSettings"
+															"type": "DelimitedTextReadSettings"
 														}
 													},
 													"sink": {
-														"type": "BinarySink",
+														"type": "DelimitedTextSink",
 														"storeSettings": {
 															"type": "AzureBlobFSWriteSettings"
+														},
+														"formatSettings": {
+															"type": "DelimitedTextWriteSettings",
+															"quoteAllText": true,
+															"fileExtension": ".txt"
 														}
 													},
-													"enableStaging": false
+													"enableStaging": false,
+													"translator": {
+														"type": "TabularTranslator",
+														"typeConversion": true,
+														"typeConversionSettings": {
+															"allowDataTruncation": true,
+															"treatBooleanAsNumber": false
+														}
+													}
 												},
 												"inputs": [
 													{
-														"referenceName": "ds_blob_landing_txt_dynamic",
+														"referenceName": "ds_blob_landing_csv_dynamic",
 														"type": "DatasetReference",
 														"parameters": {
 															"filename": {
@@ -856,7 +870,7 @@
 												],
 												"outputs": [
 													{
-														"referenceName": "ds_dl_bronze_txt_dynamic",
+														"referenceName": "ds_dl_bronze_csv_dynamic",
 														"type": "DatasetReference"
 													}
 												]
@@ -882,27 +896,40 @@
 												"userProperties": [],
 												"typeProperties": {
 													"source": {
-														"type": "BinarySource",
+														"type": "DelimitedTextSource",
 														"storeSettings": {
 															"type": "AzureBlobStorageReadSettings",
 															"recursive": true,
-															"deleteFilesAfterCompletion": false
+															"enablePartitionDiscovery": false
 														},
 														"formatSettings": {
-															"type": "BinaryReadSettings"
+															"type": "DelimitedTextReadSettings"
 														}
 													},
 													"sink": {
-														"type": "BinarySink",
+														"type": "DelimitedTextSink",
 														"storeSettings": {
 															"type": "AzureBlobStorageWriteSettings"
+														},
+														"formatSettings": {
+															"type": "DelimitedTextWriteSettings",
+															"quoteAllText": true,
+															"fileExtension": ".txt"
 														}
 													},
-													"enableStaging": false
+													"enableStaging": false,
+													"translator": {
+														"type": "TabularTranslator",
+														"typeConversion": true,
+														"typeConversionSettings": {
+															"allowDataTruncation": true,
+															"treatBooleanAsNumber": false
+														}
+													}
 												},
 												"inputs": [
 													{
-														"referenceName": "ds_blob_landing_txt_dynamic",
+														"referenceName": "ds_blob_landing_csv_dynamic",
 														"type": "DatasetReference",
 														"parameters": {
 															"filename": {
@@ -914,8 +941,14 @@
 												],
 												"outputs": [
 													{
-														"referenceName": "ds_blob_archieve_txt_dynamic",
-														"type": "DatasetReference"
+														"referenceName": "ds_blob_Archive_csv_dynamic",
+														"type": "DatasetReference",
+														"parameters": {
+															"filename": {
+																"value": "@variables('var_filename')",
+																"type": "Expression"
+															}
+														}
 													}
 												]
 											},
@@ -940,7 +973,7 @@
 												"userProperties": [],
 												"typeProperties": {
 													"dataset": {
-														"referenceName": "ds_blob_landing_txt_dynamic",
+														"referenceName": "ds_blob_landing_csv_dynamic",
 														"type": "DatasetReference",
 														"parameters": {
 															"filename": {
@@ -1002,7 +1035,7 @@
 												"userProperties": [],
 												"typeProperties": {
 													"dataflow": {
-														"referenceName": "dataflow2",
+														"referenceName": "df_OrderItemDetails",
 														"type": "DataFlowReference"
 													},
 													"compute": {

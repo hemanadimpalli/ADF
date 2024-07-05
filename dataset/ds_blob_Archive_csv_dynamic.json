@@ -1,8 +1,8 @@
 {
-	"name": "Ds_sftp_csv",
+	"name": "ds_blob_Archive_csv_dynamic",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "ls_sftp",
+			"referenceName": "ls_AzureBlobStorage1",
 			"type": "LinkedServiceReference"
 		},
 		"parameters": {
@@ -14,11 +14,9 @@
 		"type": "DelimitedText",
 		"typeProperties": {
 			"location": {
-				"type": "SftpLocation",
-				"fileName": {
-					"value": "@dataset().filename",
-					"type": "Expression"
-				}
+				"type": "AzureBlobStorageLocation",
+				"folderPath": "@formatDateTime(utcNow(),'yyyy/MM/dd')",
+				"container": "archive"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",

@@ -1,0 +1,106 @@
+{
+	"name": "ds_dl_gold_parquet",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_dl",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "part-00000-0a6d8a00-971c-429c-a95a-834f4a414b04-c000.snappy.parquet",
+				"folderPath": "2024/07/05",
+				"fileSystem": "gold"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": [
+			{
+				"name": "CUSTOMER_ID",
+				"type": "INT32"
+			},
+			{
+				"name": "PRODUCT_ID",
+				"type": "INT32"
+			},
+			{
+				"name": "ORDER_ID",
+				"type": "INT32"
+			},
+			{
+				"name": "STORE_ID",
+				"type": "UTF8"
+			},
+			{
+				"name": "LINE_ITEM_ID",
+				"type": "INT32"
+			},
+			{
+				"name": "PRODUCT_NAME",
+				"type": "UTF8"
+			},
+			{
+				"name": "COLOR",
+				"type": "UTF8"
+			},
+			{
+				"name": "STORE_NAME",
+				"type": "UTF8"
+			},
+			{
+				"name": "ORDER_STATUS",
+				"type": "UTF8"
+			},
+			{
+				"name": "WEB_ADDRESS",
+				"type": "UTF8"
+			},
+			{
+				"name": "UNIT_PRICE",
+				"type": "INT32"
+			},
+			{
+				"name": "QUANTITY",
+				"type": "INT32"
+			},
+			{
+				"name": "LATITUDE",
+				"type": "FLOAT"
+			},
+			{
+				"name": "LONGITUDE",
+				"type": "FLOAT"
+			},
+			{
+				"name": "ORDER_DATETIME",
+				"type": "INT96"
+			},
+			{
+				"name": "FIRST_NAME",
+				"type": "UTF8"
+			},
+			{
+				"name": "SECOND_NAME",
+				"type": "UTF8"
+			},
+			{
+				"name": "EMAIL_ADDRESS",
+				"type": "UTF8"
+			},
+			{
+				"name": "INGESTED_BY",
+				"type": "UTF8"
+			},
+			{
+				"name": "INGESTED_DATE",
+				"type": "DATE"
+			},
+			{
+				"name": "INGESTED_TIMESTAMP",
+				"type": "INT96"
+			}
+		]
+	}
+}
