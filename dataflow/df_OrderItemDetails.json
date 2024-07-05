@@ -69,12 +69,32 @@
 				"     skipDuplicateMapOutputs: true) ~> select1",
 				"select1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
+				"     input(",
+				"          ORDER_ID as integer,",
+				"          LINE_ITEM_ID as integer,",
+				"          PRODUCT_ID as integer,",
+				"          UNIT_PRICE as string,",
+				"          QUANTITY as integer,",
+				"          INJECTED_BY as string,",
+				"          INJECTED_DATE as date,",
+				"          INJECTED_TIME as timestamp",
+				"     ),",
 				"     format: 'parquet',",
 				"     umask: 0022,",
 				"     preCommands: [],",
 				"     postCommands: [],",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> sink1"
+				"     skipDuplicateMapOutputs: true,",
+				"     mapColumn(",
+				"          ORDER_ID,",
+				"          LINE_ITEM_ID,",
+				"          PRODUCT_ID,",
+				"          UNIT_PRICE,",
+				"          QUANTITY,",
+				"          INJECTED_BY = INJGESTED_BY,",
+				"          INJECTED_DATE = INJGESTED_DATE,",
+				"          INJECTED_TIME = INJGESTED_TIME",
+				"     )) ~> sink1"
 			]
 		}
 	}
