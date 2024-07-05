@@ -78,9 +78,6 @@
 					"name": "cast1"
 				},
 				{
-					"name": "derivedColumn1"
-				},
-				{
 					"name": "derivedColumn2"
 				}
 			],
@@ -247,28 +244,50 @@
 				"          FIRST_NAME,",
 				"          SECOND_NAME = Sur_Name,",
 				"          EMAIL_ADDRESS,",
-				"          INJECTED_BY,",
-				"          INJECTED_DATE,",
-				"          INJECTED_TIMESTAMP",
+				"          INGESTED_BY = INJECTED_BY,",
+				"          INGESTED_DATE = INJECTED_DATE,",
+				"          INGESTED_TIMESTAMP = INJECTED_TIMESTAMP",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select4",
 				"select4 cast(output(",
 				"          UNIT_PRICE as integer,",
-				"          LATITUDE as decimal(10,0),",
-				"          LONGITUDE as decimal(10,0)",
+				"          LATITUDE as float,",
+				"          LONGITUDE as float",
 				"     ),",
 				"     errors: true) ~> cast1",
-				"cast1 derive(ORDER_DATETIME = toTimestamp(ORDER_DATETIME,\"dd-MMM-yy HH.mm.ss.SS\")) ~> derivedColumn1",
 				"join2 derive(ORDER_DATETIME = toTimestamp(ORDER_DATETIME,\"yyyy-MM-dd HH:mm:ss\")) ~> derivedColumn2",
-				"derivedColumn1 sink(allowSchemaDrift: true,",
+				"cast1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     format: 'parquet',",
 				"     umask: 0022,",
 				"     preCommands: [],",
 				"     postCommands: [],",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> sink1"
+				"     skipDuplicateMapOutputs: true,",
+				"     mapColumn(",
+				"          CUSTOMER_ID,",
+				"          PRODUCT_ID,",
+				"          ORDER_ID,",
+				"          STORE_ID,",
+				"          LINE_ITEM_ID,",
+				"          PRODUCT_NAME,",
+				"          COLOR,",
+				"          STORE_NAME,",
+				"          ORDER_STATUS,",
+				"          WEB_ADDRESS,",
+				"          UNIT_PRICE,",
+				"          QUANTITY,",
+				"          LATITUDE,",
+				"          LONGITUDE,",
+				"          ORDER_DATETIME,",
+				"          FIRST_NAME,",
+				"          SECOND_NAME,",
+				"          EMAIL_ADDRESS,",
+				"          INGESTED_BY,",
+				"          INJECTED_DATE = INGESTED_DATE,",
+				"          INJECTED_TIMESTAMP = INGESTED_TIMESTAMP",
+				"     )) ~> sink1"
 			]
 		}
 	}
