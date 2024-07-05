@@ -111,7 +111,7 @@
 				"     format: 'parquet') ~> ProductDimension",
 				"source(output(",
 				"          ORDER_ID as integer,",
-				"          ORDER_DATETIME as timestamp,",
+				"          ORDER_DATETIME as string,",
 				"          CUSTOMER_ID as integer,",
 				"          ORDER_STATUS as string,",
 				"          STORE_ID as string,",
