@@ -79,6 +79,9 @@
 				},
 				{
 					"name": "derivedColumn1"
+				},
+				{
+					"name": "derivedColumn2"
 				}
 			],
 			"scriptLines": [
@@ -175,7 +178,7 @@
 				"     matchType:'exact',",
 				"     ignoreSpaces: false,",
 				"     broadcast: 'auto')~> join2",
-				"join2 select(mapColumn(",
+				"derivedColumn2 select(mapColumn(",
 				"          ORDER_ID = select1@ORDER_ID,",
 				"          PRODUCT_ID,",
 				"          LINE_ITEM_ID,",
@@ -242,8 +245,8 @@
 				"          FIRST_NAME,",
 				"          SECOND_NAME,",
 				"          EMAIL_ADDRESS,",
-				"          INJECTED_BY = select3@INJECTED_BY,",
-				"          INJECTED_DATE = select3@INJECTED_DATE,",
+				"          INJECTED_BY = {select3@INJECTED_BY},",
+				"          INJECTED_DATE = {select3@INJECTED_DATE},",
 				"          INJECTED_TIMESTAMP",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
@@ -255,6 +258,7 @@
 				"     ),",
 				"     errors: true) ~> cast1",
 				"cast1 derive(ORDER_DATETIME = toTimestamp(ORDER_DATETIME,\"dd-MMM-yy HH.mm.ss.SS\")) ~> derivedColumn1",
+				"join2 derive(ORDER_DATETIME = toTimestamp(ORDER_DATETIME,\"dd-MMM-yy HH.mm.ss.SSS\")) ~> derivedColumn2",
 				"derivedColumn1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
