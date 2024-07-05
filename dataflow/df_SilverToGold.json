@@ -244,7 +244,7 @@
 				"          LONGITUDE,",
 				"          ORDER_DATETIME,",
 				"          FIRST_NAME,",
-				"          SECOND_NAME,",
+				"          SECOND_NAME = Sur_Name,",
 				"          EMAIL_ADDRESS,",
 				"          INJECTED_BY,",
 				"          INJECTED_DATE,",
