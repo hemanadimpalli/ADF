@@ -27,7 +27,10 @@
 					"name": "filter2"
 				},
 				{
-					"name": "derivedColumn1"
+					"name": "derivedColumn2"
+				},
+				{
+					"name": "lookup1"
 				}
 			],
 			"scriptLines": [
@@ -41,15 +44,19 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> source1",
-				"derivedColumn1 split(lesser(toInteger(PRODUCT_ID), 30),",
+				"source1 split(lesser(toInteger(PRODUCT_ID), 30),",
 				"     greater(toInteger(ORDER_ID),350),",
 				"     disjoint: false) ~> split1@(Output1, Output3, Output2)",
-				"filter1, derivedColumn1 exists(split1@Output1@ORDER_ID == source1@ORDER_ID,",
+				"filter1, derivedColumn2 exists(split1@Output1@ORDER_ID == source1@ORDER_ID,",
 				"     negate:false,",
 				"     broadcast: 'auto')~> exists1",
 				"split1@Output1 filter(and(equals(toInteger(PRODUCT_ID), 2),equals(toInteger(ORDER_ID),336))) ~> filter1",
 				"split1@Output3 filter(ERROR_FUNCTION('')) ~> filter2",
-				"source1 derive(Owner = \"Hema\") ~> derivedColumn1"
+				"source1 derive(Owner = \"Hema\") ~> derivedColumn2",
+				"exists1, derivedColumn2 lookup(split1@Output1@ORDER_ID == source1@ORDER_ID,",
+				"     multiple: false,",
+				"     pickup: 'any',",
+				"     broadcast: 'both')~> lookup1"
 			]
 		}
 	}
