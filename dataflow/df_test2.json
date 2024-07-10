@@ -75,7 +75,7 @@
 				"          JOB_ID as string,",
 				"          SALARY as short,",
 				"          MANAGER_ID as short,",
-				"          DEPARTMENT_ID as short",
+				"          DEPARTMENT_ID as string",
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
