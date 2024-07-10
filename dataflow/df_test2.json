@@ -132,7 +132,7 @@
 				"select1 filter(!(isNull(COUNTRY_NAME))) ~> filter1",
 				"filter1 window(over(EMPLOYEE_ID),",
 				"     asc(COUNTRY_NAME, true),",
-				"     Rank = rank()) ~> window1",
+				"     Rank = rowNumber()) ~> window1",
 				"window1 filter(Rank == 1) ~> filter2"
 			]
 		}
