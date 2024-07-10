@@ -32,17 +32,12 @@
 						"type": "DatasetReference"
 					},
 					"name": "sourceCountry"
-				}
-			],
-			"sinks": [
+				},
 				{
-					"dataset": {
-						"referenceName": "ds_blob_output_employeewithCountry",
-						"type": "DatasetReference"
-					},
-					"name": "sink1"
+					"name": "source1"
 				}
 			],
+			"sinks": [],
 			"transformations": [
 				{
 					"name": "lookup1"
@@ -58,6 +53,9 @@
 				},
 				{
 					"name": "select1"
+				},
+				{
+					"name": "filter1"
 				}
 			],
 			"scriptLines": [
@@ -103,6 +101,8 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> sourceCountry",
+				"source(allowSchemaDrift: true,",
+				"     validateSchema: false) ~> source1",
 				"sourceEmployee, sourceDepartment lookup(sourceEmployee@DEPARTMENT_ID == sourceDepartment@DEPARTMENT_ID,",
 				"     multiple: false,",
 				"     pickup: 'any',",
@@ -119,19 +119,11 @@
 				"derivedColumn1 select(mapColumn(",
 				"          EMPLOYEE_ID,",
 				"          COUNTRY_NAME,",
-				"          {Full Name} = FULL_NAME",
+				"          FULL_NAME",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select1",
-				"select1 sink(allowSchemaDrift: true,",
-				"     validateSchema: false,",
-				"     input(",
-				"          CUSTOMER_ID as string,",
-				"          FULL_NAME as string,",
-				"          EMAIL_ADDRESS as string",
-				"     ),",
-				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> sink1"
+				"select1 filter(!(isNull(COUNTRY_NAME))) ~> filter1"
 			]
 		}
 	}
