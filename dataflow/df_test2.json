@@ -1,0 +1,140 @@
+{
+	"name": "df_test2",
+	"properties": {
+		"description": "\n1. Map the country to each employee\n2. Filter out the records where employees don’t have any country attached to it(I.e country field being NULL)\n3. Filter out the records where there are duplicates.\n\n\n",
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "Ds_blob_input2_csv_employee",
+						"type": "DatasetReference"
+					},
+					"name": "sourceEmployee"
+				},
+				{
+					"dataset": {
+						"referenceName": "Ds_blob_input2_departmentCSV",
+						"type": "DatasetReference"
+					},
+					"name": "sourceDepartment"
+				},
+				{
+					"dataset": {
+						"referenceName": "Ds_blob_input2_locationCSV",
+						"type": "DatasetReference"
+					},
+					"name": "sourceLocation"
+				},
+				{
+					"dataset": {
+						"referenceName": "Ds_blob_input2_country",
+						"type": "DatasetReference"
+					},
+					"name": "sourceCountry"
+				},
+				{
+					"name": "source1"
+				}
+			],
+			"sinks": [],
+			"transformations": [
+				{
+					"name": "lookup1"
+				},
+				{
+					"name": "lookup2"
+				},
+				{
+					"name": "lookup3"
+				},
+				{
+					"name": "derivedColumn1"
+				},
+				{
+					"name": "select1"
+				},
+				{
+					"name": "filter1"
+				},
+				{
+					"name": "window1"
+				},
+				{
+					"name": "filter2"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          EMPLOYEE_ID as short,",
+				"          FIRST_NAME as string,",
+				"          LAST_NAME as string,",
+				"          EMAIL as string,",
+				"          PHONE_NUMBER as string,",
+				"          HIRE_DATE as date,",
+				"          JOB_ID as string,",
+				"          SALARY as short,",
+				"          MANAGER_ID as short,",
+				"          DEPARTMENT_ID as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> sourceEmployee",
+				"source(output(",
+				"          DEPARTMENT_ID as string,",
+				"          DEPARTMENT_NAME as string,",
+				"          MANAGER_ID as string,",
+				"          LOCATION_ID as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> sourceDepartment",
+				"source(output(",
+				"          LOCATION_ID as string,",
+				"          STREET_ADDRESS as string,",
+				"          POSTAL_CODE as string,",
+				"          CITY as string,",
+				"          STATE_PROVINCE as string,",
+				"          COUNTRY_ID as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> sourceLocation",
+				"source(output(",
+				"          COUNTRY_ID as string,",
+				"          COUNTRY_NAME as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> sourceCountry",
+				"source(allowSchemaDrift: true,",
+				"     validateSchema: false) ~> source1",
+				"sourceEmployee, sourceDepartment lookup(sourceEmployee@DEPARTMENT_ID == sourceDepartment@DEPARTMENT_ID,",
+				"     multiple: false,",
+				"     pickup: 'any',",
+				"     broadcast: 'auto')~> lookup1",
+				"lookup1, sourceLocation lookup(sourceDepartment@LOCATION_ID == sourceLocation@LOCATION_ID,",
+				"     multiple: false,",
+				"     pickup: 'any',",
+				"     broadcast: 'auto')~> lookup2",
+				"lookup2, sourceCountry lookup(sourceLocation@COUNTRY_ID == sourceCountry@COUNTRY_ID,",
+				"     multiple: false,",
+				"     pickup: 'any',",
+				"     broadcast: 'auto')~> lookup3",
+				"lookup3 derive(FULL_NAME = concat(FIRST_NAME,' ', LAST_NAME)) ~> derivedColumn1",
+				"derivedColumn1 select(mapColumn(",
+				"          EMPLOYEE_ID,",
+				"          COUNTRY_NAME,",
+				"          FULL_NAME",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select1",
+				"select1 filter(!(isNull(COUNTRY_NAME))) ~> filter1",
+				"filter1 window(over(EMPLOYEE_ID),",
+				"     asc(COUNTRY_NAME, true),",
+				"     Rank = rowNumber()) ~> window1",
+				"window1 filter(Rank == 1) ~> filter2"
+			]
+		}
+	}
+}

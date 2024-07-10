@@ -1,0 +1,36 @@
+{
+	"name": "ds_blob_products",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_AzureBlobStorage1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "products.json",
+				"container": "input"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "{\"PRODUCT_ID\":\"16\"",
+				"type": "String"
+			},
+			{
+				"name": "\"PRODUCT_NAME\":\"Women's Socks (Grey)\"",
+				"type": "String"
+			},
+			{
+				"name": "\"UNIT_PRICE\":\"39.89\"}",
+				"type": "String"
+			}
+		]
+	}
+}
