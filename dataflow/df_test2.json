@@ -34,7 +34,15 @@
 					"name": "sourceCountry"
 				}
 			],
-			"sinks": [],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "ds_blob_output_employeewithCountry",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
 			"transformations": [
 				{
 					"name": "lookup1"
@@ -44,6 +52,9 @@
 				},
 				{
 					"name": "lookup3"
+				},
+				{
+					"name": "derivedColumn1"
 				},
 				{
 					"name": "select1"
@@ -104,8 +115,11 @@
 				"     multiple: false,",
 				"     pickup: 'any',",
 				"     broadcast: 'auto')~> lookup3",
-				"lookup3 select(mapColumn(",
+				"lookup3 derive({Full Name} = concat(FIRST_NAME,' ', LAST_NAME)) ~> derivedColumn1",
+				"derivedColumn1 select(mapColumn(",
 				"          EMPLOYEE_ID,",
+				"          COUNTRY_NAME,",
+				"          {Full Name},",
 				"          FIRST_NAME,",
 				"          LAST_NAME,",
 				"          EMAIL,",
@@ -125,11 +139,19 @@
 				"          CITY,",
 				"          STATE_PROVINCE,",
 				"          COUNTRY_ID = sourceLocation@COUNTRY_ID,",
-				"          COUNTRY_ID = sourceCountry@COUNTRY_ID,",
-				"          COUNTRY_NAME",
+				"          COUNTRY_ID = sourceCountry@COUNTRY_ID",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> select1"
+				"     skipDuplicateMapOutputs: true) ~> select1",
+				"select1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          CUSTOMER_ID as string,",
+				"          FULL_NAME as string,",
+				"          EMAIL_ADDRESS as string",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> sink1"
 			]
 		}
 	}
