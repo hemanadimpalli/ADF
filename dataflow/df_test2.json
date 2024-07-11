@@ -67,6 +67,9 @@
 				},
 				{
 					"name": "filter2"
+				},
+				{
+					"name": "select2"
 				}
 			],
 			"scriptLines": [
@@ -137,7 +140,14 @@
 				"     asc(COUNTRY_NAME, true),",
 				"     Rank = rowNumber()) ~> window1",
 				"window1 filter(Rank == 1) ~> filter2",
-				"filter2 sink(allowSchemaDrift: true,",
+				"filter2 select(mapColumn(",
+				"          EMPLOYEE_ID,",
+				"          COUNTRY_NAME,",
+				"          FULL_NAME",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select2",
+				"select2 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     umask: 0022,",
 				"     preCommands: [],",
