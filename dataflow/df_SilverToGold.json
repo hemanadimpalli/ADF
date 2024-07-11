@@ -351,6 +351,7 @@
 				"     insertable:true,",
 				"     updateable:false,",
 				"     upsertable:true,",
+				"     keys:['CUSTOMER_ID','ORDER_ID'],",
 				"     format: 'table',",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",

@@ -2,7 +2,7 @@
 	"name": "ds_ORDERSCustomerOutputQR",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "AzureSqlDatabase",
+			"referenceName": "AzureSqlDatabase1",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
