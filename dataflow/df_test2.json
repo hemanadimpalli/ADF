@@ -32,12 +32,17 @@
 						"type": "DatasetReference"
 					},
 					"name": "sourceCountry"
-				},
-				{
-					"name": "source1"
 				}
 			],
-			"sinks": [],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "Ds_dl_test2_csv",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
 			"transformations": [
 				{
 					"name": "lookup1"
@@ -107,8 +112,6 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> sourceCountry",
-				"source(allowSchemaDrift: true,",
-				"     validateSchema: false) ~> source1",
 				"sourceEmployee, sourceDepartment lookup(sourceEmployee@DEPARTMENT_ID == sourceDepartment@DEPARTMENT_ID,",
 				"     multiple: false,",
 				"     pickup: 'any',",
@@ -133,7 +136,14 @@
 				"filter1 window(over(EMPLOYEE_ID),",
 				"     asc(COUNTRY_NAME, true),",
 				"     Rank = rowNumber()) ~> window1",
-				"window1 filter(Rank == 1) ~> filter2"
+				"window1 filter(Rank == 1) ~> filter2",
+				"filter2 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> sink1"
 			]
 		}
 	}
