@@ -12,15 +12,7 @@
 					"name": "source1"
 				}
 			],
-			"sinks": [
-				{
-					"dataset": {
-						"referenceName": "Ds_blob_ouyput_assert",
-						"type": "DatasetReference"
-					},
-					"name": "sink1"
-				}
-			],
+			"sinks": [],
 			"transformations": [
 				{
 					"name": "alterRow1"
@@ -35,16 +27,7 @@
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> source1",
 				"source1 alterRow(deleteIf(COUNTRY_ID == 'AR'),",
-				"     updateIf(COUNTRY_ID=='AU')) ~> alterRow1",
-				"alterRow1 sink(allowSchemaDrift: true,",
-				"     validateSchema: false,",
-				"     input(",
-				"          CUSTOMER_ID as string,",
-				"          FULL_NAME as string,",
-				"          EMAIL_ADDRESS as string",
-				"     ),",
-				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> sink1"
+				"     updateIf(COUNTRY_ID=='AU')) ~> alterRow1"
 			]
 		}
 	}
