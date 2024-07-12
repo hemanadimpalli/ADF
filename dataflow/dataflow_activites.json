@@ -12,7 +12,15 @@
 					"name": "source1"
 				}
 			],
-			"sinks": [],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "ds_blob_output_dfActivites",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
 			"transformations": [
 				{
 					"name": "split1"
@@ -52,7 +60,16 @@
 				"exists1, derivedColumn2 lookup(split1@Output1@ORDER_ID == source1@ORDER_ID,",
 				"     multiple: false,",
 				"     pickup: 'any',",
-				"     broadcast: 'both')~> lookup1"
+				"     broadcast: 'both')~> lookup1",
+				"lookup1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          CUSTOMER_ID as string,",
+				"          FULL_NAME as string,",
+				"          EMAIL_ADDRESS as string",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> sink1"
 			]
 		}
 	}
