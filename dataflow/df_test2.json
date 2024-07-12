@@ -34,7 +34,15 @@
 					"name": "sourceCountry"
 				}
 			],
-			"sinks": [],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "Parquet1",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
 			"transformations": [
 				{
 					"name": "lookup1"
@@ -137,7 +145,12 @@
 				"select1 assert(expectTrue(!isNull(COUNTRY_NAME), false, 'assert1'),",
 				"     expectUnique(EMPLOYEE_ID, false, 'assert2')) ~> assert1",
 				"assert1 derive(Error = isError()) ~> derivedColumn2",
-				"derivedColumn2 filter(Error==true()) ~> filter2"
+				"derivedColumn2 filter(Error==true()) ~> filter2",
+				"filter2 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     format: 'parquet',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> sink1"
 			]
 		}
 	}
