@@ -18,7 +18,7 @@
 					"source": {
 						"type": "JsonSource",
 						"storeSettings": {
-							"type": "AzureBlobFSReadSettings",
+							"type": "AzureBlobStorageReadSettings",
 							"recursive": true,
 							"enablePartitionDiscovery": false
 						},
@@ -39,14 +39,42 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "ds_dynamic_json_dl",
-						"type": "DatasetReference"
+						"referenceName": "ds_blob_dynamic_json_input",
+						"type": "DatasetReference",
+						"parameters": {
+							"inputContainer": {
+								"value": "@pipeline().parameters.containerfromPl",
+								"type": "Expression"
+							},
+							"inputDir": {
+								"value": "@pipeline().parameters.InputDirFromPL",
+								"type": "Expression"
+							},
+							"inputFileNAme": {
+								"value": "@pipeline().parameters.InputFileNameFromPL",
+								"type": "Expression"
+							}
+						}
 					}
 				],
 				"outputs": [
 					{
 						"referenceName": "ds_dynamic_json_dl",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"OutputContainer": {
+								"value": "@pipeline().parameters.opContainerFromPL",
+								"type": "Expression"
+							},
+							"OutputDir": {
+								"value": "@pipeline().parameters.OpDirFromPL",
+								"type": "Expression"
+							},
+							"OutputFilename": {
+								"value": "@pipeline().parameters.OPFileNAmeFromPL",
+								"type": "Expression"
+							}
+						}
 					}
 				]
 			}
@@ -68,6 +96,24 @@
 				"type": "String"
 			},
 			"O/PFileNameFromPL": {
+				"type": "String"
+			},
+			"containerfromPl": {
+				"type": "String"
+			},
+			"InputDirFromPL": {
+				"type": "String"
+			},
+			"InputFileNameFromPL": {
+				"type": "String"
+			},
+			"opContainerFromPL": {
+				"type": "String"
+			},
+			"OpDirFromPL": {
+				"type": "String"
+			},
+			"OPFileNAmeFromPL": {
 				"type": "String"
 			}
 		},
