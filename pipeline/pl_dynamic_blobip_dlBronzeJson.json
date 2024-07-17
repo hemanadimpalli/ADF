@@ -89,15 +89,6 @@
 			"FileNameFromPl": {
 				"type": "String"
 			},
-			"o/pContainerFromPl": {
-				"type": "String"
-			},
-			"O/pDirFromPL": {
-				"type": "String"
-			},
-			"O/PFileNameFromPL": {
-				"type": "String"
-			},
 			"containerfromPl": {
 				"type": "String"
 			},
