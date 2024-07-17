@@ -6,8 +6,8 @@
 			"type": "LinkedServiceReference"
 		},
 		"parameters": {
-			"inputDir": {
-				"type": "String"
+			"InputContainer": {
+				"type": "string"
 			}
 		},
 		"annotations": [],
@@ -15,8 +15,8 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"folderPath": {
-					"value": "@dataset().inputDir",
+				"container": {
+					"value": "@dataset().InputContainer",
 					"type": "Expression"
 				}
 			}
