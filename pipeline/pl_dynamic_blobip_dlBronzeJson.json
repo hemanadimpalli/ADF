@@ -40,7 +40,13 @@
 				"inputs": [
 					{
 						"referenceName": "ds_blob_dynamic_json_input",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"inputDir": {
+								"value": "@pipeline().parameters.InputDirFromPL",
+								"type": "Expression"
+							}
+						}
 					}
 				],
 				"outputs": [
