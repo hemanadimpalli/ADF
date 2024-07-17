@@ -6,15 +6,6 @@
 			"type": "LinkedServiceReference"
 		},
 		"parameters": {
-			"Container": {
-				"type": "String"
-			},
-			"Directory": {
-				"type": "String"
-			},
-			"FileName": {
-				"type": "String"
-			},
 			"OutputContainer": {
 				"type": "String"
 			},

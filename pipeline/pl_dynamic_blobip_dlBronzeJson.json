@@ -40,41 +40,13 @@
 				"inputs": [
 					{
 						"referenceName": "ds_dynamic_json_dl",
-						"type": "DatasetReference",
-						"parameters": {
-							"Container": {
-								"value": "@pipeline().parameters.ContainerfromPL",
-								"type": "Expression"
-							},
-							"Directory": {
-								"value": "@pipeline().parameters.DirFromPL",
-								"type": "Expression"
-							},
-							"FileName": {
-								"value": "@pipeline().parameters.FileNameFromPl",
-								"type": "Expression"
-							}
-						}
+						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
 						"referenceName": "ds_dynamic_json_dl",
-						"type": "DatasetReference",
-						"parameters": {
-							"Container": {
-								"value": "@pipeline().parameters.o/pContainerFromPl",
-								"type": "Expression"
-							},
-							"Directory": {
-								"value": "@pipeline().parameters.O/pDirFromPL",
-								"type": "Expression"
-							},
-							"FileName": {
-								"value": "@pipeline().parameters.O/PFileNameFromPL",
-								"type": "Expression"
-							}
-						}
+						"type": "DatasetReference"
 					}
 				]
 			}
