@@ -89,9 +89,6 @@
 			"FileNameFromPl": {
 				"type": "String"
 			},
-			"containerfromPl": {
-				"type": "String"
-			},
 			"InputDirFromPL": {
 				"type": "String"
 			},
