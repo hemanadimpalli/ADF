@@ -6,9 +6,8 @@
 			"type": "LinkedServiceReference"
 		},
 		"parameters": {
-			"FileContainer": {
-				"type": "string",
-				"defaultValue": "Input"
+			"Input": {
+				"type": "string"
 			}
 		},
 		"annotations": [],
