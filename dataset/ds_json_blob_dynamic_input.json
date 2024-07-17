@@ -5,6 +5,12 @@
 			"referenceName": "ls_AzureBlobStorage1",
 			"type": "LinkedServiceReference"
 		},
+		"parameters": {
+			"FileContainer": {
+				"type": "string",
+				"defaultValue": "Input"
+			}
+		},
 		"annotations": [],
 		"type": "Json",
 		"typeProperties": {
