@@ -1,0 +1,104 @@
+{
+	"name": "pl_dynamic_blobip_dlBronzeJson",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy data1",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "JsonSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "JsonReadSettings"
+						}
+					},
+					"sink": {
+						"type": "JsonSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "JsonWriteSettings"
+						}
+					},
+					"enableStaging": false
+				},
+				"inputs": [
+					{
+						"referenceName": "ds_dynamic_json_dl",
+						"type": "DatasetReference",
+						"parameters": {
+							"Container": {
+								"value": "@pipeline().parameters.ContainerfromPL",
+								"type": "Expression"
+							},
+							"Directory": {
+								"value": "@pipeline().parameters.DirFromPL",
+								"type": "Expression"
+							},
+							"FileName": {
+								"value": "@pipeline().parameters.FileNameFromPl",
+								"type": "Expression"
+							}
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ds_dynamic_json_dl",
+						"type": "DatasetReference",
+						"parameters": {
+							"Container": {
+								"value": "@pipeline().parameters.o/pContainerFromPl",
+								"type": "Expression"
+							},
+							"Directory": {
+								"value": "@pipeline().parameters.O/pDirFromPL",
+								"type": "Expression"
+							},
+							"FileName": {
+								"value": "@pipeline().parameters.O/PFileNameFromPL",
+								"type": "Expression"
+							}
+						}
+					}
+				]
+			}
+		],
+		"parameters": {
+			"ContainerfromPL": {
+				"type": "String"
+			},
+			"DirFromPL": {
+				"type": "String"
+			},
+			"FileNameFromPl": {
+				"type": "String"
+			},
+			"o/pContainerFromPl": {
+				"type": "String"
+			},
+			"O/pDirFromPL": {
+				"type": "String"
+			},
+			"O/PFileNameFromPL": {
+				"type": "String"
+			}
+		},
+		"annotations": []
+	}
+}
