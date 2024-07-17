@@ -2,7 +2,7 @@
 	"name": "ds_blob_dynamic_json_input",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "ls_AzureBlobStorage1",
+			"referenceName": "ls_blob_ew",
 			"type": "LinkedServiceReference"
 		},
 		"parameters": {
