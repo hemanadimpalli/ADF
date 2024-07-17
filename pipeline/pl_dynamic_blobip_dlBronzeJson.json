@@ -67,25 +67,7 @@
 			"ContainerfromPL": {
 				"type": "String"
 			},
-			"DirFromPL": {
-				"type": "String"
-			},
-			"FileNameFromPl": {
-				"type": "String"
-			},
-			"InputDirFromPL": {
-				"type": "String"
-			},
-			"InputFileNameFromPL": {
-				"type": "String"
-			},
 			"opContainerFromPL": {
-				"type": "String"
-			},
-			"OpDirFromPL": {
-				"type": "String"
-			},
-			"OPFileNAmeFromPL": {
 				"type": "String"
 			}
 		},
