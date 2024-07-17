@@ -6,7 +6,7 @@
 			"type": "LinkedServiceReference"
 		},
 		"parameters": {
-			"OutputDir": {
+			"OutputContainer": {
 				"type": "String"
 			}
 		},
@@ -15,8 +15,8 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"folderPath": {
-					"value": "@dataset().OutputDir",
+				"fileSystem": {
+					"value": "@dataset().OutputContainer",
 					"type": "Expression"
 				}
 			}
