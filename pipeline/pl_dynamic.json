@@ -58,7 +58,7 @@
 						"referenceName": "ds_json_blob_dynamic_input",
 						"type": "DatasetReference",
 						"parameters": {
-							"Input": {
+							"folderpath": {
 								"value": "customers.json",
 								"type": "Expression"
 							}
