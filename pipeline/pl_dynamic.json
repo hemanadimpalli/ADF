@@ -56,7 +56,13 @@
 				"typeProperties": {
 					"dataset": {
 						"referenceName": "ds_json_blob_dynamic_input",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"Input": {
+								"value": "customers.json",
+								"type": "Expression"
+							}
+						}
 					},
 					"fieldList": [
 						"childItems"
