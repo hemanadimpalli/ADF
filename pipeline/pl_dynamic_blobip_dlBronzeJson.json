@@ -18,7 +18,7 @@
 					"source": {
 						"type": "JsonSource",
 						"storeSettings": {
-							"type": "AzureBlobFSReadSettings",
+							"type": "AzureBlobStorageReadSettings",
 							"recursive": true,
 							"enablePartitionDiscovery": false
 						},
@@ -39,14 +39,26 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "ds_dynamic_json_dl",
-						"type": "DatasetReference"
+						"referenceName": "ds_blob_dynamic_json_input",
+						"type": "DatasetReference",
+						"parameters": {
+							"InputContainer": {
+								"value": "@pipeline().parameters.ContainerfromPL",
+								"type": "Expression"
+							}
+						}
 					}
 				],
 				"outputs": [
 					{
 						"referenceName": "ds_dynamic_json_dl",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"OutputContainer": {
+								"value": "@pipeline().parameters.opContainerFromPL",
+								"type": "Expression"
+							}
+						}
 					}
 				]
 			}
