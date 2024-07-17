@@ -2,7 +2,7 @@
 	"name": "ds_dynamic_json_dl",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "ls_dl",
+			"referenceName": "ls_dl_new",
 			"type": "LinkedServiceReference"
 		},
 		"parameters": {
