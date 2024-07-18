@@ -47,7 +47,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"expression": {
-						"value": "@greater(activity('Lookup1').output.pipelineReturnValue, 0)",
+						"value": "@bool(greater(activity('Lookup1').output, 0))",
 						"type": "Expression"
 					},
 					"ifFalseActivities": [
