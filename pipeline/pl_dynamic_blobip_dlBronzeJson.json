@@ -40,7 +40,21 @@
 				"inputs": [
 					{
 						"referenceName": "ds_blob_dynamic_json_input",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"InputContainer": {
+								"value": "@pipeline().parameters.ContainerfromPL",
+								"type": "Expression"
+							},
+							"InputDirectory": {
+								"value": "@pipeline().parameters.DirFromPl",
+								"type": "Expression"
+							},
+							"InputFileName": {
+								"value": "@pipeline().parameters.FilenameFromPL",
+								"type": "Expression"
+							}
+						}
 					}
 				],
 				"outputs": [
@@ -62,6 +76,12 @@
 				"type": "String"
 			},
 			"opContainerFromPL": {
+				"type": "String"
+			},
+			"DirFromPl": {
+				"type": "String"
+			},
+			"FilenameFromPL": {
 				"type": "String"
 			}
 		},
