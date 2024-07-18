@@ -47,7 +47,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"expression": {
-						"value": "\n@greater(int(activity('Lookup1').output.fileSize), 0)\n",
+						"value": "@greater(int(activity('Lookup1').output.fileSize), 0)",
 						"type": "Expression"
 					},
 					"ifFalseActivities": [
@@ -57,7 +57,7 @@
 							"dependsOn": [],
 							"userProperties": [],
 							"typeProperties": {
-								"message": "if file size <0",
+								"message": "File size is not greater than zero",
 								"errorCode": "500"
 							}
 						}
