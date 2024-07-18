@@ -1,0 +1,90 @@
+{
+	"name": "pl_dynamic_blobip_dlBronzeJson",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy data1",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "JsonSource",
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "JsonReadSettings"
+						}
+					},
+					"sink": {
+						"type": "JsonSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "JsonWriteSettings"
+						}
+					},
+					"enableStaging": false
+				},
+				"inputs": [
+					{
+						"referenceName": "ds_blob_dynamic_json_input",
+						"type": "DatasetReference",
+						"parameters": {
+							"InputContainer": {
+								"value": "@pipeline().parameters.ContainerfromPL",
+								"type": "Expression"
+							},
+							"InputDirectory": {
+								"value": "@pipeline().parameters.DirFromPl",
+								"type": "Expression"
+							},
+							"InputFileName": {
+								"value": "@pipeline().parameters.FilenameFromPL",
+								"type": "Expression"
+							}
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ds_dynamic_json_dl",
+						"type": "DatasetReference",
+						"parameters": {
+							"OutputContainer": {
+								"value": "@pipeline().parameters.opContainerFromPL",
+								"type": "Expression"
+							}
+						}
+					}
+				]
+			}
+		],
+		"parameters": {
+			"ContainerfromPL": {
+				"type": "String"
+			},
+			"opContainerFromPL": {
+				"type": "String"
+			},
+			"DirFromPl": {
+				"type": "String"
+			},
+			"FilenameFromPL": {
+				"type": "String"
+			}
+		},
+		"annotations": []
+	}
+}

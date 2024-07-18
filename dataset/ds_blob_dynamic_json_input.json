@@ -1,0 +1,40 @@
+{
+	"name": "ds_blob_dynamic_json_input",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_blob_ew",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"InputContainer": {
+				"type": "string"
+			},
+			"InputDirectory": {
+				"type": "string"
+			},
+			"InputFileName": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": {
+					"value": "@dataset().InputFileName",
+					"type": "Expression"
+				},
+				"folderPath": {
+					"value": "@dataset().InputDirectory",
+					"type": "Expression"
+				},
+				"container": {
+					"value": "@dataset().InputContainer",
+					"type": "Expression"
+				}
+			}
+		},
+		"schema": {}
+	}
+}

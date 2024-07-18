@@ -1,0 +1,40 @@
+{
+	"name": "DS_input_json_blob",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_blob_ew",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"filename": {
+				"type": "String"
+			}
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": {
+					"value": "@dataset().filename",
+					"type": "Expression"
+				},
+				"container": "input"
+			}
+		},
+		"schema": {
+			"type": "object",
+			"properties": {
+				"CUSTOMER_ID": {
+					"type": "string"
+				},
+				"FULL_NAME": {
+					"type": "string"
+				},
+				"EMAIL_ADDRESS": {
+					"type": "string"
+				}
+			}
+		}
+	}
+}

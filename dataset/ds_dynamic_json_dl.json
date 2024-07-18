@@ -1,0 +1,26 @@
+{
+	"name": "ds_dynamic_json_dl",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_dl_new",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"OutputContainer": {
+				"type": "String"
+			}
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileSystem": {
+					"value": "@dataset().OutputContainer",
+					"type": "Expression"
+				}
+			}
+		},
+		"schema": {}
+	}
+}
