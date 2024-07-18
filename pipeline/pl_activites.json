@@ -46,34 +46,18 @@
 				"userProperties": [],
 				"typeProperties": {
 					"expression": {
-						"value": "@bool(endswith(activity('Get Metadata1').output.childItems[0], '.csv'))",
+						"value": "@bool(endswith(activity('Get Metadata1').output.childItems[0].name, '.csv'))",
 						"type": "Expression"
 					},
 					"ifFalseActivities": [
 						{
 							"name": "Fail1",
 							"type": "Fail",
-							"dependsOn": [
-								{
-									"activity": "Wait1",
-									"dependencyConditions": [
-										"Succeeded"
-									]
-								}
-							],
-							"userProperties": [],
-							"typeProperties": {
-								"message": "Fail if not CSV",
-								"errorCode": "500"
-							}
-						},
-						{
-							"name": "Wait1",
-							"type": "Wait",
 							"dependsOn": [],
 							"userProperties": [],
 							"typeProperties": {
-								"waitTimeInSeconds": 1
+								"message": "No CSV files found",
+								"errorCode": "500"
 							}
 						}
 					],
@@ -112,24 +96,18 @@
 				"userProperties": [],
 				"typeProperties": {
 					"items": {
-						"value": "@variables('files')",
+						"value": "@variables('filenameslist')",
 						"type": "Expression"
 					},
 					"condition": {
-						"value": "@or(startswith(item(),'countr'), startswith(item(),'depor()'))",
+						"value": "@or(startswith(item().name,'countr'), startswith(item().name,'departments'))",
 						"type": "Expression"
 					}
 				}
 			}
 		],
 		"variables": {
-			"filenames": {
-				"type": "Array"
-			},
 			"filenameslist": {
-				"type": "Array"
-			},
-			"files": {
 				"type": "Array"
 			}
 		},
