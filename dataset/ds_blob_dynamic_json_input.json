@@ -8,6 +8,12 @@
 		"parameters": {
 			"InputContainer": {
 				"type": "string"
+			},
+			"InputDirectory": {
+				"type": "string"
+			},
+			"InputFileName": {
+				"type": "string"
 			}
 		},
 		"annotations": [],
