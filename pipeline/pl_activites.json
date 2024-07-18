@@ -24,6 +24,7 @@
 					],
 					"storeSettings": {
 						"type": "AzureBlobStorageReadSettings",
+						"recursive": true,
 						"enablePartitionDiscovery": false
 					},
 					"formatSettings": {
@@ -45,37 +46,90 @@
 				"userProperties": [],
 				"typeProperties": {
 					"expression": {
-						"value": "@endswith(activity('Get Metadata1').output.childItems[0], '.csv')",
+						"value": "@bool(endswith(activity('Get Metadata1').output.childItems[0], '.csv'))",
 						"type": "Expression"
 					},
 					"ifFalseActivities": [
 						{
 							"name": "Fail1",
 							"type": "Fail",
-							"dependsOn": [],
+							"dependsOn": [
+								{
+									"activity": "Wait1",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
 							"userProperties": [],
 							"typeProperties": {
 								"message": "Fail if not CSV",
 								"errorCode": "500"
 							}
+						},
+						{
+							"name": "Wait1",
+							"type": "Wait",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"waitTimeInSeconds": 1
+							}
 						}
 					],
 					"ifTrueActivities": [
 						{
-							"name": "Append variable1",
-							"type": "AppendVariable",
+							"name": "Set variable1",
+							"type": "SetVariable",
 							"dependsOn": [],
+							"policy": {
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
 							"typeProperties": {
-								"variableName": "filenames",
-								"value": ""
+								"variableName": "filenameslist",
+								"value": {
+									"value": "@activity('Get Metadata1').output.childItems",
+									"type": "Expression"
+								}
 							}
 						}
 					]
+				}
+			},
+			{
+				"name": "Filter2",
+				"type": "Filter",
+				"dependsOn": [
+					{
+						"activity": "If Condition1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@variables('files')",
+						"type": "Expression"
+					},
+					"condition": {
+						"value": "@or(startswith(item(),'countr'), startswith(item(),'depor()'))",
+						"type": "Expression"
+					}
 				}
 			}
 		],
 		"variables": {
 			"filenames": {
+				"type": "Array"
+			},
+			"filenameslist": {
+				"type": "Array"
+			},
+			"files": {
 				"type": "Array"
 			}
 		},
