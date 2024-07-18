@@ -40,7 +40,13 @@
 				"inputs": [
 					{
 						"referenceName": "DS_input_json_blob",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"filename": {
+								"value": "@pipeline().parameters.var_filename",
+								"type": "Expression"
+							}
+						}
 					}
 				],
 				"outputs": [
@@ -51,6 +57,11 @@
 				]
 			}
 		],
+		"parameters": {
+			"var_filename": {
+				"type": "String"
+			}
+		},
 		"annotations": []
 	}
 }
