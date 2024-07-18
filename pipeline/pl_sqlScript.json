@@ -1,5 +1,5 @@
 {
-	"name": "pipeline6",
+	"name": "pl_sqlScript",
 	"properties": {
 		"activities": [
 			{
@@ -22,7 +22,7 @@
 					"scripts": [
 						{
 							"type": "Query",
-							"text": "select * from [ORDERS].[ORDERS]"
+							"text": "select * from [ORDERS].[ORDERS]\nselect * from [ORDERS].[ORDERS] where order_id=1\n"
 						}
 					],
 					"scriptBlockExecutionTimeout": "02:00:00"
