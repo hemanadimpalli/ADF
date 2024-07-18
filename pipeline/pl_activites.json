@@ -42,9 +42,43 @@
 						]
 					}
 				],
-				"userProperties": []
+				"userProperties": [],
+				"typeProperties": {
+					"expression": {
+						"value": "@endswith(activity('Get Metadata1').output.childItems[0], '.csv')",
+						"type": "Expression"
+					},
+					"ifFalseActivities": [
+						{
+							"name": "Fail1",
+							"type": "Fail",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"message": "Fail if not CSV",
+								"errorCode": "500"
+							}
+						}
+					],
+					"ifTrueActivities": [
+						{
+							"name": "Append variable1",
+							"type": "AppendVariable",
+							"dependsOn": [],
+							"typeProperties": {
+								"variableName": "filenames",
+								"value": ""
+							}
+						}
+					]
+				}
 			}
 		],
+		"variables": {
+			"filenames": {
+				"type": "Array"
+			}
+		},
 		"annotations": []
 	}
 }
