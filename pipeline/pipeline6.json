@@ -47,7 +47,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"expression": {
-						"value": "@bool(greater(int(activity('Lookup1').output.fileSize), 0)) \n",
+						"value": "\n@greater(int(activity('Lookup1').output.fileSize), 0)\n",
 						"type": "Expression"
 					},
 					"ifFalseActivities": [
