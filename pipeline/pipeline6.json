@@ -56,7 +56,7 @@
 						"referenceName": "ds_blob_input",
 						"type": "DatasetReference",
 						"parameters": {
-							"filename": "departments.csv"
+							"filename": "departmentsyy.csv"
 						}
 					},
 					"timeout": "0.12:00:00",
