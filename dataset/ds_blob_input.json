@@ -1,0 +1,19 @@
+{
+	"name": "ds_blob_input",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_blob_ew",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "departments.csv",
+				"container": "input"
+			}
+		},
+		"schema": {}
+	}
+}
