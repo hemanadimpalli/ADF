@@ -28,7 +28,13 @@
 					},
 					"dataset": {
 						"referenceName": "ds_input_blob_csv_departments",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"filename": {
+								"value": "@variables('filenameslist')",
+								"type": "Expression"
+							}
+						}
 					},
 					"firstRowOnly": false
 				}
@@ -47,8 +53,11 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataset": {
-						"referenceName": "ds_input_blob_csv_departments",
-						"type": "DatasetReference"
+						"referenceName": "ds_blob_input",
+						"type": "DatasetReference",
+						"parameters": {
+							"filename": "customers.json"
+						}
 					},
 					"timeout": "0.12:00:00",
 					"sleep": 10
