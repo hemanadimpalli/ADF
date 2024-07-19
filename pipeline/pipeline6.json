@@ -32,56 +32,6 @@
 					},
 					"firstRowOnly": false
 				}
-			},
-			{
-				"name": "If Condition1",
-				"type": "IfCondition",
-				"dependsOn": [
-					{
-						"activity": "Lookup1",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"userProperties": [],
-				"typeProperties": {
-					"expression": {
-						"value": "@greater(int(activity('Lookup1').output.fileSize), 0)",
-						"type": "Expression"
-					},
-					"ifFalseActivities": [
-						{
-							"name": "Fail1",
-							"type": "Fail",
-							"dependsOn": [],
-							"userProperties": [],
-							"typeProperties": {
-								"message": "File size is not greater than zero",
-								"errorCode": "500"
-							}
-						}
-					],
-					"ifTrueActivities": [
-						{
-							"name": "Set variable1",
-							"type": "SetVariable",
-							"dependsOn": [],
-							"policy": {
-								"secureOutput": false,
-								"secureInput": false
-							},
-							"userProperties": [],
-							"typeProperties": {
-								"variableName": "filenameslist",
-								"value": {
-									"value": "@activity('Lookup1').output",
-									"type": "Expression"
-								}
-							}
-						}
-					]
-				}
 			}
 		],
 		"variables": {
