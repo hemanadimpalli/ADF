@@ -72,6 +72,18 @@
 						"value": "@greater(activity('Get Metadata1').output.childItems,0 )",
 						"type": "Expression"
 					},
+					"ifFalseActivities": [
+						{
+							"name": "Fail1",
+							"type": "Fail",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"message": "file invalid",
+								"errorCode": "500"
+							}
+						}
+					],
 					"ifTrueActivities": [
 						{
 							"name": "Set variable1",
