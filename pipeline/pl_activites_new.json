@@ -32,8 +32,8 @@
 				}
 			},
 			{
-				"name": "Filter1",
-				"type": "Filter",
+				"name": "If Condition1",
+				"type": "IfCondition",
 				"dependsOn": [
 					{
 						"activity": "Get Metadata1",
@@ -44,31 +44,8 @@
 				],
 				"userProperties": [],
 				"typeProperties": {
-					"items": {
-						"value": "@activity('Get Metadata1').output.childItems",
-						"type": "Expression"
-					},
-					"condition": {
-						"value": "@or(startswith(item().name, 'd'), startswith(item().name, 'e'))",
-						"type": "Expression"
-					}
-				}
-			},
-			{
-				"name": "If Condition1",
-				"type": "IfCondition",
-				"dependsOn": [
-					{
-						"activity": "Filter1",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"userProperties": [],
-				"typeProperties": {
 					"expression": {
-						"value": "@greater(length(activity('Filter1').output.Value), 0)",
+						"value": "@greater(length(activity('Get Metadata1').output.childItems), 0)",
 						"type": "Expression"
 					},
 					"ifFalseActivities": [
@@ -82,6 +59,25 @@
 								"errorCode": "500"
 							}
 						}
+					],
+					"ifTrueActivities": [
+						{
+							"name": "Set variable1",
+							"type": "SetVariable",
+							"dependsOn": [],
+							"policy": {
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "File Exist",
+								"value": {
+									"value": "{\"value\": true}\n",
+									"type": "Expression"
+								}
+							}
+						}
 					]
 				}
 			}
@@ -89,7 +85,7 @@
 		"variables": {
 			"File Exist": {
 				"type": "Boolean",
-				"defaultValue": false
+				"defaultValue": true
 			}
 		},
 		"annotations": []
