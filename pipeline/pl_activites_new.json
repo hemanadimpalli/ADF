@@ -71,9 +71,9 @@
 							},
 							"userProperties": [],
 							"typeProperties": {
-								"variableName": "File_Exist",
+								"variableName": "filename",
 								"value": {
-									"value": "\"true\"\n",
+									"value": "true",
 									"type": "Expression"
 								}
 							}
@@ -85,6 +85,9 @@
 		"variables": {
 			"File_Exist": {
 				"type": "Boolean"
+			},
+			"filename": {
+				"type": "String"
 			}
 		},
 		"annotations": []
