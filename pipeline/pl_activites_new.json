@@ -96,9 +96,10 @@
 							"userProperties": [],
 							"typeProperties": {
 								"variableName": "file",
-								"value": [
-									""
-								]
+								"value": {
+									"value": "true",
+									"type": "Expression"
+								}
 							}
 						}
 					]
