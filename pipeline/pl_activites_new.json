@@ -48,72 +48,7 @@
 					"items": {
 						"value": "@activity('Get Metadata1').output.childItems",
 						"type": "Expression"
-					},
-					"condition": {
-						"value": "@or(startswith(item().name, 'd'), startswith(item().name, 'e'))",
-						"type": "Expression"
 					}
-				}
-			},
-			{
-				"name": "ForEach1",
-				"type": "ForEach",
-				"dependsOn": [
-					{
-						"activity": "Filter1",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"userProperties": [],
-				"typeProperties": {
-					"items": {
-						"value": "@activity('Filter1').output.value",
-						"type": "Expression"
-					},
-					"activities": [
-						{
-							"name": "If Condition1",
-							"type": "IfCondition",
-							"dependsOn": [],
-							"userProperties": [],
-							"typeProperties": {
-								"expression": {
-									"value": "@greater(length(activity('Filter1').output.value), 0)\n",
-									"type": "Expression"
-								},
-								"ifFalseActivities": [
-									{
-										"name": "Fail1",
-										"type": "Fail",
-										"dependsOn": [],
-										"userProperties": [],
-										"typeProperties": {
-											"message": "file size <=0",
-											"errorCode": "500"
-										}
-									}
-								],
-								"ifTrueActivities": [
-									{
-										"name": "Set variable1",
-										"type": "SetVariable",
-										"dependsOn": [],
-										"policy": {
-											"secureOutput": false,
-											"secureInput": false
-										},
-										"userProperties": [],
-										"typeProperties": {
-											"variableName": "File Exist",
-											"value": "true"
-										}
-									}
-								]
-							}
-						}
-					]
 				}
 			}
 		],
