@@ -96,7 +96,9 @@
 							"userProperties": [],
 							"typeProperties": {
 								"variableName": "file",
-								"value": "true"
+								"value": [
+									""
+								]
 							}
 						}
 					]
@@ -105,7 +107,7 @@
 		],
 		"variables": {
 			"file": {
-				"type": "String"
+				"type": "Array"
 			}
 		},
 		"annotations": []
