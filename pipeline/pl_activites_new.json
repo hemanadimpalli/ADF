@@ -87,8 +87,9 @@
 			}
 		],
 		"variables": {
-			"file": {
-				"type": "Integer"
+			"File Exist": {
+				"type": "Boolean",
+				"defaultValue": false
 			}
 		},
 		"annotations": []
