@@ -11,6 +11,7 @@
 			"location": {
 				"type": "AzureBlobFSLocation",
 				"fileName": "@item().name",
+				"folderPath": "@formatDateTime(utcnow(), 'dd/MM/yyyy')",
 				"fileSystem": "bronze"
 			},
 			"columnDelimiter": ",",
