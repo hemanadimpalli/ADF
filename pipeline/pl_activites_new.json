@@ -128,6 +128,18 @@
 									"value": "@greater(activity('Get Metadata2').output.size,0)",
 									"type": "Expression"
 								},
+								"ifFalseActivities": [
+									{
+										"name": "Fail1",
+										"type": "Fail",
+										"dependsOn": [],
+										"userProperties": [],
+										"typeProperties": {
+											"message": "File Size equal to zero",
+											"errorCode": "123"
+										}
+									}
+								],
 								"ifTrueActivities": [
 									{
 										"name": "Copy data1",
