@@ -97,7 +97,7 @@
 							"typeProperties": {
 								"variableName": "file",
 								"value": {
-									"value": "true",
+									"value": "@bool(true)",
 									"type": "Expression"
 								}
 							}
@@ -108,7 +108,7 @@
 		],
 		"variables": {
 			"file": {
-				"type": "Array"
+				"type": "Integer"
 			}
 		},
 		"annotations": []
