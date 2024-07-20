@@ -50,7 +50,7 @@
 						"type": "Expression"
 					},
 					"condition": {
-						"value": "@equals(item().name,'departments.csv')",
+						"value": "@or(equals(item().name,'departments.csv'),equals(item().name,'demployees.csv'))",
 						"type": "Expression"
 					}
 				}
