@@ -72,7 +72,8 @@
 					"items": {
 						"value": "@activity('Filter1').output.value",
 						"type": "Expression"
-					}
+					},
+					"isSequential": true
 				}
 			}
 		],
