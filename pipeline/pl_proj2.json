@@ -20,9 +20,10 @@
 						"type": "DatasetReference"
 					},
 					"fieldList": [
+						"itemName",
 						"exists",
-						"size",
-						"itemName"
+						"itemType",
+						"size"
 					],
 					"storeSettings": {
 						"type": "AzureBlobFSReadSettings",
@@ -34,6 +35,11 @@
 				}
 			}
 		],
+		"parameters": {
+			"childitems": {
+				"type": "String"
+			}
+		},
 		"annotations": []
 	}
 }
