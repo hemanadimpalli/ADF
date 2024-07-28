@@ -17,11 +17,7 @@
 				"typeProperties": {
 					"dataset": {
 						"referenceName": "ds_dl_csv_dynamic",
-						"type": "DatasetReference",
-						"parameters": {
-							"Directory": "bronze",
-							"FileName": "Product.csv"
-						}
+						"type": "DatasetReference"
 					},
 					"fieldList": [
 						"childItems"
