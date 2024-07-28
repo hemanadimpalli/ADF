@@ -35,11 +35,6 @@
 				}
 			}
 		],
-		"parameters": {
-			"childitems": {
-				"type": "String"
-			}
-		},
 		"annotations": []
 	}
 }
