@@ -247,7 +247,7 @@
 				"typeProperties": {
 					"variableName": "error",
 					"value": {
-						"value": "@activity('Copy data incoming folder to sql').output.Error?.message",
+						"value": "\n\n@activity('Copy data incoming folder to sql').output.error.message",
 						"type": "Expression"
 					}
 				}
