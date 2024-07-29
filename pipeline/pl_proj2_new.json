@@ -227,30 +227,6 @@
 						}
 					]
 				}
-			},
-			{
-				"name": "Set variable1",
-				"type": "SetVariable",
-				"dependsOn": [
-					{
-						"activity": "Copy data incoming folder to sql",
-						"dependencyConditions": [
-							"Failed"
-						]
-					}
-				],
-				"policy": {
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"variableName": "error",
-					"value": {
-						"value": "@activity('Copy data incoming folder to sql').output.errors[0].Message",
-						"type": "Expression"
-					}
-				}
 			}
 		],
 		"variables": {
