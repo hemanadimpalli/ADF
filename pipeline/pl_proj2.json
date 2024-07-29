@@ -95,10 +95,7 @@
 									"referenceName": "ds_dl_bronze_csv",
 									"type": "DatasetReference",
 									"parameters": {
-										"filename": {
-											"value": "@item().name",
-											"type": "Expression"
-										}
+										"filename": "Product.csv"
 									}
 								}
 							],
