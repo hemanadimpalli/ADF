@@ -17,7 +17,10 @@
 				"typeProperties": {
 					"dataset": {
 						"referenceName": "Ds_IncomingFiles_CSV_dynamic",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"FILENAME": "Product.csv"
+						}
 					},
 					"fieldList": [
 						"childItems"
