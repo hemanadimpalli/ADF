@@ -17,7 +17,13 @@
 				"typeProperties": {
 					"dataset": {
 						"referenceName": "Ds_dl_incomingFiles",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"Container": {
+								"value": "@pipeline().parameters.IN",
+								"type": "Expression"
+							}
+						}
 					},
 					"fieldList": [
 						"childItems"
@@ -32,6 +38,11 @@
 				}
 			}
 		],
+		"parameters": {
+			"IN": {
+				"type": "String"
+			}
+		},
 		"annotations": []
 	}
 }
