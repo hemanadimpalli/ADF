@@ -5,7 +5,14 @@
 			{
 				"name": "Lookup1",
 				"type": "Lookup",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "Copy data1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "0.12:00:00",
 					"retry": 0,
@@ -58,10 +65,6 @@
 					},
 					"sink": {
 						"type": "AzureSqlSink",
-						"preCopyScript": {
-							"value": "TRUNCATE table [[ORDERS]]].[products2];",
-							"type": "Expression"
-						},
 						"writeBehavior": "insert",
 						"sqlWriterUseTableLock": false
 					},
@@ -83,7 +86,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "ds_sql_products",
+						"referenceName": "ds_sql_products2",
 						"type": "DatasetReference"
 					}
 				]
