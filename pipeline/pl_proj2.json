@@ -50,13 +50,7 @@
 				"inputs": [
 					{
 						"referenceName": "Ds_dl_incomingFiles",
-						"type": "DatasetReference",
-						"parameters": {
-							"Container": {
-								"value": "@pipeline().parameters.IN",
-								"type": "Expression"
-							}
-						}
+						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
