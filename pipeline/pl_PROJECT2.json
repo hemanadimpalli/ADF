@@ -30,11 +30,6 @@
 				}
 			}
 		],
-		"parameters": {
-			"Filename": {
-				"type": "String"
-			}
-		},
 		"annotations": []
 	}
 }
