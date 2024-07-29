@@ -104,7 +104,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"expression": {
-						"value": "@greaterOrEquals(activity('Lookup1').output.duplicate_count, 1)",
+						"value": "@greaterOrEquals(activity('Lookup1').output.count, 1)",
 						"type": "Expression"
 					},
 					"ifFalseActivities": [
