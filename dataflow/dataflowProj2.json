@@ -1,0 +1,29 @@
+{
+	"name": "dataflowProj2",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "Ds_dl_csv_incoming",
+						"type": "DatasetReference"
+					},
+					"name": "sourceCsvProj2"
+				}
+			],
+			"sinks": [],
+			"transformations": [
+				{
+					"name": "aggregate1"
+				}
+			],
+			"scriptLines": [
+				"source(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> sourceCsvProj2",
+				"sourceCsvProj2 aggregate(count = count(ProductId)) ~> aggregate1"
+			]
+		}
+	}
+}
