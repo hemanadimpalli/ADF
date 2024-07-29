@@ -78,7 +78,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "ds_dl_incomingCSVDuplicate",
+						"referenceName": "Ds_dl_incomingFiles",
 						"type": "DatasetReference"
 					}
 				],
