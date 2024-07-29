@@ -29,7 +29,7 @@
 						"partitionOption": "None"
 					},
 					"dataset": {
-						"referenceName": "ds_sql_products2",
+						"referenceName": "ds_sql_products",
 						"type": "DatasetReference"
 					},
 					"firstRowOnly": false
