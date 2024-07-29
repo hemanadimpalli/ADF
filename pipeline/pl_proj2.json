@@ -20,6 +20,7 @@
 						"storeSettings": {
 							"type": "AzureBlobFSReadSettings",
 							"recursive": true,
+							"wildcardFileName": "*csv",
 							"enablePartitionDiscovery": false
 						},
 						"formatSettings": {
@@ -50,7 +51,10 @@
 				"inputs": [
 					{
 						"referenceName": "Ds_dl_incomingFiles",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"Container": "incoming-files"
+						}
 					}
 				],
 				"outputs": [
@@ -61,11 +65,6 @@
 				]
 			}
 		],
-		"parameters": {
-			"IN": {
-				"type": "String"
-			}
-		},
 		"annotations": []
 	}
 }
