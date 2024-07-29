@@ -7,7 +7,7 @@
 				"type": "Lookup",
 				"dependsOn": [
 					{
-						"activity": "Copy data1",
+						"activity": "Copy data incoming folder to sql",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -36,7 +36,7 @@
 				}
 			},
 			{
-				"name": "Copy data1",
+				"name": "Copy data incoming folder to sql",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -91,7 +91,7 @@
 				]
 			},
 			{
-				"name": "If Condition1",
+				"name": "if",
 				"type": "IfCondition",
 				"dependsOn": [
 					{
@@ -109,7 +109,7 @@
 					},
 					"ifFalseActivities": [
 						{
-							"name": "Copy data3",
+							"name": "copying non duplicate data to stagingfolder",
 							"type": "Copy",
 							"dependsOn": [],
 							"policy": {
@@ -169,7 +169,7 @@
 					],
 					"ifTrueActivities": [
 						{
-							"name": "Copy data2",
+							"name": "copying duplicate data to rej folder",
 							"type": "Copy",
 							"dependsOn": [],
 							"policy": {
