@@ -18,7 +18,8 @@
 				"fileName": {
 					"value": "@dataset().FILENAME",
 					"type": "Expression"
-				}
+				},
+				"fileSystem": "incoming-files"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
