@@ -12,7 +12,11 @@
 					"name": "source1"
 				}
 			],
-			"sinks": [],
+			"sinks": [
+				{
+					"name": "sink1"
+				}
+			],
 			"transformations": [
 				{
 					"name": "split1"
@@ -22,9 +26,6 @@
 				},
 				{
 					"name": "filter1"
-				},
-				{
-					"name": "filter2"
 				},
 				{
 					"name": "derivedColumn2"
@@ -51,12 +52,15 @@
 				"     negate:false,",
 				"     broadcast: 'auto')~> exists1",
 				"split1@Output1 filter(and(equals(toInteger(PRODUCT_ID), 2),equals(toInteger(ORDER_ID),336))) ~> filter1",
-				"split1@Output3 filter(ERROR_FUNCTION('')) ~> filter2",
 				"source1 derive(Owner = \"Hema\") ~> derivedColumn2",
 				"exists1, derivedColumn2 lookup(split1@Output1@ORDER_ID == source1@ORDER_ID,",
 				"     multiple: false,",
 				"     pickup: 'any',",
-				"     broadcast: 'both')~> lookup1"
+				"     broadcast: 'both')~> lookup1",
+				"lookup1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> sink1"
 			]
 		}
 	}
