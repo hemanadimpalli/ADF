@@ -1,0 +1,23 @@
+{
+	"name": "Ds_dl_csv_incoming",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_dl_new",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "Product.csv",
+				"fileSystem": "incoming-files"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}
