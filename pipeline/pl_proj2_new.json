@@ -63,6 +63,7 @@
 						"preCopyScript": "truncate table [[ORDERS]]].[products2]",
 						"writeBehavior": "insert",
 						"sqlWriterUseTableLock": false,
+						"tableOption": "autoCreate",
 						"disableMetricsCollection": false
 					},
 					"enableStaging": false,
