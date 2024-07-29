@@ -15,10 +15,8 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileSystem": {
-					"value": "@dataset().Container",
-					"type": "Expression"
-				}
+				"fileName": "Product.csv",
+				"fileSystem": "incoming-files"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
