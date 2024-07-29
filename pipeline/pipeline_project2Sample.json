@@ -17,7 +17,13 @@
 				"typeProperties": {
 					"dataset": {
 						"referenceName": "Ds_IncomingFiles_CSV_dynamic",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"file": {
+								"value": "@pipeline().parameters.filename",
+								"type": "Expression"
+							}
+						}
 					},
 					"fieldList": [
 						"childItems"
@@ -32,6 +38,11 @@
 				}
 			}
 		],
+		"parameters": {
+			"filename": {
+				"type": "String"
+			}
+		},
 		"annotations": []
 	}
 }
