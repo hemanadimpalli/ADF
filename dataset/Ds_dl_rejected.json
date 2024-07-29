@@ -5,11 +5,20 @@
 			"referenceName": "ls_dl_new",
 			"type": "LinkedServiceReference"
 		},
+		"parameters": {
+			"fileName": {
+				"type": "String"
+			}
+		},
 		"annotations": [],
 		"type": "DelimitedText",
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
+				"fileName": {
+					"value": "@concat(dataset().fileName,'_',utcnow())",
+					"type": "Expression"
+				},
 				"fileSystem": "rejected-files"
 			},
 			"columnDelimiter": ",",
