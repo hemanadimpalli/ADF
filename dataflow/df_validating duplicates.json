@@ -16,34 +16,33 @@
 			"transformations": [
 				{
 					"name": "aggregate1"
+				},
+				{
+					"name": "filter1"
 				}
 			],
 			"scriptLines": [
 				"source(output(",
-				"          EMPLOYEE_ID as string,",
-				"          FIRST_NAME as string,",
-				"          LAST_NAME as string,",
-				"          EMAIL as string,",
-				"          PHONE_NUMBER as string,",
-				"          HIRE_DATE as string,",
-				"          JOB_ID as string,",
-				"          SALARY as string,",
-				"          MANAGER_ID as string,",
-				"          DEPARTMENT_ID as string",
+				"          ProductId as string,",
+				"          Price as string,",
+				"          guid as string,",
+				"          StartDate as string,",
+				"          EndDate as string,",
+				"          CreateDate as string,",
+				"          ModifiedDate as string",
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> source1",
-				"source1 aggregate(groupBy(EMPLOYEE_ID,",
-				"          FIRST_NAME,",
-				"          EMAIL,",
-				"          PHONE_NUMBER,",
-				"          HIRE_DATE,",
-				"          JOB_ID,",
-				"          SALARY,",
-				"          MANAGER_ID,",
-				"          DEPARTMENT_ID),",
-				"     Count = count()) ~> aggregate1"
+				"source1 aggregate(groupBy(ProductId,",
+				"          Price,",
+				"          guid,",
+				"          StartDate,",
+				"          EndDate,",
+				"          CreateDate,",
+				"          ModifiedDate),",
+				"     Count = count()) ~> aggregate1",
+				"aggregate1 filter(Count > 1) ~> filter1"
 			]
 		}
 	}
