@@ -60,7 +60,7 @@
 					},
 					"sink": {
 						"type": "AzureSqlSink",
-						"preCopyScript": "Truncate Table [ORDERS].products2;",
+						"preCopyScript": "truncate table [[ORDERS]]].[products2]",
 						"writeBehavior": "insert",
 						"sqlWriterUseTableLock": false,
 						"disableMetricsCollection": false
