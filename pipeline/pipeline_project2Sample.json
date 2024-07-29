@@ -32,11 +32,6 @@
 				}
 			}
 		],
-		"parameters": {
-			"file": {
-				"type": "String"
-			}
-		},
 		"annotations": []
 	}
 }
