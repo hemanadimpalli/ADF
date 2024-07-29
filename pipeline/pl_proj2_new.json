@@ -61,10 +61,9 @@
 					},
 					"sink": {
 						"type": "AzureSqlSink",
-						"preCopyScript": "truncate table [[ORDERS]]].[products2]",
+						"preCopyScript": "truncate table [[ORDERS]].[products]",
 						"writeBehavior": "insert",
 						"sqlWriterUseTableLock": false,
-						"tableOption": "autoCreate",
 						"disableMetricsCollection": false
 					},
 					"enableStaging": false,
@@ -85,7 +84,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "ds_sql_products2",
+						"referenceName": "ds_sql_products",
 						"type": "DatasetReference"
 					}
 				]
