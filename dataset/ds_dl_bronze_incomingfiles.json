@@ -1,5 +1,5 @@
 {
-	"name": "DelimitedText5",
+	"name": "ds_dl_bronze_incomingfiles",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "ls_dl_new",
