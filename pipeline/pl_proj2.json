@@ -29,7 +29,9 @@
 					"sink": {
 						"type": "AzureSqlSink",
 						"writeBehavior": "insert",
-						"sqlWriterUseTableLock": false
+						"sqlWriterUseTableLock": false,
+						"tableOption": "autoCreate",
+						"disableMetricsCollection": false
 					},
 					"enableStaging": false,
 					"translator": {
@@ -49,7 +51,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "ds_sql_products",
+						"referenceName": "ds_sql_table",
 						"type": "DatasetReference"
 					}
 				]
