@@ -1,0 +1,27 @@
+{
+	"name": "ds_blob_input",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_blob_ew",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"filename": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": {
+					"value": "@dataset().filename",
+					"type": "Expression"
+				},
+				"container": "input"
+			}
+		},
+		"schema": {}
+	}
+}

@@ -1,0 +1,73 @@
+{
+	"name": "dataflowProj2",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "Ds_dl_csv_incoming",
+						"type": "DatasetReference"
+					},
+					"name": "sourceCsvProj2"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "ds_dl_rejected_csv",
+						"type": "DatasetReference"
+					},
+					"name": "RejectedFolder"
+				},
+				{
+					"dataset": {
+						"referenceName": "ds_dl_stagingFolder",
+						"type": "DatasetReference"
+					},
+					"name": "StagingFolder"
+				}
+			],
+			"transformations": [
+				{
+					"name": "aggregate1"
+				},
+				{
+					"name": "split1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          ProductId as string,",
+				"          Price as string,",
+				"          guid as string,",
+				"          StartDate as string,",
+				"          EndDate as date,",
+				"          CreateDate as date,",
+				"          ModifiedDate as date",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> sourceCsvProj2",
+				"sourceCsvProj2 aggregate(groupBy(ProductId),",
+				"     count = count(ProductId)) ~> aggregate1",
+				"aggregate1 split(count>1,",
+				"     disjoint: false) ~> split1@(Duplicates, NotDuplicates)",
+				"split1@Duplicates sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> RejectedFolder",
+				"split1@NotDuplicates sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> StagingFolder"
+			]
+		}
+	}
+}

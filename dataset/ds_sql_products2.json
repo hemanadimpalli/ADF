@@ -1,0 +1,45 @@
+{
+	"name": "ds_sql_products2",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_SQL",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "ProductId",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Price",
+				"type": "nvarchar"
+			},
+			{
+				"name": "guid",
+				"type": "nvarchar"
+			},
+			{
+				"name": "StartDate",
+				"type": "nvarchar"
+			},
+			{
+				"name": "EndDate",
+				"type": "nvarchar"
+			},
+			{
+				"name": "CreateDate",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ModifiedDate",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "[ORDERS]",
+			"table": "products2"
+		}
+	}
+}
