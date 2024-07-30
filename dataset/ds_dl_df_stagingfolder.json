@@ -1,0 +1,23 @@
+{
+	"name": "ds_dl_df_stagingfolder",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_dl_new",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "@formatDateTime(utcNow(),'yyyy/MM/dd')",
+				"fileSystem": "staging-files"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}
