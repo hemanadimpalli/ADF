@@ -6,7 +6,7 @@
 			"type": "LinkedServiceReference"
 		},
 		"parameters": {
-			"FILENAME": {
+			"FILEPATH": {
 				"type": "String"
 			}
 		},
@@ -15,11 +15,10 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileName": {
-					"value": "@dataset().FILENAME",
+				"fileSystem": {
+					"value": "@dataset().FILEPATH",
 					"type": "Expression"
-				},
-				"fileSystem": "incoming-files"
+				}
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
