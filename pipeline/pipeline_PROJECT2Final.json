@@ -95,15 +95,14 @@
 							"userProperties": [],
 							"typeProperties": {
 								"dataset": {
-									"referenceName": "Ds_dl_df_tempRejFile",
+									"referenceName": "Ds_blob_temprejectedFiles",
 									"type": "DatasetReference"
 								},
 								"fieldList": [
 									"exists"
 								],
 								"storeSettings": {
-									"type": "AzureBlobFSReadSettings",
-									"recursive": true,
+									"type": "AzureBlobStorageReadSettings",
 									"enablePartitionDiscovery": false
 								},
 								"formatSettings": {
