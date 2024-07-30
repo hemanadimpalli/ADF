@@ -12,7 +12,15 @@
 					"name": "source1"
 				}
 			],
-			"sinks": [],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "Ds_dl_df_RejectFile",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
 			"transformations": [
 				{
 					"name": "derivedColumn1"
@@ -21,7 +29,10 @@
 					"name": "aggregate1"
 				},
 				{
-					"name": "filter1"
+					"name": "filterForDuplicates"
+				},
+				{
+					"name": "filterForNonDuplicates"
 				}
 			],
 			"scriptLines": [
@@ -40,7 +51,15 @@
 				"source1 derive(UniqueId = concat(ProductId,'-', guid)) ~> derivedColumn1",
 				"derivedColumn1 aggregate(groupBy(UniqueId),",
 				"     Rowcount = count(UniqueId)) ~> aggregate1",
-				"aggregate1 filter(Rowcount > 1) ~> filter1"
+				"aggregate1 filter(Rowcount > 1) ~> filterForDuplicates",
+				"aggregate1 filter(Rowcount==1) ~> filterForNonDuplicates",
+				"filterForDuplicates sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> sink1"
 			]
 		}
 	}
