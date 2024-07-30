@@ -17,13 +17,7 @@
 				"typeProperties": {
 					"dataset": {
 						"referenceName": "Ds_dl_INCOMINGFOLDERPROJECT2",
-						"type": "DatasetReference",
-						"parameters": {
-							"FileName": {
-								"value": "@pipeline().parameters.PipelineLevelFileName",
-								"type": "Expression"
-							}
-						}
+						"type": "DatasetReference"
 					},
 					"fieldList": [
 						"childItems"
@@ -83,11 +77,6 @@
 				}
 			}
 		],
-		"parameters": {
-			"PipelineLevelFileName": {
-				"type": "String"
-			}
-		},
 		"annotations": []
 	}
 }
