@@ -1,0 +1,23 @@
+{
+	"name": "Ds_Dl_Df_REJECTEDFOLDERPROJ2",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_dl_new",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "@formatDateTime(utcNow(),'yyyy/MM/dd')",
+				"fileSystem": "rejected-files"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}
