@@ -19,6 +19,7 @@
 					"value": "@concat(dataset().fileName,'_',utcnow())",
 					"type": "Expression"
 				},
+				"folderPath": "@formatDateTime(utcNow(),'yyyy/MM/dd')",
 				"fileSystem": "rejected-files"
 			},
 			"columnDelimiter": ",",
