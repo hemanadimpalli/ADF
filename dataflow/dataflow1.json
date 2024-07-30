@@ -13,7 +13,14 @@
 				}
 			],
 			"sinks": [],
-			"transformations": [],
+			"transformations": [
+				{
+					"name": "derivedColumn1"
+				},
+				{
+					"name": "aggregate1"
+				}
+			],
 			"scriptLines": [
 				"source(output(",
 				"          ProductId as string,",
@@ -26,7 +33,11 @@
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     ignoreNoFilesFound: false) ~> source1"
+				"     ignoreNoFilesFound: false) ~> source1",
+				"source1 derive(UniqueId = concat(ProductId, '-', toString(Price), '-', guid, '-', toString(StartDate, 'MM-dd-yyyy'), '-', toString(EndDate, 'MM-dd-yyyy'), '-', toString(CreateDate, 'MM-dd-YYYY'), '-', toString(ModifiedDate, 'MM-dd-yyyy'))\r",
+				") ~> derivedColumn1",
+				"derivedColumn1 aggregate(groupBy(UniqueId),",
+				"     Rowcount = count(UniqueId)) ~> aggregate1"
 			]
 		}
 	}
