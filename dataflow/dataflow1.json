@@ -19,6 +19,13 @@
 						"type": "DatasetReference"
 					},
 					"name": "sink1"
+				},
+				{
+					"dataset": {
+						"referenceName": "ds_dl_df_stagingfolder",
+						"type": "DatasetReference"
+					},
+					"name": "sink2"
 				}
 			],
 			"transformations": [
@@ -29,10 +36,7 @@
 					"name": "aggregate1"
 				},
 				{
-					"name": "filterForDuplicates"
-				},
-				{
-					"name": "filterForNonDuplicates"
+					"name": "split1"
 				}
 			],
 			"scriptLines": [
@@ -51,15 +55,22 @@
 				"source1 derive(UniqueId = concat(ProductId,'-', guid)) ~> derivedColumn1",
 				"derivedColumn1 aggregate(groupBy(UniqueId),",
 				"     Rowcount = count(UniqueId)) ~> aggregate1",
-				"aggregate1 filter(Rowcount > 1) ~> filterForDuplicates",
-				"aggregate1 filter(Rowcount==1) ~> filterForNonDuplicates",
-				"filterForDuplicates sink(allowSchemaDrift: true,",
+				"aggregate1 split(Rowcount>1,",
+				"     disjoint: false) ~> split1@(DuplicateFound, NoDuplicates)",
+				"split1@DuplicateFound sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     umask: 0022,",
 				"     preCommands: [],",
 				"     postCommands: [],",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> sink1"
+				"     skipDuplicateMapOutputs: true) ~> sink1",
+				"split1@NoDuplicates sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> sink2"
 			]
 		}
 	}
