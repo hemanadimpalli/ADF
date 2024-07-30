@@ -72,16 +72,6 @@
 												"type": "Expression"
 											}
 										}
-									},
-									"linkedServiceParameters": {
-										"source1": {
-											"schemaLinkedService": {
-												"FileName": {
-													"value": "@item().name",
-													"type": "Expression"
-												}
-											}
-										}
 									}
 								},
 								"compute": {
