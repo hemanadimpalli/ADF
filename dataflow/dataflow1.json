@@ -6,7 +6,7 @@
 			"sources": [
 				{
 					"dataset": {
-						"referenceName": "Ds_dl_df_NonduplicateIncomingFile",
+						"referenceName": "Ds_dl_TemporaryProductsCSV",
 						"type": "DatasetReference"
 					},
 					"name": "source1"
@@ -30,16 +30,7 @@
 				}
 			],
 			"scriptLines": [
-				"source(output(",
-				"          ProductId as string,",
-				"          Price as string,",
-				"          guid as string,",
-				"          StartDate as string,",
-				"          EndDate as string,",
-				"          CreateDate as string,",
-				"          ModifiedDate as string",
-				"     ),",
-				"     allowSchemaDrift: true,",
+				"source(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> source1",
 				"source1 aggregate(groupBy(ProductId),",
