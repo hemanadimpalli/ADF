@@ -1,0 +1,23 @@
+{
+	"name": "Ds_dl_df_tempRejFile",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_dl_new",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "Temp",
+				"fileSystem": "rejected-files"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}
