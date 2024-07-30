@@ -72,6 +72,61 @@
 								},
 								"traceLevel": "Fine"
 							}
+						},
+						{
+							"name": "Get Metadata2",
+							"type": "GetMetadata",
+							"dependsOn": [
+								{
+									"activity": "Data flow for validation",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"dataset": {
+									"referenceName": "Ds_dl_df_incomingfile",
+									"type": "DatasetReference"
+								},
+								"fieldList": [
+									"size"
+								],
+								"storeSettings": {
+									"type": "AzureBlobFSReadSettings",
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							}
+						},
+						{
+							"name": "If Condition1",
+							"type": "IfCondition",
+							"dependsOn": [
+								{
+									"activity": "Get Metadata2",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"userProperties": [],
+							"typeProperties": {
+								"expression": {
+									"value": "@item().size",
+									"type": "Expression"
+								}
+							}
 						}
 					]
 				}
