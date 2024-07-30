@@ -93,7 +93,18 @@
 							},
 							"userProperties": [],
 							"typeProperties": {
-								"fieldList": []
+								"dataset": {
+									"referenceName": "Ds_dl_df_tempRejFile",
+									"type": "DatasetReference"
+								},
+								"fieldList": [],
+								"storeSettings": {
+									"type": "AzureBlobFSReadSettings",
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
 							}
 						},
 						{
