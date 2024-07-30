@@ -12,15 +12,7 @@
 					"name": "source1"
 				}
 			],
-			"sinks": [
-				{
-					"dataset": {
-						"referenceName": "DelimitedText5",
-						"type": "DatasetReference"
-					},
-					"name": "sink1"
-				}
-			],
+			"sinks": [],
 			"transformations": [
 				{
 					"name": "split1"
@@ -60,11 +52,7 @@
 				"exists1, derivedColumn2 lookup(split1@Output1@ORDER_ID == source1@ORDER_ID,",
 				"     multiple: false,",
 				"     pickup: 'any',",
-				"     broadcast: 'both')~> lookup1",
-				"lookup1 sink(allowSchemaDrift: true,",
-				"     validateSchema: false,",
-				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> sink1"
+				"     broadcast: 'both')~> lookup1"
 			]
 		}
 	}
