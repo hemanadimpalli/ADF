@@ -389,7 +389,7 @@
 										],
 										"outputs": [
 											{
-												"referenceName": "Ds_dl_df_STAGINGFOLDERProj2",
+												"referenceName": "Ds_dl_stageFolder",
 												"type": "DatasetReference"
 											}
 										]
