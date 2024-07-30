@@ -33,7 +33,7 @@
 				"source(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> source1",
-				"source1 aggregate(groupBy(ProductId),",
+				"source1 aggregate(groupBy(ProductId = ERROR_FUNCTION('')),",
 				"     RowCount = count(ProductId)) ~> aggregate1",
 				"aggregate1 filter(RowCount>1) ~> filter1",
 				"filter1 sink(allowSchemaDrift: true,",
