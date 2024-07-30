@@ -10,6 +10,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
+				"fileName": "Stage",
 				"folderPath": {
 					"value": "@formatDateTime(utcNow(),'yyyy/MM/dd')",
 					"type": "Expression"
