@@ -67,7 +67,10 @@
 									"type": "DataFlowReference",
 									"datasetParameters": {
 										"source1": {
-											"FileName": "Product.csv"
+											"FileName": {
+												"value": "@item().name",
+												"type": "Expression"
+											}
 										}
 									}
 								},
