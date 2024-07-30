@@ -30,9 +30,6 @@
 			],
 			"transformations": [
 				{
-					"name": "derivedColumn1"
-				},
-				{
 					"name": "aggregate1"
 				},
 				{
@@ -52,10 +49,9 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> source1",
-				"source1 derive(UniqueId = concat(ProductId,'-', guid)) ~> derivedColumn1",
-				"derivedColumn1 aggregate(groupBy(UniqueId),",
-				"     Rowcount = count(UniqueId)) ~> aggregate1",
-				"aggregate1 split(Rowcount>1,",
+				"source1 aggregate(groupBy(ProductId),",
+				"     RowCount = count(ProductId)) ~> aggregate1",
+				"aggregate1 split(RowCount>1,",
 				"     disjoint: false) ~> split1@(DuplicateFound, NoDuplicates)",
 				"split1@DuplicateFound sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
