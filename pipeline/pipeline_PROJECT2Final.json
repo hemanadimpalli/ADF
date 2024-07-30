@@ -77,8 +77,6 @@
 						{
 							"name": "Get Metadata2",
 							"type": "GetMetadata",
-							"state": "Inactive",
-							"onInactiveMarkAs": "Succeeded",
 							"dependsOn": [
 								{
 									"activity": "Data flow for validation",
@@ -116,8 +114,6 @@
 						{
 							"name": "If Condition1",
 							"type": "IfCondition",
-							"state": "Inactive",
-							"onInactiveMarkAs": "Succeeded",
 							"dependsOn": [
 								{
 									"activity": "Get Metadata2",
