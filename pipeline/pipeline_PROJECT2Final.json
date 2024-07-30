@@ -93,20 +93,7 @@
 							},
 							"userProperties": [],
 							"typeProperties": {
-								"dataset": {
-									"referenceName": "Ds_dl_df_incomingfile",
-									"type": "DatasetReference"
-								},
-								"fieldList": [
-									"size"
-								],
-								"storeSettings": {
-									"type": "AzureBlobFSReadSettings",
-									"enablePartitionDiscovery": false
-								},
-								"formatSettings": {
-									"type": "DelimitedTextReadSettings"
-								}
+								"fieldList": []
 							}
 						},
 						{

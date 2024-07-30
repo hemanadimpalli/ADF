@@ -15,14 +15,14 @@
 			"sinks": [
 				{
 					"dataset": {
-						"referenceName": "Ds_dl_df_RejectFile",
+						"referenceName": "Ds_dl_df_tempRejFile",
 						"type": "DatasetReference"
 					},
 					"name": "sink1"
 				},
 				{
 					"dataset": {
-						"referenceName": "ds_dl_df_stagingfolder",
+						"referenceName": "Ds_dl_df_TempStagingFolder",
 						"type": "DatasetReference"
 					},
 					"name": "sink2"
