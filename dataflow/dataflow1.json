@@ -12,15 +12,7 @@
 					"name": "source1"
 				}
 			],
-			"sinks": [
-				{
-					"dataset": {
-						"referenceName": "Ds_blob_temprejectedFiles",
-						"type": "DatasetReference"
-					},
-					"name": "sink1"
-				}
-			],
+			"sinks": [],
 			"transformations": [
 				{
 					"name": "aggregate1"
@@ -30,22 +22,27 @@
 				}
 			],
 			"scriptLines": [
-				"source(allowSchemaDrift: true,",
+				"source(output(",
+				"          ProductId as string,",
+				"          Price as string,",
+				"          guid as string,",
+				"          StartDate as string,",
+				"          EndDate as date,",
+				"          CreateDate as date,",
+				"          ModifiedDate as date",
+				"     ),",
+				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> source1",
-				"source1 aggregate(groupBy(ProductId = ERROR_FUNCTION('')),",
-				"     RowCount = count(ProductId)) ~> aggregate1",
-				"aggregate1 filter(RowCount>1) ~> filter1",
-				"filter1 sink(allowSchemaDrift: true,",
-				"     validateSchema: false,",
-				"     input(",
-				"          COUNTRY_ID as string,",
-				"          COUNTRY_NAME as string",
-				"     ),",
-				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true,",
-				"     preCommands: [],",
-				"     postCommands: []) ~> sink1"
+				"source1 aggregate(groupBy(ProductId,",
+				"          Price,",
+				"          guid,",
+				"          StartDate,",
+				"          EndDate,",
+				"          CreateDate,",
+				"          ModifiedDate),",
+				"     Count = count()) ~> aggregate1",
+				"aggregate1 filter(Count>1) ~> filter1"
 			]
 		}
 	}
