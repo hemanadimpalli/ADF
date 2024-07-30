@@ -16,7 +16,7 @@
 			"location": {
 				"type": "AzureBlobFSLocation",
 				"fileName": {
-					"value": "Product.csv",
+					"value": "@dataset().filename",
 					"type": "Expression"
 				},
 				"fileSystem": "incoming-files"
