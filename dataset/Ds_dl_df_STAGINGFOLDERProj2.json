@@ -10,7 +10,6 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileName": "*.CSV",
 				"folderPath": {
 					"value": "@formatDateTime(utcNow(),'yyyy/MM/dd')",
 					"type": "Expression"
