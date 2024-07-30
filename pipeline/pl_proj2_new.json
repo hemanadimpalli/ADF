@@ -81,7 +81,7 @@
 						"referenceName": "Ds_dl_incomingFiles",
 						"type": "DatasetReference",
 						"parameters": {
-							"Container": "incoming-files"
+							"FILENAME": "Product.csv"
 						}
 					}
 				],
