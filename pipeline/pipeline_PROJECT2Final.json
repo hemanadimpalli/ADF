@@ -176,7 +176,7 @@
 										},
 										"inputs": [
 											{
-												"referenceName": "Ds_dl_df_incomingfile",
+												"referenceName": "Ds_dl_df_NonduplicateIncomingFile",
 												"type": "DatasetReference"
 											}
 										],
@@ -236,7 +236,7 @@
 										},
 										"inputs": [
 											{
-												"referenceName": "Ds_dl_df_incomingfile",
+												"referenceName": "Ds_dl_df_NonduplicateIncomingFile",
 												"type": "DatasetReference"
 											}
 										],
