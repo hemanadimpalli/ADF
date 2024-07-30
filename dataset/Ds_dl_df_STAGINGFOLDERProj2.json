@@ -10,7 +10,10 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"folderPath": "@formatDateTime(utcNow(),'yyyy/MM/dd')",
+				"folderPath": {
+					"value": "@formatDateTime(utcNow(),'yyyy/MM/dd')",
+					"type": "Expression"
+				},
 				"fileSystem": "staging-files"
 			},
 			"columnDelimiter": ",",
