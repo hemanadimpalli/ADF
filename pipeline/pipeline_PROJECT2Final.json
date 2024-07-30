@@ -64,7 +64,15 @@
 							"typeProperties": {
 								"dataflow": {
 									"referenceName": "dataflow1",
-									"type": "DataFlowReference"
+									"type": "DataFlowReference",
+									"datasetParameters": {
+										"source1": {
+											"filename": {
+												"value": "@item().name",
+												"type": "Expression"
+											}
+										}
+									}
 								},
 								"compute": {
 									"coreCount": 8,
