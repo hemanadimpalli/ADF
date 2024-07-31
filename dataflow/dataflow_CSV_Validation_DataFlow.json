@@ -6,7 +6,7 @@
 			"sources": [
 				{
 					"dataset": {
-						"referenceName": "Ds_dl_INCOMINGFILES_new",
+						"referenceName": "Ds_dl_df_NonduplicateIncomingFile",
 						"type": "DatasetReference"
 					},
 					"name": "CSVSOURCE"
