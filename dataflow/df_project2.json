@@ -16,6 +16,12 @@
 			"transformations": [
 				{
 					"name": "window1"
+				},
+				{
+					"name": "derivedColumn1"
+				},
+				{
+					"name": "filter1"
 				}
 			],
 			"scriptLines": [
@@ -24,14 +30,22 @@
 				"          Price as string,",
 				"          guid as string,",
 				"          StartDate as string,",
-				"          EndDate as date,",
-				"          CreateDate as date,",
-				"          ModifiedDate as date",
+				"          EndDate as string,",
+				"          CreateDate as string,",
+				"          ModifiedDate as string",
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> source1",
-				"source1 window() ~> window1"
+				"source1 window(over(ProductId,",
+				"          Price,",
+				"          StartDate,",
+				"          EndDate,",
+				"          CreateDate,",
+				"          ModifiedDate),",
+				"     RowCount = count()) ~> window1",
+				"window1 derive(Duplicate = iif(toInteger(RowCount)>1, true(), false())) ~> derivedColumn1",
+				"derivedColumn1 filter(Duplicate==true()) ~> filter1"
 			]
 		}
 	}
