@@ -12,7 +12,15 @@
 					"name": "source1"
 				}
 			],
-			"sinks": [],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "Ds_blob_temprejectedFiles",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
 			"transformations": [
 				{
 					"name": "aggregate1"
@@ -32,7 +40,15 @@
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> source1",
 				"source1 aggregate(groupBy(ProductId),",
-				"     count = count(ProductId)) ~> aggregate1"
+				"     count = count(ProductId)) ~> aggregate1",
+				"aggregate1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          COUNTRY_ID as string,",
+				"          COUNTRY_NAME as string",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> sink1"
 			]
 		}
 	}
