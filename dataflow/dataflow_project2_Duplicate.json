@@ -15,14 +15,14 @@
 			"sinks": [
 				{
 					"dataset": {
-						"referenceName": "Ds_dl_stageFolder",
+						"referenceName": "Ds_dl_TemporaryProductsCSV",
 						"type": "DatasetReference"
 					},
 					"name": "NonDuplicateSink"
 				},
 				{
 					"dataset": {
-						"referenceName": "ds_dl_rejected_csv",
+						"referenceName": "Ds_dl_temporaryBronze",
 						"type": "DatasetReference"
 					},
 					"name": "DuplicateSink"
