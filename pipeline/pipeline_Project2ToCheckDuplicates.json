@@ -71,7 +71,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"expression": {
-						"value": "@greater(activity('Data flow1').output.errors[0].errorCount, 0)",
+						"value": "@greater(activity('Lookupto fetch RowCount').output.RowCount, 0)\n",
 						"type": "Expression"
 					},
 					"ifFalseActivities": [
