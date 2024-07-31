@@ -6,7 +6,7 @@
 			"sources": [
 				{
 					"dataset": {
-						"referenceName": "Ds_dl_df_NonduplicateIncomingFile",
+						"referenceName": "Ds_dl_df_incomingfile",
 						"type": "DatasetReference"
 					},
 					"name": "source1"
@@ -18,7 +18,7 @@
 					"name": "aggregate1"
 				},
 				{
-					"name": "filter1"
+					"name": "aggregate2"
 				}
 			],
 			"scriptLines": [
@@ -42,7 +42,7 @@
 				"          CreateDate,",
 				"          ModifiedDate),",
 				"     count = count()) ~> aggregate1",
-				"aggregate1 filter(count>1) ~> filter1"
+				"aggregate1 aggregate(max_count = max(count)) ~> aggregate2"
 			]
 		}
 	}
