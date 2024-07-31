@@ -1,6 +1,7 @@
 {
 	"name": "trigger_proj2",
 	"properties": {
+		"description": "trigger_proj2",
 		"annotations": [],
 		"runtimeState": "Started",
 		"pipeline": {
