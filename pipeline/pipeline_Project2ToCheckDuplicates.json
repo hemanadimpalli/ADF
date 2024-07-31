@@ -72,7 +72,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"expression": {
-						"value": "@greater(activity('Lookupto fetch RowCount').output.RowCount, 1)\n",
+						"value": "@greater(activity('Lookupto fetch RowCount').output.count, 1)\n",
 						"type": "Expression"
 					},
 					"ifFalseActivities": [
@@ -222,6 +222,7 @@
 						"storeSettings": {
 							"type": "AzureBlobFSReadSettings",
 							"recursive": true,
+							"wildcardFileName": "*.csv",
 							"enablePartitionDiscovery": false
 						},
 						"formatSettings": {
