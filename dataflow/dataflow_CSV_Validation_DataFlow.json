@@ -3,35 +3,11 @@
 	"properties": {
 		"type": "MappingDataFlow",
 		"typeProperties": {
-			"sources": [
-				{
-					"dataset": {
-						"referenceName": "Ds_dl_df_NonduplicateIncomingFile",
-						"type": "DatasetReference"
-					},
-					"name": "CSVSOURCE"
-				}
-			],
+			"sources": [],
 			"sinks": [],
-			"transformations": [
-				{
-					"name": "aggregate1"
-				}
-			],
+			"transformations": [],
 			"scriptLines": [
-				"source(output(",
-				"          ProductId as string,",
-				"          Price as string,",
-				"          guid as string,",
-				"          StartDate as string,",
-				"          EndDate as string,",
-				"          CreateDate as string,",
-				"          ModifiedDate as string",
-				"     ),",
-				"     allowSchemaDrift: true,",
-				"     validateSchema: false,",
-				"     ignoreNoFilesFound: false) ~> CSVSOURCE",
-				"CSVSOURCE aggregate() ~> aggregate1"
+				""
 			]
 		}
 	}
