@@ -1,0 +1,80 @@
+{
+	"name": "dataflow_project2_Duplicate",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "Ds_dl_INCOMINGFILES_new",
+						"type": "DatasetReference"
+					},
+					"name": "sourceForIncomingFile"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "Ds_dl_stageFolder",
+						"type": "DatasetReference"
+					},
+					"name": "NonDuplicateSink"
+				},
+				{
+					"dataset": {
+						"referenceName": "ds_dl_rejected_csv",
+						"type": "DatasetReference"
+					},
+					"name": "DuplicateSink"
+				}
+			],
+			"transformations": [
+				{
+					"name": "aggregateTFForDuplicateCheck"
+				},
+				{
+					"name": "split1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          ProductId as string,",
+				"          Price as string,",
+				"          guid as string,",
+				"          StartDate as string,",
+				"          EndDate as string,",
+				"          CreateDate as string,",
+				"          ModifiedDate as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> sourceForIncomingFile",
+				"sourceForIncomingFile aggregate(groupBy(ProductId,",
+				"          Price,",
+				"          guid,",
+				"          StartDate,",
+				"          EndDate,",
+				"          CreateDate,",
+				"          ModifiedDate),",
+				"     RowCount = count()) ~> aggregateTFForDuplicateCheck",
+				"aggregateTFForDuplicateCheck split(RowCount > 1 || toString(toDate(StartDate, 'yyyy-MM-dd')) != StartDate || toString(toDate(EndDate, 'yyyy-MM-dd')) != EndDate || toString(toDate(CreateDate, 'yyyy-MM-dd')) != CreateDate || toString(toDate(ModifiedDate, 'yyyy-MM-dd')) != ModifiedDate\r",
+				",",
+				"     disjoint: false) ~> split1@(Duplicate, NonDuplicates)",
+				"split1@NonDuplicates sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> NonDuplicateSink",
+				"split1@Duplicate sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> DuplicateSink"
+			]
+		}
+	}
+}
