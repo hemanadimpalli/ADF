@@ -26,9 +26,6 @@
 				},
 				{
 					"name": "filter1"
-				},
-				{
-					"name": "lookup1"
 				}
 			],
 			"scriptLines": [
@@ -65,11 +62,7 @@
 				"          CreateDate,",
 				"          ModifiedDate),",
 				"     count = count()) ~> aggregate1",
-				"aggregate1 filter(count>1) ~> filter1",
-				"source2 lookup(,",
-				"     multiple: false,",
-				"     pickup: 'any',",
-				"     broadcast: 'auto')~> lookup1"
+				"aggregate1 filter(count>1) ~> filter1"
 			]
 		}
 	}
