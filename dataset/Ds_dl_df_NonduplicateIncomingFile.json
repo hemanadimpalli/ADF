@@ -10,7 +10,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileName": "Product.csv",
+				"fileName": "item().name",
 				"fileSystem": "incoming-files"
 			},
 			"columnDelimiter": ",",
