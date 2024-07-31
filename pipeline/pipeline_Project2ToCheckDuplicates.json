@@ -23,7 +23,8 @@
 					"dataset": {
 						"referenceName": "ds_sql_DateFormat",
 						"type": "DatasetReference"
-					}
+					},
+					"firstRowOnly": false
 				}
 			},
 			{
@@ -71,7 +72,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"expression": {
-						"value": "@greater(activity('Lookupto fetch RowCount').output.RowCount, 0)\n",
+						"value": "@greater(activity('Lookupto fetch RowCount').output.RowCount, 1)\n",
 						"type": "Expression"
 					},
 					"ifFalseActivities": [
@@ -230,7 +231,8 @@
 					"dataset": {
 						"referenceName": "Ds_dl_temporaryBronze",
 						"type": "DatasetReference"
-					}
+					},
+					"firstRowOnly": false
 				}
 			}
 		],
