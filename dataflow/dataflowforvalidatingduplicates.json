@@ -10,20 +10,25 @@
 						"type": "DatasetReference"
 					},
 					"name": "source1"
-				}
-			],
-			"sinks": [
+				},
 				{
 					"dataset": {
-						"referenceName": "Ds_blob_temprejectedFiles",
+						"referenceName": "ds_sql_products",
 						"type": "DatasetReference"
 					},
-					"name": "sink1"
+					"name": "source2"
 				}
 			],
+			"sinks": [],
 			"transformations": [
 				{
 					"name": "aggregate1"
+				},
+				{
+					"name": "filter1"
+				},
+				{
+					"name": "lookup1"
 				}
 			],
 			"scriptLines": [
@@ -39,16 +44,32 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> source1",
-				"source1 aggregate(groupBy(ProductId),",
-				"     count = count(ProductId)) ~> aggregate1",
-				"aggregate1 sink(allowSchemaDrift: true,",
-				"     validateSchema: false,",
-				"     input(",
-				"          COUNTRY_ID as string,",
-				"          COUNTRY_NAME as string",
+				"source(output(",
+				"          ProductId as integer,",
+				"          Price as decimal(18,2),",
+				"          guid as integer,",
+				"          StartDate as date,",
+				"          EndDate as date,",
+				"          CreateDate as timestamp,",
+				"          ModifiedDate as timestamp",
 				"     ),",
-				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> sink1"
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> source2",
+				"source1 aggregate(groupBy(ProductId,",
+				"          Price,",
+				"          guid,",
+				"          StartDate,",
+				"          EndDate,",
+				"          CreateDate,",
+				"          ModifiedDate),",
+				"     count = count()) ~> aggregate1",
+				"aggregate1 filter(count>1) ~> filter1",
+				"source2 lookup(,",
+				"     multiple: false,",
+				"     pickup: 'any',",
+				"     broadcast: 'auto')~> lookup1"
 			]
 		}
 	}
