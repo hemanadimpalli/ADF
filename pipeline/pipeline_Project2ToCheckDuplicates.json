@@ -71,7 +71,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"expression": {
-						"value": "@greater(activity('Data flow1').output.runStatus.invalidRowCount, 0)\n",
+						"value": "\n@greater(activity('Data flow1').output.errors[0].errorCount, 0)",
 						"type": "Expression"
 					},
 					"ifFalseActivities": [
