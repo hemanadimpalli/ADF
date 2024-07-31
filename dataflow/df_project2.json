@@ -12,7 +12,15 @@
 					"name": "source1"
 				}
 			],
-			"sinks": [],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "Ds_dl_temporaryBronze",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
 			"transformations": [
 				{
 					"name": "window1"
@@ -49,7 +57,14 @@
 				"     RowCount = count()) ~> window1",
 				"window1 derive(Duplicate = iif(toInteger(RowCount)>1, true(), false())) ~> derivedColumn1",
 				"derivedColumn1 filter(Duplicate==true()) ~> filter1",
-				"filter1 aggregate(ValidRowCount = count()) ~> aggregate1"
+				"filter1 aggregate(ValidRowCount = count()) ~> aggregate1",
+				"aggregate1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> sink1"
 			]
 		}
 	}
