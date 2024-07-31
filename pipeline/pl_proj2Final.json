@@ -51,7 +51,7 @@
 					},
 					"activities": [
 						{
-							"name": "Data flowfor csv validation",
+							"name": "Data flow for csv validation",
 							"type": "ExecuteDataFlow",
 							"dependsOn": [],
 							"policy": {
