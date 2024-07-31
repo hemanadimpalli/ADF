@@ -10,13 +10,6 @@
 						"type": "DatasetReference"
 					},
 					"name": "source1"
-				},
-				{
-					"dataset": {
-						"referenceName": "ds_sql_products",
-						"type": "DatasetReference"
-					},
-					"name": "source2"
 				}
 			],
 			"sinks": [],
@@ -41,19 +34,6 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> source1",
-				"source(output(",
-				"          ProductId as integer,",
-				"          Price as decimal(18,2),",
-				"          guid as integer,",
-				"          StartDate as date,",
-				"          EndDate as date,",
-				"          CreateDate as timestamp,",
-				"          ModifiedDate as timestamp",
-				"     ),",
-				"     allowSchemaDrift: true,",
-				"     validateSchema: false,",
-				"     isolationLevel: 'READ_UNCOMMITTED',",
-				"     format: 'table') ~> source2",
 				"source1 aggregate(groupBy(ProductId,",
 				"          Price,",
 				"          guid,",
