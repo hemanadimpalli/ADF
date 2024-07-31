@@ -1,5 +1,5 @@
 {
-	"name": "ds_dl_rejected_csv",
+	"name": "Ds_Dl_Df_REJECTEDFOLDERPROJ2",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "ls_dl_new",

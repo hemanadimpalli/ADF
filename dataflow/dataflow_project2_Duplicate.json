@@ -1,0 +1,147 @@
+{
+	"name": "dataflow_project2_Duplicate",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "Ds_dl_INCOMINGFILES_new",
+						"type": "DatasetReference"
+					},
+					"name": "sourceForIncomingFile"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "Ds_dl_TemporaryProductsCSV",
+						"type": "DatasetReference"
+					},
+					"name": "NonDuplicateSink"
+				},
+				{
+					"dataset": {
+						"referenceName": "Ds_dl_temporaryBronze",
+						"type": "DatasetReference"
+					},
+					"name": "DuplicateSink"
+				}
+			],
+			"transformations": [
+				{
+					"name": "aggregateTFForDuplicateCheck"
+				},
+				{
+					"name": "split1"
+				},
+				{
+					"name": "derivedColumn1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          ProductId as string,",
+				"          Price as string,",
+				"          guid as string,",
+				"          StartDate as string,",
+				"          EndDate as string,",
+				"          CreateDate as string,",
+				"          ModifiedDate as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> sourceForIncomingFile",
+				"derivedColumn1 aggregate(groupBy(ProductId,",
+				"          Price,",
+				"          guid,",
+				"          FormatStartDate,",
+				"          FormatEndDate,",
+				"          FormatCreateDate,",
+				"          FormatModifiedDate),",
+				"     RowCount = count()) ~> aggregateTFForDuplicateCheck",
+				"aggregateTFForDuplicateCheck split(RowCount > 1 || \r",
+				"    (toString(toDate(FormatStartDate, 'yyyy-MM-dd')) != FormatStartDate) ||\r",
+				"    (toString(toDate(FormatEndDate, 'yyyy-MM-dd')) !=FormatEndDate) ||\r",
+				"    (toString(toDate(FormatCreateDate, 'yyyy-MM-dd')) != FormatCreateDate) ||\r",
+				"    (toString(toDate(FormatModifiedDate, 'yyyy-MM-dd')) != FormatModifiedDate)\r",
+				",",
+				"     disjoint: false) ~> split1@(Duplicate, NonDuplicates)",
+				"sourceForIncomingFile derive(FormatStartDate = iif(\r",
+				"    not(isNull(toDate(StartDate, 'MM-dd-yyyy'))),\r",
+				"    toString(toDate(StartDate, 'MM-dd-yyyy'), 'yyyy/MM/dd'),\r",
+				"    iif(\r",
+				"        not(isNull(toDate(StartDate, 'dd/MM/yyyy'))),\r",
+				"        toString(toDate(StartDate, 'dd/MM/yyyy'), 'yyyy/MM/dd'),\r",
+				"        iif(\r",
+				"            not(isNull(toDate(StartDate, 'yyyy-MM-dd'))),\r",
+				"            toString(toDate(StartDate, 'yyyy-MM-dd'), 'yyyy/MM/dd'),\r",
+				"            'InvalidDate'\r",
+				"        )\r",
+				"    )\r",
+				")\r",
+				"\r",
+				",",
+				"          FormatEndDate = iif(\r",
+				"    not(isNull(toDate(EndDate, 'MM-dd-yyyy'))),\r",
+				"    toString(toDate(EndDate, 'MM-dd-yyyy'), 'yyyy/MM/dd'),\r",
+				"    iif(\r",
+				"        not(isNull(toDate(EndDate, 'dd/MM/yyyy'))),\r",
+				"        toString(toDate(EndDate, 'dd/MM/yyyy'), 'yyyy/MM/dd'),\r",
+				"        iif(\r",
+				"            not(isNull(toDate(EndDate, 'yyyy-MM-dd'))),\r",
+				"            toString(toDate(EndDate, 'yyyy-MM-dd'), 'yyyy/MM/dd'),\r",
+				"            'InvalidDate'\r",
+				"        )\r",
+				"    )\r",
+				")\r",
+				"\r",
+				",",
+				"          FormatCreateDate = iif(\r",
+				"    not(isNull(toDate(CreateDate, 'MM-dd-yyyy'))),\r",
+				"    toString(toDate(CreateDate, 'MM-dd-yyyy'), 'yyyy/MM/dd'),\r",
+				"    iif(\r",
+				"        not(isNull(toDate(CreateDate, 'dd/MM/yyyy'))),\r",
+				"        toString(toDate(CreateDate, 'dd/MM/yyyy'), 'yyyy/MM/dd'),\r",
+				"        iif(\r",
+				"            not(isNull(toDate(CreateDate, 'yyyy-MM-dd'))),\r",
+				"            toString(toDate(CreateDate, 'yyyy-MM-dd'), 'yyyy/MM/dd'),\r",
+				"            'InvalidDate'\r",
+				"        )\r",
+				"    )\r",
+				")\r",
+				"\r",
+				",",
+				"          FormatModifiedDate = iif(\r",
+				"    not(isNull(toDate(StartDate, 'MM-dd-yyyy'))),\r",
+				"    toString(toDate(StartDate, 'MM-dd-yyyy'), 'yyyy/MM/dd'),\r",
+				"    iif(\r",
+				"        not(isNull(toDate(ModifiedDate, 'dd/MM/yyyy'))),\r",
+				"        toString(toDate(ModifiedDate, 'dd/MM/yyyy'), 'yyyy/MM/dd'),\r",
+				"        iif(\r",
+				"            not(isNull(toDate(ModifiedDate, 'yyyy-MM-dd'))),\r",
+				"            toString(toDate(ModifiedDate, 'yyyy-MM-dd'), 'yyyy/MM/dd'),\r",
+				"            'InvalidDate'\r",
+				"        )\r",
+				"    )\r",
+				")\r",
+				"\r",
+				") ~> derivedColumn1",
+				"split1@NonDuplicates sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> NonDuplicateSink",
+				"split1@Duplicate sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> DuplicateSink"
+			]
+		}
+	}
+}

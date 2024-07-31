@@ -1,5 +1,5 @@
 {
-	"name": "ds_dl_rejected_csv",
+	"name": "Ds_dl_stageFolder",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "ls_dl_new",
@@ -11,7 +11,7 @@
 			"location": {
 				"type": "AzureBlobFSLocation",
 				"folderPath": "@formatDateTime(utcNow(),'yyyy/MM/dd')",
-				"fileSystem": "rejected-files"
+				"fileSystem": "staging-files"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",

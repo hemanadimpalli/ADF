@@ -1,43 +1,10 @@
 {
-	"name": "pl_proj2_new",
+	"name": "pipeline_Project2ToCheckDuplicates",
 	"properties": {
 		"activities": [
 			{
-				"name": "Lookup1",
+				"name": "LookupToFetchDataFromSQL",
 				"type": "Lookup",
-				"dependsOn": [
-					{
-						"activity": "Copy data incoming folder to sql",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"policy": {
-					"timeout": "0.12:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"source": {
-						"type": "AzureSqlSource",
-						"sqlReaderQuery": "SELECT [ProductId], COUNT(*) as duplicate_count FROM [[ORDERS]]].[products2] GROUP BY [ProductId] HAVING COUNT(*) > 1;",
-						"queryTimeout": "02:00:00",
-						"partitionOption": "None"
-					},
-					"dataset": {
-						"referenceName": "ds_sql_products",
-						"type": "DatasetReference"
-					},
-					"firstRowOnly": false
-				}
-			},
-			{
-				"name": "Copy data incoming folder to sql",
-				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
@@ -49,55 +16,54 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "DelimitedTextSource",
-						"storeSettings": {
-							"type": "AzureBlobFSReadSettings",
-							"recursive": true,
-							"enablePartitionDiscovery": false
-						},
-						"formatSettings": {
-							"type": "DelimitedTextReadSettings"
-						}
+						"type": "AzureSqlSource",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
 					},
-					"sink": {
-						"type": "AzureSqlSink",
-						"preCopyScript": "Truncate table [ORDERS].[Products];",
-						"writeBehavior": "insert",
-						"sqlWriterUseTableLock": false,
-						"disableMetricsCollection": false
-					},
-					"enableStaging": false,
-					"translator": {
-						"type": "TabularTranslator",
-						"typeConversion": true,
-						"typeConversionSettings": {
-							"allowDataTruncation": true,
-							"treatBooleanAsNumber": false
-						}
-					}
-				},
-				"inputs": [
-					{
-						"referenceName": "Ds_dl_incomingFiles",
-						"type": "DatasetReference",
-						"parameters": {
-							"FILENAME": "Product.csv"
-						}
-					}
-				],
-				"outputs": [
-					{
-						"referenceName": "ds_sql_products",
+					"dataset": {
+						"referenceName": "ds_sql_DateFormat",
 						"type": "DatasetReference"
-					}
-				]
+					},
+					"firstRowOnly": false
+				}
 			},
 			{
-				"name": "if",
+				"name": "Data flow1",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [
+					{
+						"activity": "LookupToFetchDataFromSQL",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "dataflow_project2_Duplicate",
+						"type": "DataFlowReference"
+					},
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					},
+					"traceLevel": "Fine"
+				}
+			},
+			{
+				"name": "If Condition1",
 				"type": "IfCondition",
 				"dependsOn": [
 					{
-						"activity": "Lookup1",
+						"activity": "Lookupto fetch RowCount",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -106,12 +72,12 @@
 				"userProperties": [],
 				"typeProperties": {
 					"expression": {
-						"value": "@greaterOrEquals(activity('Lookup1').output.count, 1)",
+						"value": "@greater(activity('Lookupto fetch RowCount').output.count, 1)\n",
 						"type": "Expression"
 					},
 					"ifFalseActivities": [
 						{
-							"name": "copying non duplicate data to stagingfolder",
+							"name": "Copy data1",
 							"type": "Copy",
 							"dependsOn": [],
 							"policy": {
@@ -157,13 +123,13 @@
 							},
 							"inputs": [
 								{
-									"referenceName": "ds_dl_incomingCSVDuplicate",
+									"referenceName": "Ds_dl_INCOMINGFILES_new",
 									"type": "DatasetReference"
 								}
 							],
 							"outputs": [
 								{
-									"referenceName": "Ds_dl_staging",
+									"referenceName": "Ds_dl_stageFolder",
 									"type": "DatasetReference"
 								}
 							]
@@ -171,7 +137,7 @@
 					],
 					"ifTrueActivities": [
 						{
-							"name": "copying duplicate data to rej folder",
+							"name": "Copy data from incoming file",
 							"type": "Copy",
 							"dependsOn": [],
 							"policy": {
@@ -217,17 +183,14 @@
 							},
 							"inputs": [
 								{
-									"referenceName": "ds_dl_incomingCSVDuplicate",
+									"referenceName": "Ds_dl_INCOMINGFILES_new",
 									"type": "DatasetReference"
 								}
 							],
 							"outputs": [
 								{
-									"referenceName": "Ds_dl_rejected",
-									"type": "DatasetReference",
-									"parameters": {
-										"fileName": "success.csv"
-									}
+									"referenceName": "ds_dl_rejected_csv",
+									"type": "DatasetReference"
 								}
 							]
 						}
@@ -235,13 +198,13 @@
 				}
 			},
 			{
-				"name": "Copy data on failure to rejected folder",
-				"type": "Copy",
+				"name": "Lookupto fetch RowCount",
+				"type": "Lookup",
 				"dependsOn": [
 					{
-						"activity": "Copy data incoming folder to sql",
+						"activity": "Data flow1",
 						"dependencyConditions": [
-							"Failed"
+							"Succeeded"
 						]
 					}
 				],
@@ -259,55 +222,21 @@
 						"storeSettings": {
 							"type": "AzureBlobFSReadSettings",
 							"recursive": true,
+							"wildcardFileName": "*.csv",
 							"enablePartitionDiscovery": false
 						},
 						"formatSettings": {
 							"type": "DelimitedTextReadSettings"
 						}
 					},
-					"sink": {
-						"type": "DelimitedTextSink",
-						"storeSettings": {
-							"type": "AzureBlobFSWriteSettings"
-						},
-						"formatSettings": {
-							"type": "DelimitedTextWriteSettings",
-							"quoteAllText": true,
-							"fileExtension": ".txt"
-						}
-					},
-					"enableStaging": false,
-					"translator": {
-						"type": "TabularTranslator",
-						"typeConversion": true,
-						"typeConversionSettings": {
-							"allowDataTruncation": true,
-							"treatBooleanAsNumber": false
-						}
-					}
-				},
-				"inputs": [
-					{
-						"referenceName": "ds_dl_incomingCSVDuplicate",
+					"dataset": {
+						"referenceName": "Ds_dl_temporaryBronze",
 						"type": "DatasetReference"
-					}
-				],
-				"outputs": [
-					{
-						"referenceName": "Ds_dl_rejected",
-						"type": "DatasetReference",
-						"parameters": {
-							"fileName": "failure.csv"
-						}
-					}
-				]
+					},
+					"firstRowOnly": false
+				}
 			}
 		],
-		"variables": {
-			"error": {
-				"type": "String"
-			}
-		},
 		"annotations": []
 	}
 }

@@ -1,5 +1,5 @@
 {
-	"name": "Ds_dl_incomingFiles",
+	"name": "Ds_dl_df_NonduplicateIncomingFile",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "ls_dl_new",
@@ -10,6 +10,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
+				"fileName": "Product.csv",
 				"fileSystem": "incoming-files"
 			},
 			"columnDelimiter": ",",
@@ -19,43 +20,31 @@
 		},
 		"schema": [
 			{
-				"name": "EMPLOYEE_ID",
+				"name": "ProductId",
 				"type": "String"
 			},
 			{
-				"name": "FIRST_NAME",
+				"name": "Price",
 				"type": "String"
 			},
 			{
-				"name": "LAST_NAME",
+				"name": "guid",
 				"type": "String"
 			},
 			{
-				"name": "EMAIL",
+				"name": "StartDate",
 				"type": "String"
 			},
 			{
-				"name": "PHONE_NUMBER",
+				"name": "EndDate",
 				"type": "String"
 			},
 			{
-				"name": "HIRE_DATE",
+				"name": "CreateDate",
 				"type": "String"
 			},
 			{
-				"name": "JOB_ID",
-				"type": "String"
-			},
-			{
-				"name": "SALARY",
-				"type": "String"
-			},
-			{
-				"name": "MANAGER_ID",
-				"type": "String"
-			},
-			{
-				"name": "DEPARTMENT_ID",
+				"name": "ModifiedDate",
 				"type": "String"
 			}
 		]
