@@ -62,7 +62,7 @@
 				"type": "IfCondition",
 				"dependsOn": [
 					{
-						"activity": "Data flow1",
+						"activity": "Lookupto fetch RowCount",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -71,7 +71,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"expression": {
-						"value": "\n@greater(activity('Data flow1').output.errors[0].errorCount, 0)",
+						"value": "@greater(activity('Data flow1').output.errors[0].errorCount, 0)",
 						"type": "Expression"
 					},
 					"ifFalseActivities": [
@@ -194,6 +194,43 @@
 							]
 						}
 					]
+				}
+			},
+			{
+				"name": "Lookupto fetch RowCount",
+				"type": "Lookup",
+				"dependsOn": [
+					{
+						"activity": "Data flow1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"dataset": {
+						"referenceName": "Ds_dl_temporaryBronze",
+						"type": "DatasetReference"
+					}
 				}
 			}
 		],
