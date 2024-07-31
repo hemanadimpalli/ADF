@@ -63,10 +63,6 @@
 							},
 							"userProperties": [],
 							"typeProperties": {
-								"dataflow": {
-									"referenceName": "dataflowforvalidatingduplicates",
-									"type": "DataFlowReference"
-								},
 								"compute": {
 									"coreCount": 8,
 									"computeType": "General"
