@@ -22,6 +22,9 @@
 				},
 				{
 					"name": "filter1"
+				},
+				{
+					"name": "aggregate1"
 				}
 			],
 			"scriptLines": [
@@ -45,7 +48,8 @@
 				"          ModifiedDate),",
 				"     RowCount = count()) ~> window1",
 				"window1 derive(Duplicate = iif(toInteger(RowCount)>1, true(), false())) ~> derivedColumn1",
-				"derivedColumn1 filter(Duplicate==true()) ~> filter1"
+				"derivedColumn1 filter(Duplicate==true()) ~> filter1",
+				"filter1 aggregate(ValidRowCount = count()) ~> aggregate1"
 			]
 		}
 	}
