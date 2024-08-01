@@ -49,10 +49,6 @@
 					"name": "sink1"
 				},
 				{
-					"dataset": {
-						"referenceName": "ds_ORDERSCustomerOutputQR",
-						"type": "DatasetReference"
-					},
 					"name": "sink2"
 				}
 			],
@@ -324,38 +320,9 @@
 				"     )) ~> sink1",
 				"AlterRow1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     input(",
-				"          CUSTOMER_ID as integer,",
-				"          PRODUCT_ID as integer,",
-				"          ORDER_ID as integer,",
-				"          STORE_ID as integer,",
-				"          LINE_ITEM_ID as integer,",
-				"          PRODUCT_NAME as string,",
-				"          STORE_NAME as string,",
-				"          ORDER_STATUS as string,",
-				"          WEB_ADDRESS as string,",
-				"          UNIT_PRICE as integer,",
-				"          QUANTITY as integer,",
-				"          LATITUDE as decimal(18,0),",
-				"          LONGITUDE as decimal(18,0),",
-				"          ORDER_DATETIME as timestamp,",
-				"          FIRST_NAME as string,",
-				"          SECOND_NAME as string,",
-				"          EMAIL_ADDRESS as string,",
-				"          INJECTED_BY as string,",
-				"          INJECTED_DATE as date,",
-				"          INJECTED_TIMESTAMP as binary,",
-				"          Color as string",
-				"     ),",
-				"     deletable:false,",
-				"     insertable:true,",
-				"     updateable:false,",
-				"     upsertable:true,",
-				"     keys:['CUSTOMER_ID','ORDER_ID'],",
-				"     format: 'table',",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
-				"     errorHandlingOption: 'stopOnFirstError') ~> sink2"
+				"     format: 'table') ~> sink2"
 			]
 		}
 	}
