@@ -49,6 +49,10 @@
 					"name": "sink1"
 				},
 				{
+					"dataset": {
+						"referenceName": "DelimitedText3",
+						"type": "DatasetReference"
+					},
 					"name": "sink2"
 				}
 			],
@@ -320,6 +324,11 @@
 				"     )) ~> sink1",
 				"AlterRow1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
+				"     input(",
+				"          {{\"PRODUCT_ID\":\"16\"} as string,",
+				"          {\"PRODUCT_NAME\":\"Women's Socks (Grey)\"} as string,",
+				"          {\"UNIT_PRICE\":\"39.89\"}} as string",
+				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
 				"     format: 'table') ~> sink2"
