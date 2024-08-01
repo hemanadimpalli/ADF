@@ -16,7 +16,7 @@
 			"recurrence": {
 				"frequency": "Minute",
 				"interval": 1,
-				"startTime": "2024-08-01T15:07:00",
+				"startTime": "2024-08-01T10:10:00",
 				"endTime": "2024-08-02T15:07:00",
 				"timeZone": "Central Standard Time"
 			}
