@@ -14,7 +14,7 @@
 			"frequency": "Minute",
 			"interval": 30,
 			"startTime": "2024-07-31T23:55:00Z",
-			"endTime": "2024-08-01T23:55:00Z",
+			"endTime": "2024-08-02T23:55:00Z",
 			"delay": "00:00:00",
 			"maxConcurrency": 50,
 			"retryPolicy": {
