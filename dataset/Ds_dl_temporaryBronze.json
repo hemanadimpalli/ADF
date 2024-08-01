@@ -10,7 +10,8 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"folderPath": "temp/@formatDateTime(utcNow(),'yyyy/MM/dd')",
+				"fileName": "@formatDateTime(utcNow(),'yyyy/MM/dd')",
+				"folderPath": "temp",
 				"fileSystem": "bronze"
 			},
 			"columnDelimiter": ",",
