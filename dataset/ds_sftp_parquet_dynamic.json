@@ -1,10 +1,6 @@
 {
 	"name": "ds_sftp_parquet_dynamic",
 	"properties": {
-		"linkedServiceName": {
-			"referenceName": "ls_sftp",
-			"type": "LinkedServiceReference"
-		},
 		"parameters": {
 			"filename": {
 				"type": "string"

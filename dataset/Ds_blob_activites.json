@@ -1,10 +1,6 @@
 {
 	"name": "Ds_blob_activites",
 	"properties": {
-		"linkedServiceName": {
-			"referenceName": "ls_AzureBlobStorage1",
-			"type": "LinkedServiceReference"
-		},
 		"annotations": [],
 		"type": "DelimitedText",
 		"typeProperties": {

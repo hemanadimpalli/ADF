@@ -1,10 +1,6 @@
 {
 	"name": "Excel1",
 	"properties": {
-		"linkedServiceName": {
-			"referenceName": "ls_AzureBlobStorage1",
-			"type": "LinkedServiceReference"
-		},
 		"annotations": [],
 		"type": "Excel",
 		"typeProperties": {

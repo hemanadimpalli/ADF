@@ -1,10 +1,6 @@
 {
 	"name": "ds_json_bronze_products",
 	"properties": {
-		"linkedServiceName": {
-			"referenceName": "ls_dl",
-			"type": "LinkedServiceReference"
-		},
 		"annotations": [],
 		"type": "Json",
 		"typeProperties": {

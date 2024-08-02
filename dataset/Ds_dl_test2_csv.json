@@ -1,10 +1,6 @@
 {
 	"name": "Ds_dl_test2_csv",
 	"properties": {
-		"linkedServiceName": {
-			"referenceName": "ls_dl",
-			"type": "LinkedServiceReference"
-		},
 		"annotations": [],
 		"type": "DelimitedText",
 		"typeProperties": {

@@ -1,10 +1,6 @@
 {
 	"name": "ds_blob_input_xl",
 	"properties": {
-		"linkedServiceName": {
-			"referenceName": "ls_AzureBlobStorage1",
-			"type": "LinkedServiceReference"
-		},
 		"annotations": [],
 		"type": "Excel",
 		"typeProperties": {

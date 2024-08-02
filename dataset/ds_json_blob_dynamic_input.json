@@ -1,10 +1,6 @@
 {
 	"name": "ds_json_blob_dynamic_input",
 	"properties": {
-		"linkedServiceName": {
-			"referenceName": "ls_AzureBlobStorage1",
-			"type": "LinkedServiceReference"
-		},
 		"parameters": {
 			"folderpath": {
 				"type": "string"

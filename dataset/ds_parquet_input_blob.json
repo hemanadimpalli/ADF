@@ -1,10 +1,6 @@
 {
 	"name": "ds_parquet_input_blob",
 	"properties": {
-		"linkedServiceName": {
-			"referenceName": "ls_AzureBlobStorage1",
-			"type": "LinkedServiceReference"
-		},
 		"parameters": {
 			"filename": {
 				"type": "string"

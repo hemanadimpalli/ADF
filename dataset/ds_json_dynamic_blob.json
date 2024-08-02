@@ -1,10 +1,6 @@
 {
 	"name": "ds_json_dynamic_blob",
 	"properties": {
-		"linkedServiceName": {
-			"referenceName": "ls_AzureBlobStorage1",
-			"type": "LinkedServiceReference"
-		},
 		"parameters": {
 			"Container": {
 				"type": "String"

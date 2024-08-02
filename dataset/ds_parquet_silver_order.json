@@ -1,10 +1,6 @@
 {
 	"name": "ds_parquet_silver_order",
 	"properties": {
-		"linkedServiceName": {
-			"referenceName": "ls_dl",
-			"type": "LinkedServiceReference"
-		},
 		"annotations": [],
 		"type": "Parquet",
 		"typeProperties": {
