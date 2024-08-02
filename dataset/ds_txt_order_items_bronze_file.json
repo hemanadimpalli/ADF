@@ -1,10 +1,6 @@
 {
 	"name": "ds_txt_order_items_bronze_file",
 	"properties": {
-		"linkedServiceName": {
-			"referenceName": "ls_dl",
-			"type": "LinkedServiceReference"
-		},
 		"annotations": [],
 		"type": "DelimitedText",
 		"typeProperties": {

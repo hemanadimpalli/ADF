@@ -2,10 +2,6 @@
 	"name": "ds_csv_input_blob",
 	"properties": {
 		"description": "to copy the data from input dataset to output ",
-		"linkedServiceName": {
-			"referenceName": "ls_AzureBlobStorage1",
-			"type": "LinkedServiceReference"
-		},
 		"annotations": [],
 		"type": "DelimitedText",
 		"typeProperties": {

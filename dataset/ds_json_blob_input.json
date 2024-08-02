@@ -1,10 +1,6 @@
 {
 	"name": "ds_json_blob_input",
 	"properties": {
-		"linkedServiceName": {
-			"referenceName": "ls_AzureBlobStorage1",
-			"type": "LinkedServiceReference"
-		},
 		"parameters": {
 			"filename": {
 				"type": "string"

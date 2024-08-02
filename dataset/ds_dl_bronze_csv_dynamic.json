@@ -1,10 +1,6 @@
 {
 	"name": "ds_dl_bronze_csv_dynamic",
 	"properties": {
-		"linkedServiceName": {
-			"referenceName": "ls_dl",
-			"type": "LinkedServiceReference"
-		},
 		"annotations": [],
 		"type": "DelimitedText",
 		"typeProperties": {

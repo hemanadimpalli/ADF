@@ -1,10 +1,6 @@
 {
 	"name": "ds_blob_landing_csv_dynamic",
 	"properties": {
-		"linkedServiceName": {
-			"referenceName": "ls_AzureBlobStorage1",
-			"type": "LinkedServiceReference"
-		},
 		"parameters": {
 			"filename": {
 				"type": "string"

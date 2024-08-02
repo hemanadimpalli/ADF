@@ -284,13 +284,6 @@
 															}
 														}
 													},
-													"logStorageSettings": {
-														"linkedServiceName": {
-															"referenceName": "ls_AzureBlobStorage1",
-															"type": "LinkedServiceReference"
-														},
-														"path": "log"
-													},
 													"enableLogging": true,
 													"storeSettings": {
 														"type": "AzureBlobStorageReadSettings",
@@ -661,13 +654,6 @@
 															}
 														}
 													},
-													"logStorageSettings": {
-														"linkedServiceName": {
-															"referenceName": "ls_AzureBlobStorage1",
-															"type": "LinkedServiceReference"
-														},
-														"path": "log"
-													},
 													"enableLogging": true,
 													"storeSettings": {
 														"type": "AzureBlobStorageReadSettings",
@@ -982,13 +968,6 @@
 																"type": "Expression"
 															}
 														}
-													},
-													"logStorageSettings": {
-														"linkedServiceName": {
-															"referenceName": "ls_AzureBlobStorage1",
-															"type": "LinkedServiceReference"
-														},
-														"path": "log"
 													},
 													"enableLogging": true,
 													"storeSettings": {
