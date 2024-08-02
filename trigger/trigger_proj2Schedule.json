@@ -1,0 +1,18 @@
+{
+	"name": "trigger_proj2Schedule",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Stopped",
+		"pipelines": [],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Minute",
+				"interval": 15,
+				"startTime": "2024-08-01T10:52:00",
+				"endTime": "2024-08-02T15:51:00",
+				"timeZone": "Central Standard Time"
+			}
+		}
+	}
+}
